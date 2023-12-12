@@ -58,6 +58,19 @@
         
         <main class="content">
             <div class="scrollable-content">
+                @if ($errors->any())
+                    <div class="container p-5">
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>
+                                        {{$error}}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                @endif
                 @yield('content')
             </div>
         </main>
