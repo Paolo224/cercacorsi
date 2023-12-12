@@ -25,7 +25,7 @@ class AgencySeeder extends Seeder
             $newAgency->ragione_sociale = $faker->company();
             $newAgency->p_iva = $faker->randomNumber(5, true);
             $newAgency->tipo = $faker->sentence(3);
-            $newAgency->premium = $faker->boolean(30);
+            //$newAgency->premium = $faker->boolean(30);
             $newAgency->pec_sdi = $faker->email();
             $newAgency->save();
         };

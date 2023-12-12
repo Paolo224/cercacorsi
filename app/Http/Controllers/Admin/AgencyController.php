@@ -36,7 +36,7 @@ class AgencyController extends Controller
             [
                 'nome' => 'required',
                 'descrizione' => 'required',
-                'email' => 'required',
+                'p_iva' => 'required',
                 'telefono' => 'required',
                 'citta' => 'required',
                 'paese' => 'required',
