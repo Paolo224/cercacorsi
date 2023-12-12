@@ -134,9 +134,6 @@
         </div>
         <div class="content" id="main-content">
             <div class="scrollable-content">
-                <h1>Contenuto Scrollabile</h1>
-                <p>Qui puoi mettere tutto il contenuto che vuoi. Questa area sarà scrollabile se il contenuto supera
-                    l'altezza della finestra.</p>
                     @if ($errors->any())
                     <div class="container p-5">
                         <div class="alert alert-danger">
@@ -166,6 +163,9 @@
                 if (sidebar.style.left === "-190px") {
                     logoAziendale_left.style.left = "5px";
                     logoAziendale_right.style.right = "-190px";
+                    setTimeout(() => {
+                        logoAziendale_right.style.display = "none";
+                    }, 200);
                     sidebar.style.left = "0px";
                     content.style.marginLeft = "250px";
                     menuIcon.style.marginLeft = "260px";
@@ -174,7 +174,10 @@
                 } else {
                     sidebar.style.left = "-190px";
                     logoAziendale_left.style.left = "-190px";
-                    logoAziendale_right.style.right = "5px";
+                    logoAziendale_right.style.display = "block";
+                    setTimeout(() => {
+                        logoAziendale_right.style.right = "5px";
+                    }, 200);
                     content.style.marginLeft = "60px";
                     menuIcon.style.marginLeft = "17.5px";
                     menuIcon.classList.remove('rotazione_menu_icon')
