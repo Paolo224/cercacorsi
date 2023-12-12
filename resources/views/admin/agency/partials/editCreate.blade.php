@@ -12,7 +12,7 @@
     <div class="mb-3">
         <label for="agency_descrizione" class="form-label">Descrizione Aziendale</label>
         <textarea class="form-control" id="agency_descrizione" rows="5"
-        placeholder="Esempio: Siamo un'azienda di formazione dedicata a potenziare le competenze professionali e personali. Offriamo programmi formativi su misura per individui e aziende, mirando a migliorare le prospettive di carriera e l'efficacia sul lavoro." name="descrizione">
+        placeholder="Inserisci una descrizione" name="descrizione">
         {{old('descrizione', $agency->descrizione)}}
         </textarea>
     </div>
