@@ -1,0 +1,30 @@
+@import '~bootstrap/scss/bootstrap';
+
+header.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+
+    a {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+    }
+
+    a:hover {
+        color: #ffd700;
+    }
+}
+
+main.content {
+    margin-left: 250px;
+    /* larghezza della barra laterale */
+    padding: 20px;
+}
