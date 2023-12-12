@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'index']);
     Route::resource('/agency', AdminAgencyController::class);
     // altre rotte protette da login e che siano in admin
 });
