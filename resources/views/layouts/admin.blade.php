@@ -71,6 +71,9 @@
                         </div>
                     </div>
                 @endif
+                @if(Session::has('message'))
+                    <p class="alert alert-info">{{ Session::get('message') }}</p>
+                @endif
                 @yield('content')
             </div>
         </main>
