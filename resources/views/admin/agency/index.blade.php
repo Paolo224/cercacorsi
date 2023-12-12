@@ -8,6 +8,7 @@
                 <thead class="table-dark">
                   <tr>
                     <th scope="col">#id</th>
+                    <th scope="col">Logo</th>
                     <th scope="col">Nome Azienda</th>
                     <th scope="col">Email Aziendale</th>
                     <th scope="col">Telefono Aziendale</th>
@@ -23,6 +24,9 @@
                     @foreach ($agencies as $agency)
                         <tr>
                             <td>{{$agency->id}}</td>
+                            <td>
+                                <img src="{{asset('storage/' . $agency->logo)}}" class="card-img-top" alt="..." style="width: 50px;">
+                            </td>
                             <td>{{$agency->nome}}</td>
                             <td>{{$agency->pec_sdi}}</td>
                             <td>{{$agency->telefono}}</td>

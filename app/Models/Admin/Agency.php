@@ -10,6 +10,8 @@ class Agency extends Model
     use HasFactory;
 
     protected $fillable = [
+        'immagine_copertina',
+        'logo',
         'nome',
         'slug',
         'descrizione',
