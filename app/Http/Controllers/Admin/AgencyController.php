@@ -6,9 +6,27 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Agency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class AgencyController extends Controller
 {
+
+    protected $validationRules = [
+        'nome' => ['required', 'unique:agencies'],
+        'descrizione' => 'required',
+        'p_iva' => 'required',
+        'telefono' => 'required',
+        'citta' => 'required',
+        'paese' => 'required',
+        'indirizzo' => 'required',
+        'cap' => 'required',
+        'ragione_sociale' => 'required',
+        'tipo' => 'required',
+        'pec_sdi' => 'required',
+    ];
+
+    protected $customMessages = [];
+
     /**
      * Display a listing of the resource.
      */
@@ -21,9 +39,9 @@ class AgencyController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Agency $agency)
     {
-        return view('admin.agency.create');
+        return view('admin.agency.create', compact('agency'));
     }
 
     /**
@@ -32,30 +50,13 @@ class AgencyController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $data = $request->validate(
-            [
-                'nome' => 'required',
-                'descrizione' => 'required',
-                'p_iva' => 'required',
-                'telefono' => 'required',
-                'citta' => 'required',
-                'paese' => 'required',
-                'indirizzo' => 'required',
-                'cap' => 'required',
-                'ragione_sociale' => 'required',
-                'tipo' => 'required',
-                'pec_sdi' => 'required',
-            ],
-            ['nome' => 'errore']
-        );
+        $data = $request->validate($this->validationRules);
         $data['slug'] = Str::slug($data['nome']);
         $newAgency = new Agency();
         $newAgency->fill($data);
         $newAgency->save();
 
         return redirect()->route('admin.agency.show', $newAgency->id)->with('message', "$newAgency->nome AGGIUNTA CON SUCCESSO!!!");
-
-        // TODO VEDERE PERCHE NON FUNZIONA LA REQUEST.............
     }
 
     /**
@@ -69,17 +70,31 @@ class AgencyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Agency $agency)
     {
-        //
+        return view('admin.agency.edit', compact('agency'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Agency $agency)
     {
-        //
+        $data = $request->validate([
+            'nome' => ['required', Rule::unique('agencies')->ignore($agency->id)],
+            'descrizione' => 'required',
+            'p_iva' => 'required',
+            'telefono' => 'required',
+            'citta' => 'required',
+            'paese' => 'required',
+            'indirizzo' => 'required',
+            'cap' => 'required',
+            'ragione_sociale' => 'required',
+            'tipo' => 'required',
+            'pec_sdi' => 'required',
+        ]);
+        $agency->update($data);
+        return redirect()->route('admin.agency.show', compact('agency'));
     }
 
     /**

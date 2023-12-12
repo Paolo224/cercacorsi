@@ -31,7 +31,7 @@
                                 <a href="{{route('admin.agency.show', $agency->id)}}" class="btn btn-sm btn-primary">
                                     Mostra
                                 </a>
-                                <a href="" class="btn btn-sm btn-warning">
+                                <a href="{{route('admin.agency.edit', $agency->id)}}" class="btn btn-sm btn-warning">
                                     Modifica
                                 </a>
                             </td>
