@@ -163,9 +163,6 @@
                 if (sidebar.style.left === "-190px") {
                     logoAziendale_left.style.left = "5px";
                     logoAziendale_right.style.right = "-190px";
-                    // setTimeout(() => {
-                    //     logoAziendale_right.style.display = "none";
-                    // }, 200);
                     sidebar.style.left = "0px";
                     content.style.marginLeft = "250px";
                     menuIcon.style.marginLeft = "260px";
@@ -175,9 +172,7 @@
                     sidebar.style.left = "-190px";
                     logoAziendale_left.style.left = "-190px";
                     logoAziendale_right.style.display = "block";
-                    // setTimeout(() => {
-                    //     logoAziendale_right.style.right = "5px";
-                    // }, 200);
+                    logoAziendale_right.style.right = "5px";
                     content.style.marginLeft = "60px";
                     menuIcon.style.marginLeft = "17.5px";
                     menuIcon.classList.remove('rotazione_menu_icon')

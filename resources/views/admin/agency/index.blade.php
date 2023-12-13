@@ -1,9 +1,18 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
+<div class="container-fluid container-xxl">
     <div class="row">
         <div class="col-12">
+            @if(!$agencies->isNotEmpty())
+            <div class="offset-11 col-1 mt-3">
+                <a href="{{route('admin.agency.create')}}" class="btn btn-sm btn-success">
+                    + Nuovo
+                </a>
+            </div>
+                <h3 class="text-center mt-5 mb-2">Non hai inserito nessuna Azienda...</h3>
+                <h4 class="text-center mb-2">inserisci la tua azienda cliccando il tasto "Nuovo"</h4>
+            @else
             <table class="table table-striped table-hover mt-5 table-bordered">
                 <thead class="table-dark">
                   <tr>
@@ -43,6 +52,7 @@
                     @endforeach
                 </tbody>
               </table>
+              @endif
         </div>
     </div>
 </div>
