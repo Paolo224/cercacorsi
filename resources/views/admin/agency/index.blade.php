@@ -25,11 +25,7 @@
                         <tr>
                             <td class="text-center">{{$agency->id}}</td>
                             <td class="text-center">
-                                @if ($agency->isurl('logo')))
-                                    <img src="{{$agency->logo}}" class="card-img-top" alt="{{$agency->nome}}" style="width: 50px;">
-                                @else
-                                    <img src="{{asset('storage/' . $agency->logo)}}" class="card-img-top" alt="{{$agency->nome}}" style="width: 50px;">
-                                @endif
+                                <img src="{{asset('storage/' . $agency->logo)}}" class="card-img-top" alt="{{$agency->nome}}" style="width: 50px;">
                             </td>
                             <td>{{$agency->nome}}</td>
                             <td>{{$agency->pec_sdi}}</td>

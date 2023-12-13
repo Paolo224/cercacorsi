@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('agencies', function (Blueprint $table) {
             $table->id();
-            $table->text('logo');
-            $table->text('immagine_copertina');
+            $table->text('logo')->default('immagine_placeholder.png');
+            $table->text('immagine_copertina')->default('immagine_placeholder_copertina.jpg');
             $table->string('nome', 200);
             $table->string('slug', 255);
             $table->text('descrizione');
