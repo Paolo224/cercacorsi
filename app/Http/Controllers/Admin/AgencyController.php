@@ -102,18 +102,10 @@ class AgencyController extends Controller
         ]);
 
         if ($request->hasFile('logo')) {
-
-            if (str_starts_with($agency->logo, 'http')) {
-                Storage::delete($agency->logo);
-            }
-
+            Storage::delete($agency->logo);
             $data['logo'] = Storage::put('uploads', $data['logo']);
-        } else if ($request->hasFile('immagine_copertina')) {
-
-            if (str_starts_with($agency->immagine_copertina, 'http')) {
-                Storage::delete($agency->immagine_copertina);
-            }
-
+        } elseif ($request->hasFile('immagine_copertina')) {
+            Storage::delete($agency->immagine_copertina);
             $data['immagine_copertina'] = Storage::put('uploads', $data['immagine_copertina']);
         }
 

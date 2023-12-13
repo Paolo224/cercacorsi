@@ -26,9 +26,4 @@ class Agency extends Model
         'tipo',
         'pec_sdi'
     ];
-
-    public function isUrl($x)
-    {
-        return str_starts_with($this->$x, 'http');
-    }
 }
