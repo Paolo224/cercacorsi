@@ -7,6 +7,7 @@ use App\Models\Admin\Agency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class AgencyController extends Controller
 {
@@ -23,6 +24,8 @@ class AgencyController extends Controller
         'ragione_sociale' => 'required',
         'tipo' => 'required',
         'pec_sdi' => 'required',
+        'logo' => 'required|image|max:512',
+        'immagine_copertina' => 'required|image|max:512'
     ];
 
     protected $customMessages = [];
@@ -54,6 +57,8 @@ class AgencyController extends Controller
         $data['slug'] = Str::slug($data['nome']);
         $newAgency = new Agency();
         $newAgency->fill($data);
+        $newAgency->logo = Storage::put('uploads', $data['logo']);
+        $newAgency->immagine_copertina = Storage::put('uploads', $data['immagine_copertina']);
         $newAgency->save();
 
         return redirect()->route('admin.agency.show', $newAgency->id)->with('message', "$newAgency->nome AGGIUNTA CON SUCCESSO!!!");
@@ -92,7 +97,26 @@ class AgencyController extends Controller
             'ragione_sociale' => 'required',
             'tipo' => 'required',
             'pec_sdi' => 'required',
+            'logo' => 'image|max:512',
+            'immagine_copertina' => 'image|max:512'
         ]);
+
+        if ($request->hasFile('logo')) {
+
+            if (str_starts_with($agency->logo, 'http')) {
+                Storage::delete($agency->logo);
+            }
+
+            $data['logo'] = Storage::put('uploads', $data['logo']);
+        } else if ($request->hasFile('immagine_copertina')) {
+
+            if (str_starts_with($agency->immagine_copertina, 'http')) {
+                Storage::delete($agency->immagine_copertina);
+            }
+
+            $data['immagine_copertina'] = Storage::put('uploads', $data['immagine_copertina']);
+        }
+
         $agency->update($data);
         return redirect()->route('admin.agency.show', compact('agency'));
     }

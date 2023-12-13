@@ -4,16 +4,16 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <table class="table table-striped table-hover mt-5">
+            <table class="table table-striped table-hover mt-5 table-bordered">
                 <thead class="table-dark">
                   <tr>
-                    <th scope="col">#id</th>
-                    <th scope="col">Logo</th>
-                    <th scope="col">Nome Azienda</th>
-                    <th scope="col">Email Aziendale</th>
-                    <th scope="col">Telefono Aziendale</th>
-                    <th scope="col">Partita IVA</th>
-                    <th scope="col">
+                    <th scope="col" class="text-center">#id</th>
+                    <th scope="col" class="text-center">Logo</th>
+                    <th scope="col" class="text-center">Nome Azienda</th>
+                    <th scope="col" class="text-center">Email Aziendale</th>
+                    <th scope="col" class="text-center">Telefono Aziendale</th>
+                    <th scope="col" class="text-center">Partita IVA</th>
+                    <th scope="col" class="text-center">
                         <a href="{{route('admin.agency.create')}}" class="btn btn-sm btn-success">
                             + Aggiungi un Azienda
                         </a>
@@ -23,15 +23,19 @@
                 <tbody>
                     @foreach ($agencies as $agency)
                         <tr>
-                            <td>{{$agency->id}}</td>
-                            <td>
-                                <img src="{{asset('storage/' . $agency->logo)}}" class="card-img-top" alt="..." style="width: 50px;">
+                            <td class="text-center">{{$agency->id}}</td>
+                            <td class="text-center">
+                                @if ($agency->isurl('logo')))
+                                    <img src="{{$agency->logo}}" class="card-img-top" alt="{{$agency->nome}}" style="width: 50px;">
+                                @else
+                                    <img src="{{asset('storage/' . $agency->logo)}}" class="card-img-top" alt="{{$agency->nome}}" style="width: 50px;">
+                                @endif
                             </td>
                             <td>{{$agency->nome}}</td>
                             <td>{{$agency->pec_sdi}}</td>
                             <td>{{$agency->telefono}}</td>
                             <td>{{$agency->p_iva}}</td>
-                            <td>
+                            <td class="text-center">
                                 <a href="{{route('admin.agency.show', $agency->id)}}" class="btn btn-sm btn-primary">
                                     Mostra
                                 </a>

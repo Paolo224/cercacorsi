@@ -8,7 +8,11 @@
         </div>
         <div class="col-12">
             <div class="card mb-3 mt-2">
-                <span>IMMAGINA DI COPERTINA: </span><img src="{{asset('storage/' . $agency->immagine_copertina)}}" class="card-img-top" alt="..." style="width: 100px;">
+                @if ($agency->isurl('immagine_copertina')))
+                <img src="{{$agency->immagine_copertina}}" class="card-img-top immagine_copertina_show" alt="{{$agency->nome}}">
+                @else
+                <img src="{{asset('storage/' . $agency->immagine_copertina)}}" class="card-img-top immagine_copertina_show" alt="{{$agency->nome}}">
+                @endif
                 <div class="card-body">
                     <h1 class="card-title mb-4">{{$agency->nome}}</h1>
                     <p class="card-text"><span class="fw-bold d-block">Descrizione Azienda: </span>{{$agency->descrizione}}</p>

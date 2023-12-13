@@ -8,12 +8,14 @@
         <label for="agency_nome" class="form-label">Nome dell'Azienda</label>
         <input class="form-control" type="text" id="agency_nome" placeholder="Esempio: MAC Formazione" name="nome" value="{{old('nome', $agency->nome)}}">
     </div>
+
     <div class="mb-3">
-        <label for="agency_logo" class="form-label">Nome dell'Azienda</label>
+        <label for="agency_logo" class="form-label">Logo Aziendale</label>
         <input class="form-control" type="file" id="agency_logo" name="logo" value="{{old('logo', $agency->logo)}}">
     </div>
+
     <div class="mb-3">
-        <label for="agency_immagine_copertina" class="form-label">Nome dell'Azienda</label>
+        <label for="agency_immagine_copertina" class="form-label">Immagine di copertina</label>
         <input class="form-control" type="file" id="agency_immagine_copertina" name="immagine_copertina" value="{{old('immagine_copertina', $agency->immagine_copertina)}}">
     </div>
 
