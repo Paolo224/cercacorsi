@@ -17,9 +17,14 @@ div.topbar {
     color: var(--color-topbar);
     text-align: center;
     height: 60px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
 
     .menu-icon {
         color: var(--color-menu-icon);
@@ -116,6 +121,12 @@ div.sidebar {
 
 .content {
     margin-left: 60px;
-    padding: 20px;
+    padding: 60px 20px 20px 20px;
     transition: margin-left 0.3s ease;
+}
+
+.immagine_copertina_show {
+    width: 50%;
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0;
 }
