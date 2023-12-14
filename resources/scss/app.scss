@@ -97,6 +97,9 @@ div.sidebar {
     color: var(--color-sidbar);
     padding: 20px;
     transition: left 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     a {
         display: block;

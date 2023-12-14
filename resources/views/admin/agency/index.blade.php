@@ -32,15 +32,15 @@
                 <tbody>
                     @foreach ($agencies as $agency)
                         <tr>
-                            <td class="text-center">{{$agency->id}}</td>
-                            <td class="text-center">
+                            <td class="text-center align-middle">{{$agency->id}}</td>
+                            <td class="text-center align-middle">
                                 <img src="{{asset('storage/' . $agency->logo)}}" class="card-img-top" alt="{{$agency->nome}}" style="width: 50px;">
                             </td>
-                            <td>{{$agency->nome}}</td>
-                            <td>{{$agency->pec_sdi}}</td>
-                            <td>{{$agency->telefono}}</td>
-                            <td>{{$agency->p_iva}}</td>
-                            <td class="text-center">
+                            <td class="text-center align-middle">{{$agency->nome}}</td>
+                            <td class="text-center align-middle">{{$agency->email}}</td>
+                            <td class="text-center align-middle">{{$agency->telefono1}}</td>
+                            <td class="text-center align-middle">{{$agency->p_iva}}</td>
+                            <td class="text-center align-middle">
                                 <a href="{{route('admin.agency.show', $agency->id)}}" class="btn btn-sm btn-primary">
                                     Mostra
                                 </a>

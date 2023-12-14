@@ -27,8 +27,8 @@
                     <p class="card-text"><span class="fw-bold d-block">Partita IVA: </span>{{$agency->p_iva}}</p>
                     <p class="card-text"><span class="fw-bold d-block">Tipologia dell'Azienda: </span>{{$agency->tipo}}</p>
                     <div class="card-text d-flex flex-row justify-content-around">
-                        <p class="text-body-primary">{{$agency->pec_sdi}}</p>
-                        <p class="text-body-primery">{{$agency->telefono}}</p>
+                        <p class="text-body-primary">{{$agency->email}}</p>
+                        <p class="text-body-primery">{{$agency->telefono1}}</p>
                     </div>
                 </div>
             </div>
