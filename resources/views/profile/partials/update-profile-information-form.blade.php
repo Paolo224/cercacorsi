@@ -18,13 +18,27 @@
         @method('patch')
 
         <div class="mb-2">
-            <label for="name">{{__('Name')}}</label>
-            <input class="form-control" type="text" name="name" id="name" autocomplete="name" value="{{old('name', $user->name)}}" required autofocus>
-            @error('name')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->get('name')}}</strong>
-            </span>
-            @enderror
+            <label for="nome" class="col-md-4 col-form-label text-md-right">Nome</label>
+
+                <input id="nome" type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" value="{{ old('nome') }}" required autocomplete="nome" autofocus>
+
+                @error('nome')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+        </div>
+
+        <div class="mb-2">
+            <label for="cognome" class="col-md-4 col-form-label text-md-right">Cognome</label>
+
+                <input id="cognome" type="text" class="form-control @error('cognome') is-invalid @enderror" name="cognome" value="{{ old('cognome') }}" required autocomplete="cognome" autofocus>
+
+                @error('cognome')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
         </div>
 
         <div class="mb-2">
