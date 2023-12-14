@@ -130,6 +130,9 @@
                     </g>
                 </svg>
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
             <!-- Aggiungi altri link o contenuti qui -->
         </div>
         <div class="content" id="main-content">

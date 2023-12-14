@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Agency;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
@@ -35,7 +36,9 @@ class AgencyController extends Controller
      */
     public function index()
     {
-        $agencies = Agency::all();
+        $user = Auth::user();
+
+        $agencies = $user->agencies;
         return view('admin.agency.index', compact('agencies'));
     }
 
@@ -60,6 +63,7 @@ class AgencyController extends Controller
             $data['immagine_copertina'] = Storage::put('uploads', $data['immagine_copertina']);
         }
         $data['slug'] = Str::slug($data['nome']);
+        $data['user_id'] = Auth::user()->id;
         $newAgency = new Agency();
         $newAgency->fill($data);
         $newAgency->save();
@@ -104,10 +108,11 @@ class AgencyController extends Controller
             'immagine_copertina' => 'image|max:512|mimes:jpg,png,svg'
         ]);
 
-        if ($request->logo != 'immagine_placeholder.png') {
+        if ($request->hasFile('logo')) {
             Storage::delete($agency->logo);
             $data['logo'] = Storage::put('uploads', $data['logo']);
-        } elseif ($request->immagine_copertina != 'immagine_placeholder_copertina.jpg') {
+        }
+        if ($request->hasFile('immagine_copertina')) {
             Storage::delete($agency->immagine_copertina);
             $data['immagine_copertina'] = Storage::put('uploads', $data['immagine_copertina']);
         }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Admin\Agency;
+use App\Models\User;
 use Faker\Generator as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,8 +14,11 @@ class AgencySeeder extends Seeder
 {
     public function run(Faker $faker)
     {
+        $user = User::all();
+
         for ($i = 0; $i < 5; $i++) {
             $newAgency = new Agency();
+            $newAgency->user_id = User::inRandomOrder()->first()->id;
             // $newAgency->logo = 'immagine_placeholder.jpg';
             // $newAgency->immagine_copertina = 'immagine_placeholder_copertina.jpg';
             $newAgency->nome = $faker->name();
