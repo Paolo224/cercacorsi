@@ -12,21 +12,27 @@ class Agency extends Model
 
     protected $fillable = [
         'user_id',
-        'immagine_copertina',
-        'logo',
         'nome',
         'slug',
+        'logo',
+        'immagine_copertina',
+        'video_presentazione',
         'descrizione',
+        'motto',
+        'altre_informazioni',
         'email',
-        'telefono',
+        'telefono1',
+        'telefono2',
         'indirizzo',
-        'cap',
         'citta',
+        'provincia',
+        'cap',
         'paese',
         'ragione_sociale',
         'p_iva',
-        'tipo',
-        'pec_sdi'
+        'codice_fiscale',
+        'pec_sdi',
+        'tipo'
     ];
 
     public function user()

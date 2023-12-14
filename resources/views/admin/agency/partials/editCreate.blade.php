@@ -6,7 +6,7 @@
 
     <div class="mb-3">
         <label for="agency_nome" class="form-label">Nome dell'Azienda</label>
-        <input class="form-control" type="text" id="agency_nome" placeholder="Esempio: MAC Formazione" name="nome" value="{{old('nome', $agency->nome)}}">
+        <input class="form-control" type="text" id="agency_nome" name="nome" value="{{old('nome', $agency->nome)}}">
     </div>
 
     <div class="mb-3">
@@ -15,61 +15,93 @@
     </div>
 
     <div class="mb-3">
+        <label for="agency_motto" class="form-label">Motto dell'Azienda</label>
+        <textarea class="form-control" id="agency_motto" rows="3" name="motto">{{old('motto', $agency->motto)}}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="agency_descrizione" class="form-label">Descrizione Aziendale</label>
+        <textarea class="form-control" id="agency_descrizione" rows="10" name="descrizione">{{old('descrizione', $agency->descrizione)}}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="agency_altre_informazioni" class="form-label">Altre Informazioni</label>
+        <textarea class="form-control" id="agency_altre_informazioni" rows="5" name="altre_informazioni">{{old('altre_informazioni', $agency->altre_informazioni)}}</textarea>
+    </div>
+
+    <div class="mb-3">
         <label for="agency_immagine_copertina" class="form-label">Immagine di copertina</label>
         <input class="form-control" type="file" id="agency_immagine_copertina" name="immagine_copertina" value="{{old('immagine_copertina', $agency->immagine_copertina)}}">
     </div>
 
     <div class="mb-3">
-        <label for="agency_descrizione" class="form-label">Descrizione Aziendale</label>
-        <textarea class="form-control" id="agency_descrizione" rows="5"
-        placeholder="Inserisci una descrizione" name="descrizione">
-        {{old('descrizione', $agency->descrizione)}}
-        </textarea>
+        <label for="agency_video_presentazione" class="form-label">Video di Presentazione</label>
+        <input class="form-control" type="file" id="agency_video_presentazione" name="video_presentazione" value="{{old('video_presentazione', $agency->video_presentazione)}}">
     </div>
 
     <div class="mb-3">
-        <label for="agency_p_iva" class="form-label">Partita IVA</label>
-        <input class="form-control" type="text" id="agency_p_iva" placeholder="Esempio: IT02760840641" name="p_iva" maxlength="13" value="{{old('p_iva', $agency->p_iva)}}">
+        <label for="agency_email" class="form-label">Email</label>
+        <input class="form-control" type="text" id="agency_email" name="email" value="{{old('email', $agency->email)}}">
+    </div>
+    
+    <div class="mb-3">
+        <label for="agency_telefono1" class="form-label">Telefono n.1</label>
+        <input class="form-control" type="text" id="agency_telefono1" name="telefono1" maxlength="10" value="{{old('telefono1', $agency->telefono1)}}">
+    </div>
+
+    <div class="mb-3">
+        <label for="agency_telefono2" class="form-label">Telefono n.2</label>
+        <input class="form-control" type="text" id="agency_telefono2" name="telefono2" maxlength="10" value="{{old('telefono2', $agency->telefono2)}}">
     </div>
 
     <div class="mb-3">
         <label for="agency_indirizzo" class="form-label">Indirizzo</label>
-        <input class="form-control" type="text" id="agency_indirizzo" placeholder="Esempio: Via Toppole 3" name="indirizzo" value="{{old('indirizzo', $agency->indirizzo)}}">
+        <input class="form-control" type="text" id="agency_indirizzo" name="indirizzo" value="{{old('indirizzo', $agency->indirizzo)}}">
     </div>
-
+    
     <div class="mb-3">
         <label for="agency_citta" class="form-label">Città</label>
-        <input class="form-control" type="text" id="agency_citta" placeholder="Esempio: Manocalzati (AV)" name="citta" value="{{old('citta', $agency->citta)}}">
+        <input class="form-control" type="text" id="agency_citta" name="citta" value="{{old('citta', $agency->citta)}}">
     </div>
 
+    <div class="mb-3">
+        <label for="agency_provincia" class="form-label">Provincia</label>
+        <input class="form-control" type="text" id="agency_provincia" name="provincia" value="{{old('provincia', $agency->provincia)}}">
+    </div>
+    
     <div class="mb-3">
         <label for="agency_cap" class="form-label">Codice Postale</label>
-        <input class="form-control" type="text" id="agency_cap" placeholder="Esempio: 83100" name="cap"  maxlength="5" value="{{old('cap', $agency->cap)}}">
+        <input class="form-control" type="text" id="agency_cap" name="cap"  maxlength="5" value="{{old('cap', $agency->cap)}}">
     </div>
-
+    
     <div class="mb-3">
         <label for="agency_paese" class="form-label">Paese</label>
-        <input class="form-control" type="text" id="agency_paese" placeholder="Esempio: Avellino" name="paese" value="{{old('paese', $agency->paese)}}">
+        <input class="form-control" type="text" id="agency_paese" name="paese" value="{{old('paese', $agency->paese)}}">
     </div>
 
     <div class="mb-3">
         <label for="agency_ragione_sociale" class="form-label">Ragione Sociale</label>
-        <input class="form-control" type="text" id="agency_ragione_sociale" placeholder="Esempio: MAC Formazione" name="ragione_sociale" value="{{old('ragione_sociale', $agency->ragione_sociale)}}">
+        <input class="form-control" type="text" id="agency_ragione_sociale" name="ragione_sociale" value="{{old('ragione_sociale', $agency->ragione_sociale)}}">
     </div>
 
     <div class="mb-3">
-        <label for="agency_tipo" class="form-label">Tipologia</label>
-        <input class="form-control" type="text" id="agency_tipo" placeholder="Esempio: Azienda (SRL, SPA) o altra Società for profit" name="tipo" value="{{old('tipo', $agency->tipo)}}">
+        <label for="agency_p_iva" class="form-label">Partita IVA</label>
+        <input class="form-control" type="text" id="agency_p_iva" name="p_iva" maxlength="13" value="{{old('p_iva', $agency->p_iva)}}">
+    </div>
+
+    <div class="mb-3">
+        <label for="agency_codice_fiscale" class="form-label">Codice Fiscale</label>
+        <input class="form-control" type="text" id="agency_codice_fiscale" name="codice_fiscale" maxlength="16" value="{{old('codice_fiscale', $agency->codice_fiscale)}}">
     </div>
 
     <div class="mb-3">
         <label for="agency_pec_sdi" class="form-label">Pec o SDI</label>
-        <input class="form-control" type="text" id="agency_pec_sdi" placeholder="Esempio: example@pec.it" name="pec_sdi" value="{{old('pec_sdi', $agency->pec_sdi)}}">
+        <input class="form-control" type="text" id="agency_pec_sdi" name="pec_sdi" value="{{old('pec_sdi', $agency->pec_sdi)}}">
     </div>
 
     <div class="mb-3">
-        <label for="agency_telefono" class="form-label">Telefono</label>
-        <input class="form-control" type="text" id="agency_telefono" placeholder="Esempio: 02 899 195 66" name="telefono" maxlength="10" value="{{old('telefono', $agency->telefono)}}">
+        <label for="agency_tipo" class="form-label">Tipologia</label>
+        <input class="form-control" type="text" id="agency_tipo" name="tipo" value="{{old('tipo', $agency->tipo)}}">
     </div>
 
     <div class="mb-3">

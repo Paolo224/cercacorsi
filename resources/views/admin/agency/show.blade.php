@@ -9,6 +9,13 @@
         <div class="col-12">
             <div class="card mb-3 mt-2">
                 <img src="{{asset('storage/' . $agency->immagine_copertina)}}" class="card-img-top immagine_copertina_show" alt="{{$agency->nome}}">
+                @if ($agency->video_presentazione === '#')
+                <img src="{{asset('storage/immagine_video_placeholder.png')}}" class="card-img-top immagine_copertina_show" alt="{{$agency->nome}}">
+                @else
+                    <video width="640" height="360" controls >
+                        <source src="{{asset('storage/' . $agency->video_presentazione)}}" type="video/mp4">
+                    </video>
+                @endif
                 <div class="card-body">
                     <h1 class="card-title mb-4">{{$agency->nome}}</h1>
                     <p class="card-text"><span class="fw-bold d-block">Descrizione Azienda: </span>{{$agency->descrizione}}</p>
