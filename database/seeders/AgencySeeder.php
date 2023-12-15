@@ -38,7 +38,8 @@ class AgencySeeder extends Seeder
             $newAgency->codice_fiscale = 'PDRJHY85Y38D982H';
             $newAgency->tipo = 'SPA';
             //$newAgency->premium = $faker->boolean(30);
-            $newAgency->pec_sdi = $faker->email();
+            $newAgency->pec = $faker->email();
+            $newAgency->sdi = 'SBM8549';
             $newAgency->altre_informazioni = $faker->realText(500, 2);
             $newAgency->save();
         };

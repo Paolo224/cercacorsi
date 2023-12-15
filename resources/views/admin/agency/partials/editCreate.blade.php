@@ -36,7 +36,7 @@
 
     <div class="mb-3">
         <label for="agency_video_presentazione" class="form-label">Video di Presentazione</label>
-        <input class="form-control" type="file" id="agency_video_presentazione" name="video_presentazione" value="{{old('video_presentazione', $agency->video_presentazione)}}">
+        <input class="form-control" type="text" id="agency_video_presentazione" name="video_presentazione" value="{{old('video_presentazione', $agency->video_presentazione)}}">
     </div>
 
     <div class="mb-3">
@@ -95,8 +95,13 @@
     </div>
 
     <div class="mb-3">
-        <label for="agency_pec_sdi" class="form-label">Pec o SDI</label>
-        <input class="form-control" type="text" id="agency_pec_sdi" name="pec_sdi" value="{{old('pec_sdi', $agency->pec_sdi)}}">
+        <label for="agency_pec" class="form-label">Pec</label>
+        <input class="form-control" type="text" id="agency_pec" name="pec" value="{{old('pec', $agency->pec)}}">
+    </div>
+
+    <div class="mb-3">
+        <label for="agency_sdi" class="form-label">Codice SDI</label>
+        <input class="form-control" type="text" id="agency_sdi" name="sdi" value="{{old('sdi', $agency->sdi)}}">
     </div>
 
     <div class="mb-3">

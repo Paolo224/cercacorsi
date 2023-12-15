@@ -15,24 +15,25 @@ class AgencyController extends Controller
 
     protected $validationRules = [
         'nome' => ['required', 'unique:agencies'],
-        'logo' => 'image|max:512|mimes:jpg,png,svg',
-        'immagine_copertina' => 'image|max:512|mimes:jpg,png,svg',
-        'video_presentazione' => 'mimetypes:video/mp4',
+        'logo' => 'image|max:2048|mimes:jpg,png,gif',
+        'immagine_copertina' => 'image|max:2048|mimes:jpg,png,gif',
+        'video_presentazione' => 'url:http,https|nullable',
         'descrizione' => 'required',
-        'motto' => 'required',
-        'altre_informazioni' => 'required',
-        'telefono1' => 'required',
-        'telefono2' => 'required',
-        'email' => 'required',
+        'motto' => '',
+        'altre_informazioni' => '',
+        'telefono1' => 'required|max:10',
+        'telefono2' => '|max:10',
+        'email' => 'required|',
         'indirizzo' => 'required',
         'citta' => 'required',
-        'provincia' => 'required',
+        'provincia' => 'required|max:2',
         'paese' => 'required',
-        'cap' => 'required',
+        'cap' => 'required|max:5',
         'ragione_sociale' => 'required',
-        'p_iva' => 'required',
-        'codice_fiscale' => 'required',
-        'pec_sdi' => 'required',
+        'p_iva' => 'required|max:13',
+        'codice_fiscale' => 'required|max:16',
+        'sdi' => 'required|max:7',
+        'pec' => 'required',
         'tipo' => 'required',
     ];
 
@@ -69,9 +70,6 @@ class AgencyController extends Controller
         if ($request->hasFile('immagine_copertina')) {
             $data['immagine_copertina'] = Storage::put('uploads/img', $data['immagine_copertina']);
         }
-        if ($request->hasFile('video_presentazione')) {
-            $data['video_presentazione'] = Storage::put('uploads/video', $data['video_presentazione']);
-        }
         $data['slug'] = Str::slug($data['nome']);
         $data['user_id'] = Auth::user()->id;
         $newAgency = new Agency();
@@ -104,24 +102,25 @@ class AgencyController extends Controller
     {
         $data = $request->validate([
             'nome' => ['required', Rule::unique('agencies')->ignore($agency->id)],
-            'logo' => 'image|max:512|mimes:jpg,png,svg',
-            'immagine_copertina' => 'image|max:512|mimes:jpg,png,svg',
-            'video_presentazione' => 'mimetypes:video/mp4',
+            'logo' => 'image|max:2048|mimes:jpg,png,gif',
+            'immagine_copertina' => 'image|max:2048|mimes:jpg,png,gif',
+            'video_presentazione' => 'url:http,https|nullable',
             'descrizione' => 'required',
-            'motto' => 'required',
-            'altre_informazioni' => 'required',
-            'telefono1' => 'required',
-            'telefono2' => 'required',
-            'email' => 'required',
+            'motto' => '',
+            'altre_informazioni' => '',
+            'telefono1' => 'required|max:10',
+            'telefono2' => '|max:10',
+            'email' => 'required|',
             'indirizzo' => 'required',
             'citta' => 'required',
-            'provincia' => 'required',
+            'provincia' => 'required|max:2',
             'paese' => 'required',
-            'cap' => 'required',
+            'cap' => 'required|max:5',
             'ragione_sociale' => 'required',
-            'p_iva' => 'required',
-            'codice_fiscale' => 'required',
-            'pec_sdi' => 'required',
+            'p_iva' => 'required|max:13',
+            'codice_fiscale' => 'required|max:16',
+            'sdi' => 'required|max:7',
+            'pec' => 'required',
             'tipo' => 'required',
         ]);
 
@@ -132,10 +131,6 @@ class AgencyController extends Controller
         if ($request->hasFile('immagine_copertina')) {
             Storage::delete($agency->immagine_copertina);
             $data['immagine_copertina'] = Storage::put('uploads/img', $data['immagine_copertina']);
-        }
-        if ($request->hasFile('video_presentazione')) {
-            Storage::delete($agency->video_presentazione);
-            $data['video_presentazione'] = Storage::put('uploads/video', $data['video_presentazione']);
         }
 
         $agency->update($data);

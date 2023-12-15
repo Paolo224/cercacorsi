@@ -31,7 +31,8 @@ class Agency extends Model
         'ragione_sociale',
         'p_iva',
         'codice_fiscale',
-        'pec_sdi',
+        'sdi',
+        'pec',
         'tipo'
     ];
 
