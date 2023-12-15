@@ -128,8 +128,125 @@ div.sidebar {
     transition: margin-left 0.3s ease;
 }
 
-.immagine_copertina_show {
-    width: 50%;
-    border-top-left-radius: 0.375rem;
-    border-top-right-radius: 0;
+
+// SHOW.BLADE.PHP
+
+div.immagine_copertina_pagina_show {
+    height: 350px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+
+    div.logo_azienda {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        background-color: white;
+        overflow: hidden;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 1%;
+        top: 2%;
+        border: 2px solid rgb(255, 255, 255);
+    }
+
+    p.motto_aziendale {
+        position: absolute;
+        left: 50%;
+        bottom: 1%;
+        transform: translateX(-50%);
+        color: white;
+        padding: 15px;
+        background-color: rgba(0, 0, 0, 0.7);
+        font-size: 2rem;
+        border-radius: 10px;
+    }
+}
+
+div.contenitore_informazioni_aziendali {
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: #dfdfdf;
+    font-weight: 600;
+    width: 100%;
+    margin-left: 1px;
+}
+
+div.contenitore_descrizione_aziendale {
+    height: 530px;
+    overflow-y: scroll;
+}
+
+.contenitore_descrizione_aziendale::-webkit-scrollbar {
+    width: 4px;
+    /* Larghezza della scrollbar */
+}
+
+.contenitore_descrizione_aziendale::-webkit-scrollbar-thumb {
+    background-color: #888;
+    display: none;
+    transition: all 0.5s ease;
+    /* Colore del thumb (la parte trascinabile della scrollbar) */
+}
+
+.contenitore_descrizione_aziendale::-webkit-scrollbar-thumb {
+    display: block;
+    /* Colore del thumb (la parte trascinabile della scrollbar) */
+}
+
+#video_aziendale {
+    width: 100%;
+    /* Larghezza del video */
+    max-width: 800px;
+    /* Larghezza massima consentita */
+    height: auto;
+    /* Altezza del video (auto per mantenere l'aspetto proporzionato) */
+    border: 1px solid #ccc;
+    /* Bordo attorno al video */
+    border-radius: 8px;
+    /* Arrotondamento dei bordi */
+    margin: 0 auto;
+    /* Centro il video orizzontalmente */
+    display: block;
+    /* Imposto come elemento block */
+}
+
+/* Stili per i controlli del video */
+#video_aziendale::-webkit-media-controls {
+    /* Stili specifici per i controlli (solo per Webkit browsers come Chrome e Safari) */
+    background-color: rgba(0, 0, 0, 0);
+    /* Colore dello sfondo dei controlli */
+    color: white;
+    /* Colore del testo dei controlli */
+}
+
+/* Stili per il pulsante di riproduzione/pausa */
+#video_aziendale::-webkit-media-controls-play-button {
+    /* Stili specifici per il pulsante play (solo per Webkit browsers) */
+    color: white;
+    /* Colore del pulsante play */
+}
+
+div.contenitore_altre_info {
+    ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    li {
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        font-weight: 600;
+        font-size: 1.3rem;
+    }
 }
