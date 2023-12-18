@@ -63,10 +63,16 @@
         <label for="agency_citta" class="form-label">Città</label>
         <input class="form-control" type="text" id="agency_citta" name="citta" value="{{old('citta', $agency->citta)}}">
     </div>
-
+    
     <div class="mb-3">
         <label for="agency_provincia" class="form-label">Provincia</label>
-        <input class="form-control" type="text" id="agency_provincia" name="provincia" value="{{old('provincia', $agency->provincia)}}">
+        {{-- <input class="form-control" type="text" id="agency_provincia" name="provincia" value="{{old('provincia', $agency->provincia)}}"> --}}
+        <select class="js-example-basic-single" name="provincia" id="agency_provincia">
+            <option value="" selected>Selezione Provincia</option>
+            @foreach ($provinceItaliane as $abbreviazione => $provincia)    
+            <option value="{{$abbreviazione}}" @if(Route::currentRouteName() === 'admin.agency.create') @else {{ old('provincia', $agency->provincia) == $abbreviazione ? 'selected' : '' }} @endif>{{$provincia}}</option>
+            @endforeach
+        </select>
     </div>
     
     <div class="mb-3">
