@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
         <div class="col">
             <div class="card">
-                <div class="card-header">{{ __('User Dashboard') }}</div>
+                <div class="card-header">{{Auth::user()->cognome}} {{Auth::user()->nome}}</div>
 
                 <div class="card-body">
                     @if (session('status'))
