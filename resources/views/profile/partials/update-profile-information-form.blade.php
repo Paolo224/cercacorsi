@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="text-secondary">
-            {{ __('Profile Information') }}
+            Profilo
         </h2>
 
         <p class="mt-1 text-muted">
-            {{ __("Update your account's profile information and email address.") }}
+            Aggiorna le informazioni del Profilo e l'indirizzo email del tuo account
         </p>
     </header>
 
@@ -20,7 +20,7 @@
         <div class="mb-2">
             <label for="nome" class="col-md-4 col-form-label text-md-right">Nome</label>
 
-                <input id="nome" type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" value="{{ old('nome') }}" required autocomplete="nome" autofocus>
+                <input id="nome" type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" value="{{ old('nome', $user->nome) }}" required autocomplete="nome" autofocus>
 
                 @error('nome')
                 <span class="invalid-feedback" role="alert">
@@ -32,7 +32,7 @@
         <div class="mb-2">
             <label for="cognome" class="col-md-4 col-form-label text-md-right">Cognome</label>
 
-                <input id="cognome" type="text" class="form-control @error('cognome') is-invalid @enderror" name="cognome" value="{{ old('cognome') }}" required autocomplete="cognome" autofocus>
+                <input id="cognome" type="text" class="form-control @error('cognome') is-invalid @enderror" name="cognome" value="{{ old('cognome', $user->cognome) }}" required autocomplete="cognome" autofocus>
 
                 @error('cognome')
                 <span class="invalid-feedback" role="alert">
@@ -74,7 +74,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-4">
-            <button class="btn btn-primary" type="submit">{{ __('Save') }}</button>
+            <button class="btn btn-primary" type="submit">Salva</button>
 
             @if (session('status') === 'profile-updated')
             <script>
