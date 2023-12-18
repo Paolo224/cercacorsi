@@ -367,11 +367,15 @@ class AgencyController extends Controller
         ]);
 
         if ($request->hasFile('logo')) {
-            Storage::delete($agency->logo);
+            if ($agency->logo !== 'immagine_placeholder.jpg') {
+                Storage::delete($agency->logo);
+            }
             $data['logo'] = Storage::put('uploads/img', $data['logo']);
         }
         if ($request->hasFile('immagine_copertina')) {
-            Storage::delete($agency->immagine_copertina);
+            if ($agency->immagine_copertina !== 'immagine_placeholder_copertina.png') {
+                Storage::delete($agency->immagine_copertina);
+            }
             $data['immagine_copertina'] = Storage::put('uploads/img', $data['immagine_copertina']);
         }
 
