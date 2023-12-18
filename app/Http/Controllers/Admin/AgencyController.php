@@ -34,6 +34,12 @@ class AgencyController extends Controller
         'codice_fiscale' => 'required|max:16',
         'sdi' => 'required|max:7',
         'pec' => 'required',
+        'whatsapp' => ['regex:/\bwhatsapp\b/', 'nullable'],
+        'facebook' => ['regex:/\bfacebook\b/', 'nullable'],
+        'linkedin' => ['regex:/\blinkedin\b/', 'nullable'],
+        'tiktok' => ['regex:/\btiktok\b/', 'nullable'],
+        'youtube' => ['regex:/\byoutube\b/', 'nullable'],
+        'instagram' => ['regex:/\binstagram\b/', 'nullable'],
         'tipo' => 'required',
     ];
 
@@ -351,6 +357,12 @@ class AgencyController extends Controller
             'sdi' => 'required|max:7',
             'pec' => 'required',
             'visibile' => 'required',
+            'whatsapp' => ['regex:/\bwhatsapp\b/', 'nullable'],
+            'facebook' => ['regex:/\bfacebook\b/', 'nullable'],
+            'linkedin' => ['regex:/\blinkedin\b/', 'nullable'],
+            'tiktok' => ['regex:/\btiktok\b/', 'nullable'],
+            'youtube' => ['regex:/\byoutube\b/', 'nullable'],
+            'instagram' => ['regex:/\binstagram\b/', 'nullable'],
             'tipo' => 'required',
         ]);
 

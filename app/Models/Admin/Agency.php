@@ -34,6 +34,12 @@ class Agency extends Model
         'sdi',
         'pec',
         'visibile',
+        'whatsapp',
+        'facebook',
+        'linkedin',
+        'tiktok',
+        'youtube',
+        'instagram',
         'tipo'
     ];
 

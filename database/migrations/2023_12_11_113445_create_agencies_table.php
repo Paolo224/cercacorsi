@@ -37,6 +37,12 @@ return new class extends Migration
             $table->text('altre_informazioni')->nullable();
             $table->boolean('premium')->default(false);
             $table->boolean('visibile')->default(true);
+            $table->text('facebook')->nullable();
+            $table->text('instagram')->nullable();
+            $table->text('linkedin')->nullable();
+            $table->text('tiktok')->nullable();
+            $table->text('youtube')->nullable();
+            $table->text('whatsapp')->nullable();
             $table->timestamps();
         });
     }
