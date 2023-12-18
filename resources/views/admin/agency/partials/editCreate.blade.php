@@ -109,6 +109,20 @@
         <input class="form-control" type="text" id="agency_tipo" name="tipo" value="{{old('tipo', $agency->tipo)}}">
     </div>
 
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="visible" name="visibile" value="1" required @checked(old('visibile', $agency->visibile))>
+        <label class="form-check-label" for="dishVisible">
+            Visibile
+        </label>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="not_visible" name="visibile" value="0" required @checked(!old('visibile', $agency->visibile))>
+        <label class="form-check-label" for="dish-notVisible">
+            Non Visibile
+        </label>
+    </div>
+
     <div class="mb-3">
         <button type="submit" class="btn btn-outline-dark">
             Salva

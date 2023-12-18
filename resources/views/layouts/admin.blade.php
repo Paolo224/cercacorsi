@@ -70,7 +70,7 @@
                     </svg>
                 </a>
         
-                <a class="d-flex align-items-center justify-content-between" href="{{ url('admin/dashboard') }}">
+                <a class="d-flex align-items-center justify-content-between" href="{{ url('admin/') }}">
                     Dashboard
                     <svg class="my_svg_icon" id="Capa_1" enable-background="new 0 0 512 512" height="20" viewBox="0 0 512 512"
                         width="20" xmlns="http://www.w3.org/2000/svg">
