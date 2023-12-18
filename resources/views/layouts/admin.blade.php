@@ -173,6 +173,39 @@
                 $('.js-example-basic-single').select2();
             });
         </script>
+
+        <script>
+            $(document).ready(function() {
+                $('#agency_immagine_copertina').change(function() {
+                    var input = this;
+
+                    if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            $('#agency_immagine_copertina_Image').attr('src', e.target.result).show();
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                });
+
+                $('#agency_logo').change(function() {
+                    var input = this;
+
+                    if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            $('#agency_logo_Image').attr('src', e.target.result).show();
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                });
+            });
+        </script>
+
         <script>
             function toggleSidebar() {
                 const sidebar = document.getElementById('sidebar');

@@ -13,7 +13,8 @@
         <label for="agency_logo" class="form-label">Logo Aziendale</label>
         <input class="form-control" type="file" id="agency_logo" name="logo" value="{{old('logo', $agency->logo)}}">
     </div>
-
+    <img id="agency_logo_Image" src="#" alt="Preview" style="display: none; max-width: 100px;">
+    
     <div class="mb-3">
         <label for="agency_motto" class="form-label">Motto dell'Azienda</label>
         <textarea class="form-control" id="agency_motto" rows="3" name="motto">{{old('motto', $agency->motto)}}</textarea>
@@ -33,6 +34,7 @@
         <label for="agency_immagine_copertina" class="form-label">Immagine di copertina</label>
         <input class="form-control" type="file" id="agency_immagine_copertina" name="immagine_copertina" value="{{old('immagine_copertina', $agency->immagine_copertina)}}">
     </div>
+    <img id="agency_immagine_copertina_Image" src="#" alt="Preview" style="display: none; max-width: 100px;">
 
     <div class="mb-3">
         <label for="agency_video_presentazione" class="form-label">Video di Presentazione</label>
@@ -127,6 +129,27 @@
         <label class="form-check-label" for="dish-notVisible">
             Non Visibile
         </label>
+    </div>
+
+    <div class="mb-3">
+        <label for="agency_whatsapp" class="form-label">Whatsapp</label>
+        <input class="form-control" type="text" id="agency_whatsapp" name="whatsapp" value="{{old('whatsapp', $agency->whatsapp)}}">
+    </div>
+    <div class="mb-3">
+        <label for="agency_instagram" class="form-label">Instagram</label>
+        <input class="form-control" type="text" id="agency_instagram" name="instagram" value="{{old('instagram', $agency->instagram)}}">
+    </div>
+    <div class="mb-3">
+        <label for="agency_facebook" class="form-label">Facebook</label>
+        <input class="form-control" type="text" id="agency_facebook" name="facebook" value="{{old('facebook', $agency->facebook)}}">
+    </div>
+    <div class="mb-3">
+        <label for="agency_youtube" class="form-label">Youtube</label>
+        <input class="form-control" type="text" id="agency_youtube" name="youtube" value="{{old('youtube', $agency->youtube)}}">
+    </div>
+    <div class="mb-3">
+        <label for="agency_tiktok" class="form-label">TikTok</label>
+        <input class="form-control" type="text" id="agency_tiktok" name="tiktok" value="{{old('tiktok', $agency->tiktok)}}">
     </div>
 
     <div class="mb-3">
