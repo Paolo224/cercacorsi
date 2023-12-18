@@ -36,6 +36,7 @@ return new class extends Migration
             $table->string('sdi', 7);
             $table->text('altre_informazioni')->nullable();
             $table->boolean('premium')->default(false);
+            $table->boolean('visibile')->default(true);
             $table->timestamps();
         });
     }

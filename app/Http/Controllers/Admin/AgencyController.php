@@ -121,6 +121,7 @@ class AgencyController extends Controller
             'codice_fiscale' => 'required|max:16',
             'sdi' => 'required|max:7',
             'pec' => 'required',
+            'visibile' => 'required',
             'tipo' => 'required',
         ]);
 
@@ -143,5 +144,14 @@ class AgencyController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function enableToggle(Request $request, Agency $agency)
+    {
+        $agency->visibile = !$agency->visibile;
+        $agency->save();
+
+        $message = ($agency->visibile) ? $agency->nome . " è visibile" : $agency->nome . " non è visibile";
+        return redirect()->route('admin.agency.index')->with('alert-type', 'success')->with('alert-message', "<b>$message</b>");
     }
 }
