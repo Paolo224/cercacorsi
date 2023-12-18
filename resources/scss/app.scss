@@ -251,3 +251,16 @@ div.contenitore_altre_info {
         font-size: 1.3rem;
     }
 }
+
+.banner_visibile {
+    position: absolute;
+    top: 37px;
+    right: -38px;
+    width: 181px;
+    height: 33px;
+    background-color: #ff0000;
+    transform: rotate(45deg);
+    z-index: 999;
+    color: white;
+    font-weight: 600;
+}

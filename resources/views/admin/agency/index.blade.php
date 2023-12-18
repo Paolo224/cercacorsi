@@ -17,6 +17,11 @@
                 <div class="col">
                     <div class="card">
                         <div class="img_container" style="border-top-left-radius: 0.375rem; border-top-right-radius: 0.375rem; height: 200px; width: 100%; background-position: center; background-size: cover; background-image: url('{{asset('storage/' . $agency->immagine_copertina)}}');">
+                            @if ($agency->visibile == 0)    
+                            <div class="banner_visibile text-center align-middle">
+                                Non Visibile
+                            </div>
+                            @endif
                         </div>
                         <div class="card-body">
                             <img src="{{asset('storage/' . $agency->logo)}}" class="card-img-top" alt="{{$agency->nome}}" style="width: 50px;"><h5 class="ms-3 align-middle m-0 card-title d-inline-block">{{$agency->nome}}</h5>
