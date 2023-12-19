@@ -50,7 +50,7 @@ class Agency extends Model
 
     public function Courses()
     {
-        return $this->hasMany(Courses::class);
+        return $this->hasMany(Course::class);
     }
 
     public function getABooleanFromNumber($num)

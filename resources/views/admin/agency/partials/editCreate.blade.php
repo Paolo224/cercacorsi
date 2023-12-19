@@ -17,7 +17,7 @@
     
     <div class="mb-3">
         <label for="agency_motto" class="form-label">Motto dell'Azienda</label>
-        <textarea class="form-control" id="agency_motto" rows="3" name="motto">{{old('motto', $agency->motto)}}</textarea>
+        <input class="form-control" id="agency_motto" name="motto">{{old('motto', $agency->motto)}}
     </div>
 
     <div class="mb-3">
@@ -119,14 +119,14 @@
 
     <div class="form-check">
         <input class="form-check-input" type="radio" id="visible" name="visibile" value="1" required @checked(old('visibile', $agency->visibile))>
-        <label class="form-check-label" for="dishVisible">
+        <label class="form-check-label">
             Visibile
         </label>
     </div>
 
     <div class="form-check">
         <input class="form-check-input" type="radio" id="not_visible" name="visibile" value="0" required @checked(!old('visibile', $agency->visibile))>
-        <label class="form-check-label" for="dish-notVisible">
+        <label class="form-check-label">
             Non Visibile
         </label>
     </div>

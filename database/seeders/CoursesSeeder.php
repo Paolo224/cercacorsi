@@ -6,6 +6,7 @@ use App\Models\Admin\Agency;
 use App\Models\Admin\Course;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
 class CoursesSeeder extends Seeder
@@ -22,6 +23,7 @@ class CoursesSeeder extends Seeder
             $newCourse->agency_id = Agency::inRandomOrder()->first()->id;
             $newCourse->categoria = $faker->word();
             $newCourse->titolo = $faker->word();
+            $newCourse->slug = Str::slug($newCourse->titolo);
             $newCourse->immagine = 'immagine_placeholder_copertina.png';
             $newCourse->descrizione = $faker->realText(500, 2);
             $newCourse->durata = '600';

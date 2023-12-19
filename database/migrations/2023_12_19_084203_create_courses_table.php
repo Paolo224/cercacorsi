@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('categoria', 255);
             $table->string('titolo', 255);
+            $table->string('slug', 255);
             $table->string('sottotitolo')->nullable();
             $table->text('descrizione');
             $table->string('durata', 3);
