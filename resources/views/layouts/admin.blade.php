@@ -203,6 +203,20 @@
                         reader.readAsDataURL(input.files[0]);
                     }
                 });
+
+                $('#course_immagine').change(function() {
+                    var input = this;
+
+                    if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            $('#course_immagine_Image').attr('src', e.target.result).show();
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                });
             });
         </script>
 

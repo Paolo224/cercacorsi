@@ -3,11 +3,6 @@
 @section('content')
 <div class="container-fluid container-xxl">
     <div class="row mt-3">
-            <div class="col-12 text-end">
-                <a href="{{route('admin.course.create')}}" class="btn btn-sm btn-success" style="width: 80px;">
-                    + Nuovo
-                </a>
-            </div>
             @if(!$courses->isNotEmpty())
                 <h3 class="text-center mt-5 mb-2">Non hai inserito nessuna Corso di Formazione...</h3>
                 <h4 class="text-center mb-2">Inserisci un corso cliccando il tasto "Nuovo"</h4>
