@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Admin\Agency;
-use App\Models\Admin\Courses;
+use App\Models\Admin\Course;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
@@ -18,7 +18,7 @@ class CoursesSeeder extends Seeder
         $agency = Agency::all();
 
         for ($i = 0; $i < 5; $i++) {
-            $newCourse = new Courses();
+            $newCourse = new Course();
             $newCourse->agency_id = Agency::inRandomOrder()->first()->id;
             $newCourse->categoria = $faker->word();
             $newCourse->titolo = $faker->word();

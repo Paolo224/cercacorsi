@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Courses;
+use App\Models\Admin\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +21,7 @@ class CoursesController extends Controller
         $agencies = $user->agencies->pluck('id'); // Ottieni gli ID delle agenzie dell'utente
 
         // Ottieni i corsi associati alle agenzie dell'utente
-        $courses = Courses::whereIn('agency_id', $agencies)->get();
+        $courses = Course::whereIn('agency_id', $agencies)->get();
 
         return view('admin.course.index', compact('courses'));
     }
@@ -29,9 +29,9 @@ class CoursesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Course $course)
     {
-        //
+        return view('admin.course.create', compact('course'));
     }
 
     /**
