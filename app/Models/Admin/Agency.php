@@ -48,6 +48,11 @@ class Agency extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function Courses()
+    {
+        return $this->hasMany(Courses::class);
+    }
+
     public function getABooleanFromNumber($num)
     {
         return ($num) ? 'true' : 'false';
