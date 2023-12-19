@@ -7,7 +7,7 @@
         <select {{-- class="js-example-basic-single"--}} name="agency_id" id="course_agency_id"> 
             <option value="" selected>Azienda...</option>
             @foreach ($agencies as $agency)    
-            <option value="{{$agency->id}}" @if(Route::currentRouteName() === 'admin.course.create') @else {{ old('agency_id', $agency->id) == $agency ? 'selected' : '' }} @endif>{{$agency->nome}}</option>
+            <option value="{{$agency->id}}" @if(Route::currentRouteName() === 'admin.course.create') @else {{ old('agency_id', $agency->id) == $agency->id ? 'selected' : '' }} @endif>{{$agency->nome}}</option>
             @endforeach
         </select>
     </div>
@@ -16,7 +16,7 @@
         <select {{-- class="js-example-basic-single"--}} name="categoria" id="course_categoria"> 
             <option value="" selected>Categoria...</option>
             @foreach ($categoriaCorso as $categoria => $valore)    
-            <option value="{{$categoria}}" @if(Route::currentRouteName() === 'admin.course.create') @else {{ old('provincia', $course->categoria) == $categoria ? 'selected' : '' }} @endif>{{$valore}}</option>
+            <option value="{{$categoria}}" @if(Route::currentRouteName() === 'admin.course.create') @else {{ old('categoria', $course->categoria) == $categoria ? 'selected' : '' }} @endif>{{$valore}}</option>
             @endforeach
         </select>
     </div>
@@ -63,7 +63,7 @@
 
     <div class="mb-3">
         <label for="course_competenze_partenza" class="form-label">Competenze di Partenza</label>
-        <input class="form-control" id="course_competenze_partenza" name="competenze_partenza">{{old('competenze_partenza', $course->competenze_partenza)}}
+        <input class="form-control" id="course_competenze_partenza" name="competenze_partenza" value="{{old('competenze_partenza', $course->competenze_partenza)}}">
     </div>
 
     <div class="mb-3">
@@ -103,17 +103,17 @@
 
     <div class="mb-3">
         <label for="course_on_site" class="form-label">Corso di Formazione presso Terzi</label>
-        <input type="checkbox" id="course_on_site" name="on_site" value="{{ old('on_site', $course->on_site)}}">
+        <input type="checkbox" id="course_on_site" name="on_site" value="1" @if(Route::currentRouteName() === 'admin.course.create') @else {{ old('on_site', $course->on_site) == 1 ? 'checked' : '' }} @endif>
     </div>
 
     <div class="mb-3">
         <label for="course_in_aula" class="form-label">Corso in Presenza</label>
-        <input type="checkbox" id="course_in_aula" name="in_aula" value="{{ old('in_aula', $course->in_aula)}}">
+        <input type="checkbox" id="course_in_aula" name="in_aula" value="1" @if(Route::currentRouteName() === 'admin.course.create') @else {{ old('in_aula', $course->in_aula) == 1 ? 'checked' : '' }} @endif>
     </div>
 
     <div class="mb-3">
         <label for="course_fad" class="form-label">Corso di Formazione a Distanza</label>
-        <input type="checkbox" id="course_fad" name="fad" value="{{ old('fad', $course->fad)}}">
+        <input type="checkbox" id="course_fad" name="fad" value="1" @if(Route::currentRouteName() === 'admin.course.create') @else {{ old('fad', $course->fad) == 1 ? 'checked' : '' }} @endif>
     </div>
 
     <div class="mb-3">

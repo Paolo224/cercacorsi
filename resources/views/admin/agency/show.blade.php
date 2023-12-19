@@ -230,22 +230,21 @@
         </div>
     </div>
     <div class="row">
-        @foreach ($agency->courses as $agency)
-            
+        @foreach ($agency->courses as $agency)    
+            <div class="col-4" style="border: 1px solid black">
+                <h3>{{$agency->titolo}}</h3>
+                <p>{{$agency->durata}} ore</p>
+                @if ($agency->on_site == 1)
+                    <p>Presso Terzi</p>
+                @endif
+                @if ($agency->in_aula == 1)
+                    <p>In Aula</p>
+                @endif
+                @if ($agency->fad == 1)
+                    <p>Formazione a distanza</p>
+                @endif
+                <a href="{{route('admin.course.show', $agency->id)}}">Vai al corso</a>
+            </div>
         @endforeach
-        <div class="col-4" style="border: 1px solid black">
-            <h3>{{$agency->titolo}}</h3>
-            <p>{{$agency->durata}} ore</p>
-            @if ($agency->on_site == 1)
-                <p>Presso Terzi</p>
-            @endif
-            @if ($agency->in_aula == 1)
-                <p>In Aula</p>
-            @endif
-            @if ($agency->fad == 1)
-                <p>Formazione a distanza</p>
-            @endif
-            <a href="{{route('admin.course.show', $agency->id)}}">Vai al corso</a>
-        </div>
     </div>
 @endsection

@@ -22,11 +22,16 @@ class CoursesController extends Controller
         'video_corso' => 'url:http,https|nullable',
         'durata' => 'required|max:3',
         'competenze_partenza' => 'required',
-        'prezzo' => 'required|numeric',
+        'prezzo' => 'nullable|numeric',
         'programma' => 'required',
         'obiettivi' => 'required',
+        'attestato' => 'required',
         'descrizione_attestato' => 'nullable',
         'lingua' => 'required',
+        'fad' => 'nullable',
+        'on_site' => 'nullable',
+        'in_aula' => 'nullable',
+        'visibile' => 'required',
         'a_chi_si_rivolge' => 'required',
         'requisiti_richiesti' => 'required'
     ];
@@ -82,8 +87,6 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-
         $data = $request->validate($this->validationRules);
         if ($request->hasFile('immagine')) {
             $data['immagine'] = Storage::put('uploads/img/courses', $data['immagine']);
@@ -99,16 +102,22 @@ class CoursesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Course $course)
     {
-        //
+        return view('admin.course.show', compact('course'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Course $course)
     {
+        $categoriaCorso = [
+            'diesgno' => 'disegno',
+            'informatica' => 'informatica',
+            'foto' => 'foto'
+        ];
+
         $lingueErogazioneCorso = [
             'Italiano' => 'Italiano',
             'Francese' => 'Francese',
@@ -117,14 +126,51 @@ class CoursesController extends Controller
             'Tedesco' => 'Tedesco',
             'Cinese' => 'Cinese',
         ];
+
+        $user = Auth::user();
+
+        $agencies = $user->agencies;
+
+
+        return view('admin.course.edit', compact('course', 'categoriaCorso', 'lingueErogazioneCorso', 'agencies'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Course $course)
     {
-        //
+        // dd($request);
+        $data = $request->validate([
+            'categoria' => 'required',
+            'titolo' => 'required',
+            'agency_id' => 'required',
+            'sottotitolo' => 'nullable',
+            'descrizione' => 'required',
+            'immagine' => 'image|max:2048|mimes:jpg,png,gif',
+            'video_corso' => 'url:http,https|nullable',
+            'durata' => 'required|max:3',
+            'competenze_partenza' => 'required',
+            'prezzo' => 'nullable|numeric',
+            'programma' => 'required',
+            'obiettivi' => 'required',
+            'attestato' => 'required',
+            'descrizione_attestato' => 'nullable',
+            'lingua' => 'required',
+            'fad' => 'nullable',
+            'on_site' => 'nullable',
+            'in_aula' => 'nullable',
+            'visibile' => 'required',
+            'a_chi_si_rivolge' => 'required',
+            'requisiti_richiesti' => 'required'
+        ]);
+
+        if ($request->hasFile('immagine')) {
+            $data['immagine'] = Storage::put('uploads/img/courses', $data['immagine']);
+        }
+
+        $course->update($data);
+        return redirect()->route('admin.course.show', compact('course'));
     }
 
     /**
