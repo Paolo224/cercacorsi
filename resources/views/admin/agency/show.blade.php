@@ -54,12 +54,14 @@
                     </div>
                     <!-- TELEFONO 2 -->
                     <div class="col-6 d-flex align-items-center mb-3">
-                        <i class="fas fa-phone fa-lg"></i>
-                        <span class="ms-2">
-                            <a href="tel:+39{{$agency->telefono2}}" class="text-black text-decoration-none">
-                                {{$agency->telefono2}}
-                            </a>
-                        </span>
+                        @if ($agency->telefono2 != null)        
+                            <i class="fas fa-phone fa-lg"></i>
+                            <span class="ms-2">
+                                <a href="tel:+39{{$agency->telefono2}}" class="text-black text-decoration-none">
+                                    {{$agency->telefono2}}
+                                </a>
+                            </span>
+                        @endif
                     </div>
                     <!-- CITTA E PROVINCIA -->
                     <div class="col-6 d-flex align-items-center mb-3">
