@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin\Agency;
 use App\Models\Admin\Courses;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,8 +15,11 @@ class CoursesSeeder extends Seeder
      */
     public function run(Faker $faker): void
     {
+        $agency = Agency::all();
+
         for ($i = 0; $i < 5; $i++) {
             $newCourse = new Courses();
+            $newCourse->agency_id = Agency::inRandomOrder()->first()->id;
             $newCourse->categoria = $faker->word();
             $newCourse->titolo = $faker->word();
             $newCourse->descrizione = $faker->realText(500, 2);
