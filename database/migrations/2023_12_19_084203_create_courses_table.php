@@ -28,7 +28,9 @@ return new class extends Migration
             $table->text('descrizione_attestato')->nullable();
             $table->boolean('visibile')->default(true);
             $table->string('lingua')->nullable();
-            $table->string('modalita_fruizione_corso')->nullable();
+            $table->boolean('on_site')->default(true);
+            $table->boolean('in_aula')->default(true);
+            $table->boolean('fad')->default(true);
             $table->string('a_chi_si_rivolge', 255);
             $table->string('requisiti_richiesti', 255);
             $table->timestamps();

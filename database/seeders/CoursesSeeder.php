@@ -22,6 +22,7 @@ class CoursesSeeder extends Seeder
             $newCourse->agency_id = Agency::inRandomOrder()->first()->id;
             $newCourse->categoria = $faker->word();
             $newCourse->titolo = $faker->word();
+            $newCourse->immagine = 'immagine_placeholder_copertina.png';
             $newCourse->descrizione = $faker->realText(500, 2);
             $newCourse->durata = '600';
             $newCourse->competenze_partenza = $faker->word(3, true);
