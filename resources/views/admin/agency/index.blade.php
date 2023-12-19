@@ -16,7 +16,7 @@
                 @foreach ($agencies as $agency)
                 <div class="col">
                     <div class="card">
-                        <div class="img_container" style="border-top-left-radius: 0.375rem; border-top-right-radius: 0.375rem; height: 200px; width: 100%; background-position: center; background-size: cover; background-image: url('{{asset('storage/' . $agency->immagine_copertina)}}');">
+                        <div class="img_container" style="position: relative; overflow: hidden; border-top-left-radius: 0.375rem; border-top-right-radius: 0.375rem; height: 200px; width: 100%; background-position: center; background-size: cover; background-image: url('{{asset('storage/' . $agency->immagine_copertina)}}');">
                             @if ($agency->visibile == 0)    
                             <div class="banner_visibile text-center align-middle">
                                 Non Visibile
@@ -25,9 +25,9 @@
                         </div>
                         <div class="card-body">
                             <img src="{{asset('storage/' . $agency->logo)}}" class="card-img-top" alt="{{$agency->nome}}" style="width: 50px;"><h5 class="ms-3 align-middle m-0 card-title d-inline-block">{{$agency->nome}}</h5>
-                            <p class="card-text mt-3 mb-0">{{$agency->email}}</p>
-                            <p class="card-text mt-2 mb-0">{{$agency->telefono1}}</p>
-                            <div class="mt-2 d-flex justify-content-between">
+                            <p class="card-text mt-3 mb-0"><i class="fa-regular fa-envelope me-2" style="color: #000000;"></i>{{$agency->email}}</p>
+                            <p class="card-text mt-2 mb-0"><i class="fas fa-phone me-2"></i>{{$agency->telefono1}}</p>
+                            <div class="mt-3 d-flex justify-content-between">
                                 <a href="{{route('admin.agency.show', $agency->id)}}" class="btn btn-sm btn-primary">
                                     Dettagli
                                 </a>
