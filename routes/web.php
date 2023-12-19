@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CoursesController as AdminCoursesController;
 use App\Http\Controllers\Admin\AgencyController as AdminAgencyController;
 use App\Http\Controllers\Admin\DashboardController as DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -23,6 +24,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
     Route::resource('/agency', AdminAgencyController::class);
+    Route::resource('/course', AdminCoursesController::class);
     // altre rotte protette da login e che siano in admin
 });
 

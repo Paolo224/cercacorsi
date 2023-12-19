@@ -19,9 +19,6 @@ class AgencySeeder extends Seeder
         for ($i = 0; $i < 5; $i++) {
             $newAgency = new Agency();
             $newAgency->user_id = User::inRandomOrder()->first()->id;
-            // $newAgency->user_id = '11';
-            // $newAgency->logo = 'immagine_placeholder.jpg';
-            // $newAgency->immagine_copertina = 'immagine_placeholder_copertina.jpg';
             $newAgency->nome = $faker->company();
             $newAgency->slug = Str::slug($newAgency->nome);
             $newAgency->descrizione = $faker->realText(500, 2);
