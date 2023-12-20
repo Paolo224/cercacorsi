@@ -72,7 +72,7 @@
                     <th scope="col" class="text-center" style="width: 80px">On Site</th>
                     <th scope="col" class="text-center" style="width: 80px">In Aula</th>
                     <th scope="col" class="text-center" style="width: 80px">FAD</th>
-                    <th scope="col" class="text-center" style="width: 80px">Visibile</th>
+                    <th scope="col" class="text-center" style="width: 80px">Visibilità</th>
                     <th scope="col" class="text-center" style="width: 150px">
                         <a href="{{route('admin.course.create')}}" class="btn btn-sm btn-success bottone_aggiungi_index_corsi">
                             <i class="fa-regular fa-square-plus"></i>
