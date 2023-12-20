@@ -219,7 +219,16 @@
                 });
             });
         </script>
-
+        <script>
+            $(document).ready(function() {
+                $('#SearchNomeCorso').on('input', function() {
+                    var searchText = $(this).val().toLowerCase();
+                    $('#coursesTable tbody tr').filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1)
+                    });
+                });
+            });
+        </script>
         <script>
             function toggleSidebar() {
                 const sidebar = document.getElementById('sidebar');

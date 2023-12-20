@@ -5,16 +5,16 @@
     <div class="mb-3">
         <label for="course_agency_id" class="form-label">A quale azienda fa riferimento questo corso?</label>
         <select {{-- class="js-example-basic-single"--}} name="agency_id" id="course_agency_id"> 
-            <option value="" selected>Azienda...</option>
+            <option value="" selected disabled></option>
             @foreach ($agencies as $agency)    
-            <option value="{{$agency->id}}" @if(Route::currentRouteName() === 'admin.course.create') @else {{ old('agency_id', $agency->id) == $agency->id ? 'selected' : '' }} @endif>{{$agency->nome}}</option>
+            <option value="{{$agency->id}}" @if(Route::currentRouteName() === 'admin.course.create') @else {{ $course->agency_id == $agency->id ? 'selected' : '' }} @endif>{{$agency->nome}}</option>
             @endforeach
         </select>
     </div>
     <div class="mb-3">
         <label for="course_categoria" class="form-label">Di che Categoria fa Parte il Corso?</label>
         <select {{-- class="js-example-basic-single"--}} name="categoria" id="course_categoria"> 
-            <option value="" selected>Categoria...</option>
+            <option value="" selected disabled></option>
             @foreach ($categoriaCorso as $categoria => $valore)    
             <option value="{{$categoria}}" @if(Route::currentRouteName() === 'admin.course.create') @else {{ old('categoria', $course->categoria) == $categoria ? 'selected' : '' }} @endif>{{$valore}}</option>
             @endforeach
@@ -95,7 +95,7 @@
 
     <label for="course_lingua" class="form-label">Lingua del Corso</label>
     <select {{-- class="js-example-basic-single"--}} name="lingua" id="course_lingua"> 
-        <option value="" selected>Lingua...</option>
+        <option value="" selected disabled></option>
         @foreach ($lingueErogazioneCorso as $lingua => $valore)    
         <option value="{{$lingua}}" @if(Route::currentRouteName() === 'admin.course.create') @else {{ old('provincia', $course->lingua) == $lingua ? 'selected' : '' }} @endif>{{$valore}}</option>
         @endforeach

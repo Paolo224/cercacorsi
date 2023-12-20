@@ -2,28 +2,77 @@
 
 @section('content')
 <div class="container-fluid container-xxl">
-    <div class="row mt-3">
+    <div class="row mt-3 justify-content-center">
             @if(!$courses->isNotEmpty())
             <div class="col-12 text-end">
-                <a href="{{route('admin.course.create')}}" class="btn btn-sm btn-success" style="width: 80px;">
+                <a href="{{route('admin.course.index')}}" class="btn btn-sm btn-success" style="width: 80px;">
                     + Nuovo
                 </a>
             </div>
-                <h3 class="text-center mt-5 mb-2">Non hai inserito nessuna Corso di Formazione...</h3>
+                <h3 class="text-center mt-5 mb-2"><i class="fa-regular fa-face-sad-tear"></i> Nessun Corso di Formazione trovato...</h3>
                 <h4 class="text-center mb-2">Inserisci un corso cliccando il tasto "Nuovo"</h4>
             @else
-            <table class="table table-striped table-hover mt-3">
+            <div class="row p-0">
+                <div class="col-12 d-flex align-items-center mb-2">
+                    @if (Route::currentRouteName() != 'admin.course.index')
+                    <a href="{{route('admin.course.index')}}" class="btn btn-sm btn-danger me-2" style="width: 30px; height: 30px;">
+                        <i class="fa-solid fa-xmark"></i>
+                    </a>
+                    @endif
+                    <p class="fs-4 fw-bold m-0">
+                        Filtra per:
+                    </p>
+                </div>
+                <div class="col-2 d-flex justify-content-center">
+                    <form action="{{ route('admin.course.filterVisibili') }}" method="GET" class="me-2">
+                        <button type="submit" class="btn btn-outline-dark">Visibili</button>
+                    </form>
+    
+                    <form action="{{ route('admin.course.filterNonVisibili') }}" method="GET">
+                        <button type="submit" class="btn btn-outline-dark">Non visibili</button>
+                    </form>
+                </div>
+                <div class="col-2 d-flex justify-content-center">
+                    <form action="{{ route('admin.course.filterLingua') }}" method="GET" style="height: 100%">
+                        <select id="SearchCategoria" name="categoriaFilter" onchange="this.form.submit()" style="height: 100%; border: 1px solid #212529; border-radius: 0.375rem;">
+                            <option value="" selected disabled></option>
+                            @foreach ($categoriaCorso as $categoria)    
+                                <option type="submit" value="{{$categoria}}">{{$categoria}}</option>
+                            @endforeach
+                        </select>
+                    </form>
+                    <p class="ms-2 m-0 d-flex align-items-center">Categoria</p>
+                </div>
+                <div class="col-3 d-flex justify-content-center">
+                    <form action="{{ route('admin.course.filterAgency') }}" method="GET" style="height: 100%">
+                        <select id="SearchAzienda" name="AgencyFilter" onchange="this.form.submit()" style="height: 100%; width: 250px; border: 1px solid #212529; border-radius: 0.375rem;">
+                            <option value="" selected disabled></option>
+                            @foreach ($AllAgencies as $agency)    
+                                <option type="submit" value="{{$agency->id}}">{{$agency->nome}}</option>
+                            @endforeach
+                        </select>
+                    </form>
+                    <p class="ms-2 m-0 d-flex align-items-center">Azienda</p>
+                </div>
+                <div class="col-5 d-flex justify-content-center">
+                    <form action="" method="GET" style="width: 100%; height: 100%">
+                        <input type="text" id="SearchNomeCorso" name="SearchNomeCorso" placeholder="Cerca per Nome del Corso">
+                    </form>
+                </div>
+            </div>
+            <table class="table table-striped table-hover mt-3 table-bordered" id="coursesTable">
                 <thead class="table-dark">
                 <tr>
                     <th scope="col" class="text-center">Azienda</th>
                     <th scope="col" class="text-center">Corso</th>
                     <th scope="col" class="text-center">Durata</th>
+                    <th scope="col" class="text-center" style="width: 120px">Categoria</th>
                     <th scope="col" class="text-center" style="width: 120px">Prezzo</th>
                     <th scope="col" class="text-center" style="width: 100px">Lingua</th>
-                    <th scope="col" class="text-center" style="width: 100px">On Site</th>
-                    <th scope="col" class="text-center" style="width: 100px">In Aula</th>
-                    <th scope="col" class="text-center" style="width: 100px">FAD</th>
-                    <th scope="col" class="text-center" style="width: 100px">Visibile</th>
+                    <th scope="col" class="text-center" style="width: 80px">On Site</th>
+                    <th scope="col" class="text-center" style="width: 80px">In Aula</th>
+                    <th scope="col" class="text-center" style="width: 80px">FAD</th>
+                    <th scope="col" class="text-center" style="width: 80px">Visibile</th>
                     <th scope="col" class="text-center" style="width: 150px">
                         <a href="{{route('admin.course.create')}}" class="btn btn-sm btn-success bottone_aggiungi_index_corsi">
                             <i class="fa-regular fa-square-plus"></i>
@@ -43,6 +92,9 @@
                             </td>
                             <td class="text-center align-middle fw-bold text-uppercase">
                                 {{$course->durata}} ore
+                            </td>
+                            <td class="text-center align-middle fw-bold text-uppercase">
+                                {{$course->categoria}}
                             </td>
                             <td class="text-center align-middle fw-bold text-uppercase">
                                 @if ($course->prezzo != null || $course->prezzo != 0)

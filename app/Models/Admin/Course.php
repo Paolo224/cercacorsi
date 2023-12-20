@@ -38,4 +38,28 @@ class Course extends Model
     {
         return $this->belongsTo(Agency::class);
     }
+
+    public function lingueErogazioneCorso()
+    {
+        $lingueErogazioneCorso = [
+            'Italiano' => 'Italiano',
+            'Francese' => 'Francese',
+            'Inglese' => 'Inglese',
+            'Spagnolo' => 'Spagnolo',
+            'Tedesco' => 'Tedesco'
+        ];
+
+        return $lingueErogazioneCorso;
+    }
+
+    public function categoriaCorso()
+    {
+        $categoriaCorso = [
+            'disegno' => 'disegno',
+            'informatica' => 'informatica',
+            'foto' => 'foto'
+        ];
+
+        return $categoriaCorso;
+    }
 }

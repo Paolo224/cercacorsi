@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Agency;
 use App\Models\Admin\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,21 +39,82 @@ class CoursesController extends Controller
 
     protected $customMessages = [];
 
+
+    public function Visibili(Request $request, Course $course)
+    {
+        $filteredCourses = Course::where('visibile', 1)->get();
+
+        $categoriaCorso = $course->categoriaCorso();
+
+        $user = Auth::user();
+
+        $AllAgencies = $user->agencies;
+
+        return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
+    }
+
+    public function NonVisibili(Request $request, Course $course)
+    {
+        $filteredCourses = Course::where('visibile', 0)->get();
+
+        $categoriaCorso = $course->categoriaCorso();
+
+        $user = Auth::user();
+
+        $AllAgencies = $user->agencies;
+
+        return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
+    }
+
+    public function Categoria(Request $request, Course $course)
+    {
+        $selectedCategoria = $request->input('categoriaFilter');
+
+        $categoriaCorso = $course->categoriaCorso();
+
+        $user = Auth::user();
+
+        $AllAgencies = $user->agencies;
+
+        $filteredCourses = Course::where('categoria', $selectedCategoria)->get();
+
+        return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
+    }
+
+    public function Agency(Request $request, Course $course)
+    {
+        $selectedAgency = $request->input('AgencyFilter');
+
+        $categoriaCorso = $course->categoriaCorso();
+
+        $user = Auth::user();
+
+        $AllAgencies = $user->agencies;
+
+        $filteredCourses = Course::where('agency_id', $selectedAgency)->get();
+
+        return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Course $course)
     {
+        $categoriaCorso = $course->categoriaCorso();
+
         // Ottieni l'utente autenticato (o l'utente di cui vuoi ottenere i corsi)
         $user = auth()->user(); // Ottieni l'utente autenticato
 
-        // Ottieni tutte le agenzie associate all'utente
-        $agencies = $user->agencies->pluck('id'); // Ottieni gli ID delle agenzie dell'utente
+        // Ottieni tutte le Aziende associate all'utente
+        $agencies = $user->agencies->pluck('id'); // Ottieni gli ID delle Aziende dell'utente
 
-        // Ottieni i corsi associati alle agenzie dell'utente
+        // Ottieni i corsi associati alle Aziende dell'utente
         $courses = Course::whereIn('agency_id', $agencies)->get();
 
-        return view('admin.course.index', compact('courses'));
+        $AllAgencies = $user->agencies;
+
+        return view('admin.course.index', compact('courses', 'categoriaCorso', 'AllAgencies'));
     }
 
     /**
@@ -60,19 +122,9 @@ class CoursesController extends Controller
      */
     public function create(Course $course)
     {
-        $categoriaCorso = [
-            'diesgno' => 'disegno',
-            'informatica' => 'informatica',
-            'foto' => 'foto'
-        ];
+        $categoriaCorso = $course->categoriaCorso();
 
-        $lingueErogazioneCorso = [
-            'Italiano' => 'Italiano',
-            'Francese' => 'Francese',
-            'Inglese' => 'Inglese',
-            'Spagnolo' => 'Spagnolo',
-            'Tedesco' => 'Tedesco'
-        ];
+        $lingueErogazioneCorso = $course->lingueErogazioneCorso();
 
         $user = Auth::user();
 
@@ -125,24 +177,13 @@ class CoursesController extends Controller
      */
     public function edit(Course $course)
     {
-        $categoriaCorso = [
-            'diesgno' => 'disegno',
-            'informatica' => 'informatica',
-            'foto' => 'foto'
-        ];
+        $categoriaCorso = $course->categoriaCorso();
 
-        $lingueErogazioneCorso = [
-            'Italiano' => 'Italiano',
-            'Francese' => 'Francese',
-            'Inglese' => 'Inglese',
-            'Spagnolo' => 'Spagnolo',
-            'Tedesco' => 'Tedesco',
-        ];
+        $lingueErogazioneCorso = $course->lingueErogazioneCorso();
 
         $user = Auth::user();
 
         $agencies = $user->agencies;
-
 
         return view('admin.course.edit', compact('course', 'categoriaCorso', 'lingueErogazioneCorso', 'agencies'));
     }
