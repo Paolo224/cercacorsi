@@ -71,8 +71,7 @@ class CoursesController extends Controller
             'Francese' => 'Francese',
             'Inglese' => 'Inglese',
             'Spagnolo' => 'Spagnolo',
-            'Tedesco' => 'Tedesco',
-            'Cinese' => 'Cinese',
+            'Tedesco' => 'Tedesco'
         ];
 
         $user = Auth::user();
@@ -138,7 +137,6 @@ class CoursesController extends Controller
             'Inglese' => 'Inglese',
             'Spagnolo' => 'Spagnolo',
             'Tedesco' => 'Tedesco',
-            'Cinese' => 'Cinese',
         ];
 
         $user = Auth::user();

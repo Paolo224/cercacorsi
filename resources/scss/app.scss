@@ -1,7 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 
-
+// STILE PER LAYOUT ADMIN
 :root {
     --color-hover-icon: #ff0800;
     --color-icon: #ffd700;
@@ -12,7 +12,6 @@
     --color-topbar: #fff;
 }
 
-/* Stile per la barra superiore */
 div.topbar {
     background-color: var(--background-color-topbar);
     color: var(--color-topbar);
@@ -130,7 +129,7 @@ div.sidebar {
 }
 
 
-// SHOW.BLADE.PHP
+// SHOW.BLADE.PHP AZIENDA
 
 div.immagine_copertina_pagina_show {
     height: 350px;
@@ -252,6 +251,8 @@ div.contenitore_altre_info {
     }
 }
 
+// Visibile/Non visibile Azienda banner Rosso
+
 .banner_visibile {
     position: absolute;
     top: 37px;
@@ -263,4 +264,22 @@ div.contenitore_altre_info {
     z-index: 999;
     color: white;
     font-weight: 600;
+}
+
+// STILE INDEX CORSI
+a.bottone_modifica_index_corsi:hover {
+    border: 1px solid black;
+}
+
+a.bottone_mostra_index_corsi:hover {
+    border: 1px solid black;
+}
+
+a.bottone_aggiungi_index_corsi {
+    transition: width 0.4s ease;
+    width: 30.25px;
+}
+
+a.bottone_aggiungi_index_corsi:hover {
+    width: 100%;
 }
