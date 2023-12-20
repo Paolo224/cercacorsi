@@ -92,6 +92,20 @@ class CoursesController extends Controller
             $data['immagine'] = Storage::put('uploads/img/courses', $data['immagine']);
         }
         $data['slug'] = Str::slug($data['titolo']);
+
+
+        if (!$request->has('fad')) {
+            $data['fad'] = 0;
+        }
+
+        if (!$request->has('in_aula')) {
+            $data['in_aula'] = 0;
+        }
+
+        if (!$request->has('on_site')) {
+            $data['on_site'] = 0;
+        }
+
         $newCourse = new Course();
         $newCourse->fill($data);
         $newCourse->save();
@@ -167,6 +181,18 @@ class CoursesController extends Controller
 
         if ($request->hasFile('immagine')) {
             $data['immagine'] = Storage::put('uploads/img/courses', $data['immagine']);
+        }
+
+        if (!$request->has('fad')) {
+            $data['fad'] = 0;
+        }
+
+        if (!$request->has('in_aula')) {
+            $data['in_aula'] = 0;
+        }
+
+        if (!$request->has('on_site')) {
+            $data['on_site'] = 0;
         }
 
         $course->update($data);
