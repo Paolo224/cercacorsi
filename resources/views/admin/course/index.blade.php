@@ -24,16 +24,16 @@
                     </p>
                 </div>
                 <div class="col-2 d-flex justify-content-center">
-                    <form action="{{ route('admin.course.filterVisibili') }}" method="GET" class="me-2">
+                    <form action="{{ route('admin.course.Visibili') }}" method="GET" class="me-2">
                         <button type="submit" class="btn btn-outline-dark">Visibili</button>
                     </form>
     
-                    <form action="{{ route('admin.course.filterNonVisibili') }}" method="GET">
+                    <form action="{{ route('admin.course.NonVisibili') }}" method="GET">
                         <button type="submit" class="btn btn-outline-dark">Non visibili</button>
                     </form>
                 </div>
                 <div class="col-2 d-flex justify-content-center">
-                    <form action="{{ route('admin.course.filterLingua') }}" method="GET" style="height: 100%">
+                    <form action="{{ route('admin.course.Categoria') }}" method="GET" style="height: 100%">
                         <select id="SearchCategoria" name="categoriaFilter" onchange="this.form.submit()" style="height: 100%; border: 1px solid #212529; border-radius: 0.375rem;">
                             <option value="" selected disabled></option>
                             @foreach ($categoriaCorso as $categoria)    
@@ -44,7 +44,7 @@
                     <p class="ms-2 m-0 d-flex align-items-center">Categoria</p>
                 </div>
                 <div class="col-3 d-flex justify-content-center">
-                    <form action="{{ route('admin.course.filterAgency') }}" method="GET" style="height: 100%">
+                    <form action="{{ route('admin.course.Agency') }}" method="GET" style="height: 100%">
                         <select id="SearchAzienda" name="AgencyFilter" onchange="this.form.submit()" style="height: 100%; width: 250px; border: 1px solid #212529; border-radius: 0.375rem;">
                             <option value="" selected disabled></option>
                             @foreach ($AllAgencies as $agency)    

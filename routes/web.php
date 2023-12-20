@@ -24,10 +24,10 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
     Route::resource('/agency', AdminAgencyController::class);
-    Route::get('/course/Visibili', [AdminCoursesController::class, 'Visibili'])->name('course.filterVisibili');
-    Route::get('/course/NonVisibili', [AdminCoursesController::class, 'NonVisibili'])->name('course.filterNonVisibili');
-    Route::get('/course/Lingua', [AdminCoursesController::class, 'Categoria'])->name('course.filterLingua');
-    Route::get('/course/Agency', [AdminCoursesController::class, 'Agency'])->name('course.filterAgency');
+    Route::get('/course/Visibili', [AdminCoursesController::class, 'Visibili'])->name('course.Visibili');
+    Route::get('/course/NonVisibili', [AdminCoursesController::class, 'NonVisibili'])->name('course.NonVisibili');
+    Route::get('/course/Categoria', [AdminCoursesController::class, 'Categoria'])->name('course.Categoria');
+    Route::get('/course/Agency', [AdminCoursesController::class, 'Agency'])->name('course.Agency');
     Route::resource('/course', AdminCoursesController::class);
     // altre rotte protette da login e che siano in admin
 });
