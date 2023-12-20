@@ -5,7 +5,7 @@
     <div class="row mt-3 justify-content-center">
             @if(!$courses->isNotEmpty())
             <div class="col-12 text-end">
-                <a href="{{route('admin.course.index')}}" class="btn btn-sm btn-success" style="width: 80px;">
+                <a href="{{route('admin.course.create')}}" class="btn btn-sm btn-success" style="width: 80px;">
                     + Nuovo
                 </a>
             </div>
