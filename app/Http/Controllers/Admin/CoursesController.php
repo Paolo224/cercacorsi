@@ -7,6 +7,7 @@ use App\Models\Admin\Agency;
 use App\Models\Admin\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -138,12 +139,17 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate($this->validationRules);
+        $data = $request->validate($this->validationRules); //, $this->customMessages);
         if ($request->hasFile('immagine')) {
             $data['immagine'] = Storage::put('uploads/img/courses', $data['immagine']);
         }
         $data['slug'] = Str::slug($data['titolo']);
-
+        $num = 1;
+        while (DB::table('courses')->where('slug', $data['slug'])->first()) {
+            $slug = Str::slug($data['titolo']) . '-' . $num;
+            $num++;
+            $data['slug'] = $slug;
+        }
 
         if (!$request->has('fad')) {
             $data['fad'] = 0;
@@ -194,29 +200,33 @@ class CoursesController extends Controller
     public function update(Request $request, Course $course)
     {
         // dd($request);
-        $data = $request->validate([
-            'categoria' => 'required',
-            'titolo' => 'required',
-            'agency_id' => 'required',
-            'sottotitolo' => 'nullable',
-            'descrizione' => 'required',
-            'immagine' => 'image|max:2048|mimes:jpg,png,gif',
-            'video_corso' => 'url:http,https|nullable',
-            'durata' => 'required|max:3',
-            'competenze_partenza' => 'required',
-            'prezzo' => 'nullable|numeric',
-            'programma' => 'required',
-            'obiettivi' => 'required',
-            'attestato' => 'required',
-            'descrizione_attestato' => 'nullable',
-            'lingua' => 'required',
-            'fad' => 'nullable',
-            'on_site' => 'nullable',
-            'in_aula' => 'nullable',
-            'visibile' => 'required',
-            'a_chi_si_rivolge' => 'required',
-            'requisiti_richiesti' => 'required'
-        ]);
+        // $data = $request->validate([
+        //     'categoria' => 'required',
+        //     'titolo' => 'required',
+        //     'agency_id' => 'required',
+        //     'sottotitolo' => 'nullable',
+        //     'descrizione' => 'required',
+        //     'immagine' => 'image|max:2048|mimes:jpg,png,gif',
+        //     'video_corso' => 'url:http,https|nullable',
+        //     'durata' => 'required|max:3',
+        //     'competenze_partenza' => 'required',
+        //     'prezzo' => 'nullable|numeric',
+        //     'programma' => 'required',
+        //     'obiettivi' => 'required',
+        //     'attestato' => 'required',
+        //     'descrizione_attestato' => 'nullable',
+        //     'lingua' => 'required',
+        //     'fad' => 'nullable',
+        //     'on_site' => 'nullable',
+        //     'in_aula' => 'nullable',
+        //     'visibile' => 'required',
+        //     'a_chi_si_rivolge' => 'required',
+        //     'requisiti_richiesti' => 'required'
+        // ]);
+
+        $newRules = $this->validationRules;
+        $newRules['slug'] = ['string', Rule::unique('courses')->ignore($course->id)];
+        $data = $request->validate($newRules);
 
         if ($request->hasFile('immagine')) {
             $data['immagine'] = Storage::put('uploads/img/courses', $data['immagine']);

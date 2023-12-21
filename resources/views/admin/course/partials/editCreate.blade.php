@@ -97,7 +97,7 @@
     <select {{-- class="js-example-basic-single"--}} name="lingua" id="course_lingua"> 
         <option value="" selected disabled></option>
         @foreach ($lingueErogazioneCorso as $lingua => $valore)    
-        <option value="{{$lingua}}" @if(Route::currentRouteName() === 'admin.course.create') @else {{ old('provincia', $course->lingua) == $lingua ? 'selected' : '' }} @endif>{{$valore}}</option>
+        <option value="{{$lingua}}" @if(Route::currentRouteName() === 'admin.course.create') @else {{ old('lingua', $course->lingua) == $lingua ? 'selected' : '' }} @endif>{{$valore}}</option>
         @endforeach
     </select>
 
