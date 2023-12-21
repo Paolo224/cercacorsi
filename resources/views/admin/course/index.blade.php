@@ -145,10 +145,10 @@
                                 @endif
                             </td>
                             <td class="text-center align-middle">
-                                <a href="{{route('admin.tutti-i-corsi.show', $course->id)}}" class="btn btn-sm p-2 bottone_mostra_index_corsi">
+                                <a href="{{route('admin.tutti-i-corsi.show', $course->slug)}}" class="btn btn-sm p-2 bottone_mostra_index_corsi">
                                     <i class="fa-solid fa-circle-info fa-2x" style="color: black"></i>
                                 </a>
-                                <a href="{{route('admin.tutti-i-corsi.edit', $course->id)}}" class="btn btn-sm p-2 bottone_modifica_index_corsi">
+                                <a href="{{route('admin.tutti-i-corsi.edit', $course->slug)}}" class="btn btn-sm p-2 bottone_modifica_index_corsi">
                                     <i class="fa-solid fa-pen-to-square fa-2x"></i>
                                 </a>
                             </td>

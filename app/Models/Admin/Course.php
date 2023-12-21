@@ -34,6 +34,11 @@ class Course extends Model
         'requisiti_richiesti'
     ];
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     public function agency()
     {
         return $this->belongsTo(Agency::class);

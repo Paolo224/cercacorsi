@@ -161,7 +161,7 @@ class CoursesController extends Controller
         $newCourse->fill($data);
         $newCourse->save();
 
-        return redirect()->route('admin.tutti-i-corsi.show', $newCourse->id)->with('message', "$newCourse->nome AGGIUNTA CON SUCCESSO!!!");
+        return redirect()->route('admin.tutti-i-corsi.show', $newCourse->slug)->with('message', "$newCourse->nome AGGIUNTA CON SUCCESSO!!!");
     }
 
     /**
