@@ -230,6 +230,17 @@
             });
         </script>
         <script>
+            $(document).ready(function() {
+                $('input[type=radio][name=attestato]').change(function() {
+                    if (this.value === '1') {
+                        $('#course_descrizione_attestato_riga').show();
+                    } else {
+                        $('#course_descrizione_attestato_riga').hide();
+                    }
+                });
+            });
+        </script>
+        <script>
             function toggleSidebar() {
                 const sidebar = document.getElementById('sidebar');
                 const menuIcon = document.getElementById('menu-icon');

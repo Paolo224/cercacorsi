@@ -13,6 +13,13 @@
                 <h4 class="text-center mb-2">Inserisci un corso cliccando il tasto "Nuovo"</h4>
             @else
             <div class="row p-0">
+                <div class="col-12 p-0">
+                    <h1>
+                        Tutti i corsi di Formazione
+                    </h1>
+                </div>
+            </div>
+            <div class="row p-0 mt-2">
                 <div class="col-12 d-flex align-items-center mb-2">
                     <p class="fs-4 fw-bold m-0">
                         Filtra per:
@@ -46,14 +53,14 @@
                                 </select>
                             <p class="m-0 d-flex align-items-center">Azienda</p>
                         </div>
-                        <div class="col-2 d-flex flex-column-reverse h-100">
+                        <div class="col-1 d-flex flex-column-reverse h-100">
                             <select id="Ordinamento" name="Ordinamento">
                                 <option value="" selected></option>
                                 <option value="asc">A-Z</option>
                                 <option value="desc">Z-A</option>
                             </select>
-                        <p class="m-0 d-flex align-items-center">Ordinamento</p>
-                    </div>
+                            <p class="m-0 d-flex align-items-center">Ordinamento</p>
+                        </div>
                         <div class="offset-1 col-1 d-flex align-items-end">
                             @if (Route::currentRouteName() != 'admin.tutti-i-corsi.index')
                                 <a href="{{route('admin.tutti-i-corsi.index')}}" class="btn btn-sm btn-danger me-2 align-baseline">
