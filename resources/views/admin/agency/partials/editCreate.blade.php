@@ -17,7 +17,7 @@
     
     <div class="mb-3">
         <label for="agency_motto" class="form-label">Motto dell'Azienda</label>
-        <input class="form-control" id="agency_motto" name="motto">{{old('motto', $agency->motto)}}
+        <input class="form-control" id="agency_motto" name="motto" value="{{old('motto', $agency->motto)}}">
     </div>
 
     <div class="mb-3">
