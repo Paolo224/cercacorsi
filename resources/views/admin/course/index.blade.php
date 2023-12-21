@@ -14,50 +14,63 @@
             @else
             <div class="row p-0">
                 <div class="col-12 d-flex align-items-center mb-2">
-                    @if (Route::currentRouteName() != 'admin.tutti-i-corsi.index')
-                    <a href="{{route('admin.tutti-i-corsi.index')}}" class="btn btn-sm btn-danger me-2" style="width: 30px; height: 30px;">
-                        <i class="fa-solid fa-xmark"></i>
-                    </a>
-                    @endif
                     <p class="fs-4 fw-bold m-0">
                         Filtra per:
                     </p>
                 </div>
-                <div class="col-2 d-flex justify-content-center">
-                    <form action="{{ route('admin.tutti-i-corsi.Visibili') }}" method="GET" class="me-2">
-                        <button type="submit" class="btn btn-outline-dark">Visibili</button>
-                    </form>
-    
-                    <form action="{{ route('admin.tutti-i-corsi.NonVisibili') }}" method="GET">
-                        <button type="submit" class="btn btn-outline-dark">Non visibili</button>
-                    </form>
-                </div>
-                <div class="col-2 d-flex justify-content-center">
-                    <form action="{{ route('admin.tutti-i-corsi.Categoria') }}" method="GET" style="height: 100%">
-                        <select id="SearchCategoria" name="categoriaFilter" onchange="this.form.submit()" style="height: 100%; border: 1px solid #212529; border-radius: 0.375rem;">
-                            <option value="" selected disabled></option>
-                            @foreach ($categoriaCorso as $categoria)    
-                                <option type="submit" value="{{$categoria}}">{{$categoria}}</option>
-                            @endforeach
-                        </select>
-                    </form>
-                    <p class="ms-2 m-0 d-flex align-items-center">Categoria</p>
-                </div>
-                <div class="col-3 d-flex justify-content-center">
-                    <form action="{{ route('admin.tutti-i-corsi.Agency') }}" method="GET" style="height: 100%">
-                        <select id="SearchAzienda" name="AgencyFilter" onchange="this.form.submit()" style="height: 100%; width: 250px; border: 1px solid #212529; border-radius: 0.375rem;">
-                            <option value="" selected disabled></option>
-                            @foreach ($AllAgencies as $agency)    
-                                <option type="submit" value="{{$agency->id}}">{{$agency->nome}}</option>
-                            @endforeach
-                        </select>
-                    </form>
-                    <p class="ms-2 m-0 d-flex align-items-center">Azienda</p>
-                </div>
-                <div class="col-5 d-flex justify-content-center">
-                    <form action="" method="GET" style="width: 100%; height: 100%">
-                        <input type="text" id="SearchNomeCorso" name="SearchNomeCorso" placeholder="Cerca per Nome del Corso">
-                    </form>
+                <form action="{{ route('admin.tutti-i-corsi.filtri') }}" method="GET" class="me-2">
+                    <div class="row justify-content-start">
+                        <div class="col-2 d-flex flex-column-reverse h-100">
+                            <select name="visibile" id="visibile">
+                                <option value="" selected></option>
+                                <option value="1">Visibili</option>
+                                <option value="0">Non Visibili</option>
+                            </select>
+                            <p class="m-0 d-flex align-items-center">Visibilità</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column-reverse h-100">
+                                <select id="SearchCategoria" name="PerCategoria">
+                                    <option value="" selected></option>
+                                    @foreach ($categoriaCorso as $categoria)    
+                                        <option value="{{$categoria}}">{{$categoria}}</option>
+                                    @endforeach
+                                </select>
+                            <p class="m-0 d-flex align-items-center">Categoria</p>
+                        </div>
+                        <div class="col-3 d-flex flex-column-reverse h-100">
+                                <select id="SearchAzienda" name="PerAzienda">
+                                    <option value="" selected></option>
+                                    @foreach ($AllAgencies as $agency)    
+                                        <option value="{{$agency->id}}">{{$agency->nome}}</option>
+                                    @endforeach
+                                </select>
+                            <p class="m-0 d-flex align-items-center">Azienda</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column-reverse h-100">
+                            <select id="Ordinamento" name="Ordinamento">
+                                <option value="" selected></option>
+                                <option value="asc">A-Z</option>
+                                <option value="desc">Z-A</option>
+                            </select>
+                        <p class="m-0 d-flex align-items-center">Ordinamento</p>
+                    </div>
+                        <div class="offset-1 col-1 d-flex align-items-end">
+                            @if (Route::currentRouteName() != 'admin.tutti-i-corsi.index')
+                                <a href="{{route('admin.tutti-i-corsi.index')}}" class="btn btn-sm btn-danger me-2 align-baseline">
+                                    <i class="fa-solid fa-xmark me-1"></i>Azzera
+                                </a>
+                            @else
+                                <button class="btn btn-outline-dark" type="submit">Applica</button>
+                            @endif
+                        </div>
+                    </div>
+                </form>
+                <div class="row mt-3">
+                    <div class="col-5 d-flex justify-content-center">
+                        <form action="" method="GET" style="width: 100%; height: 100%">
+                            <input type="text" id="SearchNomeCorso" name="SearchNomeCorso" placeholder="Cerca per Nome del Corso">
+                        </form>
+                    </div>
                 </div>
             </div>
             <table class="table table-striped table-hover mt-3 table-bordered" id="coursesTable">

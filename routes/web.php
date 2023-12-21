@@ -26,10 +26,11 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('/le-mie-aziende', AdminAgencyController::class)->parameters([
         'le-mie-aziende' => 'agency' // Cambia il nome del parametro da 'agency' a 'le-mie-aziende'
     ]);
-    Route::get('/tutti-i-corsi/Visibili', [AdminCoursesController::class, 'Visibili'])->name('tutti-i-corsi.Visibili');
-    Route::get('/tutti-i-corsi/NonVisibili', [AdminCoursesController::class, 'NonVisibili'])->name('tutti-i-corsi.NonVisibili');
-    Route::get('/tutti-i-corsi/Categoria', [AdminCoursesController::class, 'Categoria'])->name('tutti-i-corsi.Categoria');
-    Route::get('/tutti-i-corsi/Agency', [AdminCoursesController::class, 'Agency'])->name('tutti-i-corsi.Agency');
+    // Route::get('/tutti-i-corsi/Visibili', [AdminCoursesController::class, 'Visibili'])->name('tutti-i-corsi.Visibili');
+    // Route::get('/tutti-i-corsi/NonVisibili', [AdminCoursesController::class, 'NonVisibili'])->name('tutti-i-corsi.NonVisibili');
+    // Route::get('/tutti-i-corsi/Categoria', [AdminCoursesController::class, 'Categoria'])->name('tutti-i-corsi.Categoria');
+    // Route::get('/tutti-i-corsi/Agency', [AdminCoursesController::class, 'Agency'])->name('tutti-i-corsi.Agency');
+    Route::get('/tutti-i-corsi/Filtri', [AdminCoursesController::class, 'Filtri'])->name('tutti-i-corsi.filtri');
     Route::resource('/tutti-i-corsi', AdminCoursesController::class)->parameters([
         'tutti-i-corsi' => 'course' // Cambia il nome del parametro da 'course' a 'tutti-i-corsi'
     ]);

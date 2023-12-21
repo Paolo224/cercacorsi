@@ -41,60 +41,81 @@ class CoursesController extends Controller
     protected $customMessages = [];
 
 
-    public function Visibili(Request $request, Course $course)
+    // public function Visibili(Request $request, Course $course)
+    // {
+    //     $filteredCourses = Course::where('visibile', 1)->get();
+
+    //     $categoriaCorso = $course->categoriaCorso();
+
+    //     $user = Auth::user();
+
+    //     $AllAgencies = $user->agencies;
+
+    //     return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
+    // }
+
+    // public function NonVisibili(Request $request, Course $course)
+    // {
+    //     $filteredCourses = Course::where('visibile', 0)->get();
+
+    //     $categoriaCorso = $course->categoriaCorso();
+
+    //     $user = Auth::user();
+
+    //     $AllAgencies = $user->agencies;
+
+    //     return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
+    // }
+
+    // public function Categoria(Request $request, Course $course)
+    // {
+    //     $selectedCategoria = $request->input('PerCategoria');
+
+    //     $categoriaCorso = $course->categoriaCorso();
+
+    //     $user = Auth::user();
+
+    //     $AllAgencies = $user->agencies;
+
+    //     $filteredCourses = Course::where('categoria', $selectedCategoria)->get();
+
+    //     return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
+    // }
+
+    public function Filtri(Request $request, Course $course)
     {
-        $filteredCourses = Course::where('visibile', 1)->get();
-
-        $categoriaCorso = $course->categoriaCorso();
-
+        // dd($request);
         $user = Auth::user();
-
         $AllAgencies = $user->agencies;
-
-        return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
-    }
-
-    public function NonVisibili(Request $request, Course $course)
-    {
-        $filteredCourses = Course::where('visibile', 0)->get();
-
         $categoriaCorso = $course->categoriaCorso();
+        $filteredCourses = Course::query();
+        //dump($request);
+        if ($request->filled('visibile')) {
+            $filteredCourses->where('visibile', $request->visibile);
+        }
 
-        $user = Auth::user();
+        if ($request->filled('PerCategoria')) {
+            $filteredCourses->where('categoria', $request->PerCategoria);
+        }
 
-        $AllAgencies = $user->agencies;
+        if ($request->filled('PerAzienda')) {
+            $filteredCourses->where('agency_id', $request->PerAzienda);
+        }
 
-        return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
-    }
+        // Ordinamento
+        if ($request->filled('Ordinamento')) {
+            $sort = $request->Ordinamento;
 
-    public function Categoria(Request $request, Course $course)
-    {
-        $selectedCategoria = $request->input('categoriaFilter');
+            if ($sort === 'asc') {
+                $filteredCourses->orderBy('titolo', 'asc');
+            } elseif ($sort === 'desc') {
+                $filteredCourses->orderBy('titolo', 'desc');
+            }
+        }
+        // dd($request);
+        $courses = $filteredCourses->get();
 
-        $categoriaCorso = $course->categoriaCorso();
-
-        $user = Auth::user();
-
-        $AllAgencies = $user->agencies;
-
-        $filteredCourses = Course::where('categoria', $selectedCategoria)->get();
-
-        return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
-    }
-
-    public function Agency(Request $request, Course $course)
-    {
-        $selectedAgency = $request->input('AgencyFilter');
-
-        $categoriaCorso = $course->categoriaCorso();
-
-        $user = Auth::user();
-
-        $AllAgencies = $user->agencies;
-
-        $filteredCourses = Course::where('agency_id', $selectedAgency)->get();
-
-        return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
+        return view('admin.course.index', compact('courses', 'categoriaCorso', 'AllAgencies'));
     }
 
     /**
@@ -102,18 +123,13 @@ class CoursesController extends Controller
      */
     public function index(Course $course)
     {
-        $categoriaCorso = $course->categoriaCorso();
-
-        // Ottieni l'utente autenticato (o l'utente di cui vuoi ottenere i corsi)
-        $user = auth()->user(); // Ottieni l'utente autenticato
-
-        // Ottieni tutte le Aziende associate all'utente
-        $agencies = $user->agencies->pluck('id'); // Ottieni gli ID delle Aziende dell'utente
-
-        // Ottieni i corsi associati alle Aziende dell'utente
-        $courses = Course::whereIn('agency_id', $agencies)->get();
+        $user = auth()->user();
+        $agencies = $user->agencies->pluck('id');
 
         $AllAgencies = $user->agencies;
+        $categoriaCorso = $course->categoriaCorso();
+        // Ottieni i corsi associati alle Aziende dell'utente
+        $courses = Course::whereIn('agency_id', $agencies)->get();
 
         return view('admin.course.index', compact('courses', 'categoriaCorso', 'AllAgencies'));
     }
