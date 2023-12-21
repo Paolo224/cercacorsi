@@ -396,12 +396,11 @@ class AgencyController extends Controller
         //
     }
 
-    public function enableToggle(Request $request, Agency $agency)
+    public function enableToggle(Agency $agency)
     {
         $agency->visibile = !$agency->visibile;
         $agency->save();
 
-        $message = ($agency->visibile) ? $agency->nome . " è visibile" : $agency->nome . " non è visibile";
-        return redirect()->route('admin.le-mie-aziende.index')->with('alert-type', 'success')->with('alert-message', "<b>$message</b>");
+        return redirect()->route('admin.le-mie-aziende.index');
     }
 }

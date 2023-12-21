@@ -58,8 +58,8 @@ class Agency extends Model
         return $this->hasMany(Course::class);
     }
 
-    // public function getABooleanFromNumber($num)
-    // {
-    //     return ($num) ? 'true' : 'false';
-    // }
+    public function getABooleanFromNumber($num)
+    {
+        return ($num) ? 'true' : 'false';
+    }
 }
