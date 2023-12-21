@@ -7,7 +7,7 @@
         <select {{-- class="js-example-basic-single"--}} name="agency_id" id="course_agency_id"> 
             <option value="" selected disabled></option>
             @foreach ($agencies as $agency)    
-            <option value="{{$agency->id}}" @if(Route::currentRouteName() === 'admin.course.create') @else {{ $course->agency_id == $agency->id ? 'selected' : '' }} @endif>{{$agency->nome}}</option>
+            <option value="{{$agency->id}}" @if(Route::currentRouteName() === 'admin.tutti-i-corsi.create') @else {{ $course->agency_id == $agency->id ? 'selected' : '' }} @endif>{{$agency->nome}}</option>
             @endforeach
         </select>
     </div>

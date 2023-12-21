@@ -3,9 +3,9 @@
 @section('content')
 <div class="container-fluid container-xxl">
     <div class="row py-2 d-flex justify-content-between">
-        <a href="{{route('admin.agency.index')}}" class="btn btn-primary" style="width: 60px;">
+        <a href="{{route('admin.le-mie-aziende.index')}}" class="btn btn-primary" style="width: 60px;">
             <svg fill="#ffffff" id="Expand" height="30" viewBox="0 0 16 16" width="30" xmlns="http://www.w3.org/2000/svg"><path d="m1.0728 9.1934 5.0908 3.999a1.4112 1.4112 0 0 0 1.501.165 1.4908 1.4908 0 0 0 .8354-1.3574v-1.5h4.5a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0 -.5-.5h-4.5v-1.5a1.49 1.49 0 0 0 -.8345-1.3564 1.4088 1.4088 0 0 0 -1.5014.163h-.0005l-5.09 4a1.5293 1.5293 0 0 0 0 2.3868zm.6181-1.6 5.0908-4a.4089.4089 0 0 1 .4472-.0508.4907.4907 0 0 1 .2711.4574v2a.5.5 0 0 0 .5.5h4.5v3h-4.5a.5.5 0 0 0 -.5.5v2a.4928.4928 0 0 1 -.272.458.4084.4084 0 0 1 -.4463-.0517l-5.0913-4a.5282.5282 0 0 1 .0005-.8125z"/><path d="m15 5.5a.5.5 0 0 0 -.5.5v4a.5.5 0 0 0 1 0v-4a.5.5 0 0 0 -.5-.5z"/></svg></a>
-        <a href="{{route('admin.agency.edit', $agency->id)}}" class="btn btn-warning"style="width: 53px;">
+        <a href="{{route('admin.le-mie-aziende.edit', $agency->id)}}" class="btn btn-warning"style="width: 53px;">
             <svg fill="#000" enable-background="new 0 0 24 24" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="m19 12c-.553 0-1 .448-1 1v8c0 .551-.448 1-1 1h-14c-.552 0-1-.449-1-1v-14c0-.551.448-1 1-1h8c.553 0 1-.448 1-1s-.447-1-1-1h-8c-1.654 0-3 1.346-3 3v14c0 1.654 1.346 3 3 3h14c1.654 0 3-1.346 3-3v-8c0-.553-.447-1-1-1z"/><path d="m9.376 11.089c-.07.07-.117.159-.137.255l-.707 3.536c-.033.164.019.333.137.452.095.095.223.146.354.146.032 0 .065-.003.098-.01l3.535-.707c.098-.02.187-.067.256-.137l7.912-7.912-3.535-3.535z"/><path d="m23.268.732c-.975-.975-2.561-.975-3.535 0l-1.384 1.384 3.535 3.535 1.384-1.384c.472-.471.732-1.099.732-1.767s-.26-1.296-.732-1.768z"/></svg></a>
     </div>
     <div class="row">
@@ -243,7 +243,7 @@
                 @if ($agency->fad == 1)
                     <p>Formazione a distanza</p>
                 @endif
-                <a href="{{route('admin.course.show', $agency->id)}}">Vai al corso</a>
+                <a href="{{route('admin.tutti-i-corsi.show', $agency->id)}}">Vai al corso</a>
             </div>
         @endforeach
     </div>

@@ -197,7 +197,7 @@ class AgencyController extends Controller
         $newAgency->fill($data);
         $newAgency->save();
 
-        return redirect()->route('admin.agency.show', $newAgency->id)->with('message', "$newAgency->nome AGGIUNTA CON SUCCESSO!!!");
+        return redirect()->route('admin.le-mie-aziende.show', $newAgency->id)->with('message', "$newAgency->nome AGGIUNTA CON SUCCESSO!!!");
     }
 
     /**
@@ -380,7 +380,7 @@ class AgencyController extends Controller
         }
 
         $agency->update($data);
-        return redirect()->route('admin.agency.show', compact('agency'));
+        return redirect()->route('admin.le-mie-aziende.show', compact('agency'));
     }
 
     /**
@@ -397,6 +397,6 @@ class AgencyController extends Controller
         $agency->save();
 
         $message = ($agency->visibile) ? $agency->nome . " è visibile" : $agency->nome . " non è visibile";
-        return redirect()->route('admin.agency.index')->with('alert-type', 'success')->with('alert-message', "<b>$message</b>");
+        return redirect()->route('admin.le-mie-aziende.index')->with('alert-type', 'success')->with('alert-message', "<b>$message</b>");
     }
 }

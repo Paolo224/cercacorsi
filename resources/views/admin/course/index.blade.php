@@ -5,7 +5,7 @@
     <div class="row mt-3 justify-content-center">
             @if(!$courses->isNotEmpty())
             <div class="col-12 text-end">
-                <a href="{{route('admin.course.create')}}" class="btn btn-sm btn-success" style="width: 80px;">
+                <a href="{{route('admin.tutti-i-corsi.create')}}" class="btn btn-sm btn-success" style="width: 80px;">
                     + Nuovo
                 </a>
             </div>
@@ -14,8 +14,8 @@
             @else
             <div class="row p-0">
                 <div class="col-12 d-flex align-items-center mb-2">
-                    @if (Route::currentRouteName() != 'admin.course.index')
-                    <a href="{{route('admin.course.index')}}" class="btn btn-sm btn-danger me-2" style="width: 30px; height: 30px;">
+                    @if (Route::currentRouteName() != 'admin.tutti-i-corsi.index')
+                    <a href="{{route('admin.tutti-i-corsi.index')}}" class="btn btn-sm btn-danger me-2" style="width: 30px; height: 30px;">
                         <i class="fa-solid fa-xmark"></i>
                     </a>
                     @endif
@@ -24,16 +24,16 @@
                     </p>
                 </div>
                 <div class="col-2 d-flex justify-content-center">
-                    <form action="{{ route('admin.course.Visibili') }}" method="GET" class="me-2">
+                    <form action="{{ route('admin.tutti-i-corsi.Visibili') }}" method="GET" class="me-2">
                         <button type="submit" class="btn btn-outline-dark">Visibili</button>
                     </form>
     
-                    <form action="{{ route('admin.course.NonVisibili') }}" method="GET">
+                    <form action="{{ route('admin.tutti-i-corsi.NonVisibili') }}" method="GET">
                         <button type="submit" class="btn btn-outline-dark">Non visibili</button>
                     </form>
                 </div>
                 <div class="col-2 d-flex justify-content-center">
-                    <form action="{{ route('admin.course.Categoria') }}" method="GET" style="height: 100%">
+                    <form action="{{ route('admin.tutti-i-corsi.Categoria') }}" method="GET" style="height: 100%">
                         <select id="SearchCategoria" name="categoriaFilter" onchange="this.form.submit()" style="height: 100%; border: 1px solid #212529; border-radius: 0.375rem;">
                             <option value="" selected disabled></option>
                             @foreach ($categoriaCorso as $categoria)    
@@ -44,7 +44,7 @@
                     <p class="ms-2 m-0 d-flex align-items-center">Categoria</p>
                 </div>
                 <div class="col-3 d-flex justify-content-center">
-                    <form action="{{ route('admin.course.Agency') }}" method="GET" style="height: 100%">
+                    <form action="{{ route('admin.tutti-i-corsi.Agency') }}" method="GET" style="height: 100%">
                         <select id="SearchAzienda" name="AgencyFilter" onchange="this.form.submit()" style="height: 100%; width: 250px; border: 1px solid #212529; border-radius: 0.375rem;">
                             <option value="" selected disabled></option>
                             @foreach ($AllAgencies as $agency)    
@@ -65,8 +65,8 @@
                 <tr>
                     <th scope="col" class="text-center">Azienda</th>
                     <th scope="col" class="text-center">Corso</th>
-                    <th scope="col" class="text-center">Durata</th>
                     <th scope="col" class="text-center" style="width: 120px">Categoria</th>
+                    <th scope="col" class="text-center">Durata</th>
                     <th scope="col" class="text-center" style="width: 120px">Prezzo</th>
                     <th scope="col" class="text-center" style="width: 100px">Lingua</th>
                     <th scope="col" class="text-center" style="width: 80px">On Site</th>
@@ -74,7 +74,7 @@
                     <th scope="col" class="text-center" style="width: 80px">FAD</th>
                     <th scope="col" class="text-center" style="width: 80px">Visibilità</th>
                     <th scope="col" class="text-center" style="width: 150px">
-                        <a href="{{route('admin.course.create')}}" class="btn btn-sm btn-success bottone_aggiungi_index_corsi">
+                        <a href="{{route('admin.tutti-i-corsi.create')}}" class="btn btn-sm btn-success bottone_aggiungi_index_corsi">
                             <i class="fa-regular fa-square-plus"></i>
                         </a>
                     </th>
@@ -91,10 +91,10 @@
                                 {{$course->titolo}}
                             </td>
                             <td class="text-center align-middle fw-bold text-uppercase">
-                                {{$course->durata}} ore
+                                {{$course->categoria}}
                             </td>
                             <td class="text-center align-middle fw-bold text-uppercase">
-                                {{$course->categoria}}
+                                {{$course->durata}} ore
                             </td>
                             <td class="text-center align-middle fw-bold text-uppercase">
                                 @if ($course->prezzo != null || $course->prezzo != 0)
@@ -145,10 +145,10 @@
                                 @endif
                             </td>
                             <td class="text-center align-middle">
-                                <a href="{{route('admin.course.show', $course->id)}}" class="btn btn-sm p-2 bottone_mostra_index_corsi">
+                                <a href="{{route('admin.tutti-i-corsi.show', $course->id)}}" class="btn btn-sm p-2 bottone_mostra_index_corsi">
                                     <i class="fa-solid fa-circle-info fa-2x" style="color: black"></i>
                                 </a>
-                                <a href="{{route('admin.course.edit', $course->id)}}" class="btn btn-sm p-2 bottone_modifica_index_corsi">
+                                <a href="{{route('admin.tutti-i-corsi.edit', $course->id)}}" class="btn btn-sm p-2 bottone_modifica_index_corsi">
                                     <i class="fa-solid fa-pen-to-square fa-2x"></i>
                                 </a>
                             </td>

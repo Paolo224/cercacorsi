@@ -4,7 +4,7 @@
 <div class="container-fluid container-xxl">
     <div class="row mt-3">
             <div class="col-12 text-end">
-                <a href="{{route('admin.agency.create')}}" class="btn btn-sm btn-success" style="width: 80px;">
+                <a href="{{route('admin.le-mie-aziende.create')}}" class="btn btn-sm btn-success" style="width: 80px;">
                     + Nuovo
                 </a>
             </div>
@@ -28,10 +28,10 @@
                             <p class="card-text mt-3 mb-0"><i class="fa-regular fa-envelope me-2" style="color: #000000;"></i>{{$agency->email}}</p>
                             <p class="card-text mt-2 mb-0"><i class="fas fa-phone me-2"></i>{{$agency->telefono1}}</p>
                             <div class="mt-3 d-flex justify-content-between">
-                                <a href="{{route('admin.agency.show', $agency->id)}}" class="btn btn-sm btn-primary">
+                                <a href="{{route('admin.le-mie-aziende.show', $agency->id)}}" class="btn btn-sm btn-primary">
                                     Dettagli
                                 </a>
-                                <a href="{{route('admin.agency.edit', $agency->id)}}" class="btn btn-sm btn-warning">
+                                <a href="{{route('admin.le-mie-aziende.edit', $agency->id)}}" class="btn btn-sm btn-warning">
                                     Modifica
                                 </a>
                             </div>
