@@ -223,9 +223,16 @@
             $(document).ready(function() {
                 $('#SearchNomeCorso').on('input', function() {
                     var searchText = $(this).val().toLowerCase();
-                    $('#coursesTable tbody tr').filter(function() {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1)
-                    });
+
+                    // Verifica se il campo di ricerca è vuoto
+                    if (searchText.length > 2) {
+                        $('#coursesTable tbody tr').filter(function() {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1)
+                        });
+                    } else {
+                        // Se il campo di ricerca è vuoto, mostra tutti gli elementi
+                        $('#coursesTable tbody tr').show();
+                    }
                 });
             });
         </script>
