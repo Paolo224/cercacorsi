@@ -235,6 +235,23 @@
                     }
                 });
             });
+            $(document).ready(function() {
+                $('#SearchNomeAzienda').on('input', function() {
+                    var searchText = $(this).val().toLowerCase();
+
+                    // Verifica se il campo di ricerca è vuoto
+                    if (searchText.length > 2) {
+                        $('.card').filter(function() {
+                            // Utilizza il testo dell'elemento h5 per la ricerca
+                            var agencyName = $(this).find('h5').text().toLowerCase();
+                            $(this).toggle(agencyName.indexOf(searchText) > -1);
+                        });
+                    } else {
+                        // Se il campo di ricerca è vuoto, mostra tutte le cards
+                        $('.card').show();
+                    }
+                });
+            });
         </script>
         <script>
             $(document).ready(function() {

@@ -46,6 +46,34 @@ class AgencyController extends Controller
 
     protected $customMessages = [];
 
+    public function Filtri(Request $request, Agency $agency)
+    {
+        $filteredAgencies = Agency::query();
+
+        if ($request->filled('visibile')) {
+            $filteredAgencies->where('visibile', $request->visibile);
+        }
+
+        if ($request->filled('PerPremium')) {
+            $filteredAgencies->where('premium', $request->PerPremium);
+        }
+
+        // Ordinamento
+        if ($request->filled('Ordinamento')) {
+            $sort = $request->Ordinamento;
+
+            if ($sort === 'asc') {
+                $filteredAgencies->orderBy('nome', 'asc');
+            } elseif ($sort === 'desc') {
+                $filteredAgencies->orderBy('nome', 'desc');
+            }
+        }
+
+        $agencies = $filteredAgencies->get();
+
+        return view('admin.agency.index', compact('agencies'));
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/le-mie-aziende/Filtri', [AdminAgencyController::class, 'Filtri'])->name('le-mie-aziende.filtri');
     Route::patch('/{agency}/toggle', [AdminAgencyController::class, 'enableToggle'])->name('toggle');
     Route::resource('/le-mie-aziende', AdminAgencyController::class)->parameters([
         'le-mie-aziende' => 'agency' // Cambia il nome del parametro da 'agency' a 'le-mie-aziende'
