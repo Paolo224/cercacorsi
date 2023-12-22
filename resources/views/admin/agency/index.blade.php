@@ -87,20 +87,34 @@
                                 Non Visibile
                             </div>
                             @endif
+                            @if ($agency->premium == 1) 
+                            <div class="position-absolute" style="top: -7px; left: 20px;">
+                                <svg fill="#daa520" id="Layer_1" enable-background="new 0 0 32 32" height="60" viewBox="0 0 32 32" width="60" xmlns="http://www.w3.org/2000/svg"><path d="m2 5.312h4.201v22.377c0 .381.217.729.559.897s.75.128 1.052-.105l8.188-6.314 8.188 6.313c.178.138.394.208.61.208.15 0 .302-.034.441-.103.342-.168.559-.517.559-.897v-22.376h4.202c.553 0 1-.447 1-1s-.447-1-1-1h-5.201-17.598-5.201c-.552 0-1 .447-1 1s.448 1 1 1z"/></svg>
+                            </div>   
+                            @endif
                         </div>
                         <div class="card-body">
                             <img src="{{asset('storage/' . $agency->logo)}}" class="card-img-top" alt="{{$agency->nome}}" style="width: 50px;"><h5 class="ms-3 align-middle m-0 card-title d-inline-block">{{$agency->nome}}</h5>
                             <p class="card-text mt-3 mb-0"><i class="fa-regular fa-envelope me-2" style="color: #000000;"></i>{{$agency->email}}</p>
                             <p class="card-text mt-2 mb-0"><i class="fas fa-phone me-2"></i>{{$agency->telefono1}}</p>
-                            <div class="mt-3 d-flex justify-content-end">
-                                <form action="{{ route('admin.toggle', $agency->slug) }}" method="POST">
-                                    @method('PATCH')
-                                    @csrf
-                                    <button class="btn btn-sm btn-outline-dark me-3" type="submit" title="{{$agency->getABooleanFromNumber($agency->visibile) ? 'visible' : 'invisible' }}">
-                                        <i class="fa-solid fa-lg fa-eye{{$agency->visibile ? '' : '-slash'}}"></i>
-                                    </button>
-                                </form>
+                            <div class="mt-3 d-flex justify-content-between">
+                                @if ($agency->premium == 1)
+                                <button class="btn btn-sm btn-success" disabled>
+                                    <i class="fa-regular fa-thumbs-up"></i>
+                                </button>
+                                @else
+                                <a href="{{route('admin.le-mie-aziende.index', $agency->slug)}}" class="btn btn-sm btn-warning">
+                                    Passa a Premium
+                                </a>
+                                @endif
                                 <div>
+                                    <form class="d-inline-block" action="{{ route('admin.toggle', $agency->slug) }}" method="POST">
+                                        @method('PATCH')
+                                        @csrf
+                                        <button class="btn btn-sm btn-outline-dark me-3" type="submit" title="{{$agency->getABooleanFromNumber($agency->visibile) ? 'visible' : 'invisible' }}">
+                                            <i class="fa-solid fa-lg fa-eye{{$agency->visibile ? '' : '-slash'}}"></i>
+                                        </button>
+                                    </form>
                                     <a href="{{route('admin.le-mie-aziende.show', $agency->slug)}}" class="btn btn-sm btn-outline-dark me-2">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
