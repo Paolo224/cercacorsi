@@ -100,7 +100,7 @@
                             <div class="mt-3 d-flex justify-content-between">
                                 @if ($agency->premium == 1)
                                 <button class="btn btn-sm btn-success" disabled>
-                                    <i class="fa-regular fa-thumbs-up"></i>
+                                    <i class="fa-regular fa-thumbs-up"></i> Premium Attivo
                                 </button>
                                 @else
                                 <a href="{{route('admin.le-mie-aziende.index', $agency->slug)}}" class="btn btn-sm btn-warning">

@@ -41,47 +41,6 @@ class CoursesController extends Controller
     protected $customMessages = [];
 
 
-    // public function Visibili(Request $request, Course $course)
-    // {
-    //     $filteredCourses = Course::where('visibile', 1)->get();
-
-    //     $categoriaCorso = $course->categoriaCorso();
-
-    //     $user = Auth::user();
-
-    //     $AllAgencies = $user->agencies;
-
-    //     return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
-    // }
-
-    // public function NonVisibili(Request $request, Course $course)
-    // {
-    //     $filteredCourses = Course::where('visibile', 0)->get();
-
-    //     $categoriaCorso = $course->categoriaCorso();
-
-    //     $user = Auth::user();
-
-    //     $AllAgencies = $user->agencies;
-
-    //     return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
-    // }
-
-    // public function Categoria(Request $request, Course $course)
-    // {
-    //     $selectedCategoria = $request->input('PerCategoria');
-
-    //     $categoriaCorso = $course->categoriaCorso();
-
-    //     $user = Auth::user();
-
-    //     $AllAgencies = $user->agencies;
-
-    //     $filteredCourses = Course::where('categoria', $selectedCategoria)->get();
-
-    //     return view('admin.course.index', ['courses' => $filteredCourses, 'categoriaCorso' => $categoriaCorso, 'AllAgencies' => $AllAgencies]);
-    // }
-
     public function Filtri(Request $request, Course $course)
     {
         // dd($request);

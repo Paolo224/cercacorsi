@@ -361,3 +361,202 @@ select#SearchPremium {
     background-position: 5px center;
     background-size: 16px;
 }
+
+// EDIT AZIENDE
+.my_form_label_input {
+    display: block;
+    color: #333;
+}
+
+.my_form_input_nome {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 7px;
+    width: 60%;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    height: 40px;
+    width: 60%;
+}
+
+.custom-file-upload:hover {
+    background-color: #e0e0e0;
+}
+
+.my_form_input_motto {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 7px;
+    width: 95%;
+}
+
+#agency_descrizione {
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 7px;
+}
+
+#agency_altre_informazioni {
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 7px;
+}
+
+.my_form_input_motto {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 7px;
+    width: 90%;
+}
+
+.my_form_input_email {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 7px;
+    width: 90%;
+}
+
+.my_form_input_telefono {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 7px;
+    width: 80%;
+}
+
+.my_form_input_indirizzo {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 7px;
+    width: 80%;
+}
+
+.my_form_input_citta {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 7px;
+    width: 80%;
+}
+
+.my_form_input_cap {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 7px;
+    width: 80%;
+}
+
+.my_form_input_paese {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 7px;
+    width: 90%;
+}
+
+section.dati_aziendali {
+    background-color: #e1e1e1;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 95%;
+
+    .my_form_input_rSociale {
+        border: 1px solid black;
+        border-radius: 6px;
+        padding: 7px;
+        width: 95%;
+    }
+
+    .my_form_input_tipo {
+        border: 1px solid black;
+        border-radius: 6px;
+        padding: 7px;
+        width: 95%;
+    }
+
+    .my_form_input_pIva {
+        border: 1px solid black;
+        border-radius: 6px;
+        padding: 7px;
+        width: 95%;
+    }
+
+    .my_form_input_cFiscale {
+        border: 1px solid black;
+        border-radius: 6px;
+        padding: 7px;
+        width: 95%;
+    }
+
+    .my_form_input_pec {
+        border: 1px solid black;
+        border-radius: 6px;
+        padding: 7px;
+        width: 97.5%;
+    }
+
+    .my_form_input_sdi {
+        border: 1px solid black;
+        border-radius: 6px;
+        padding: 7px;
+        width: 97.5%;
+    }
+}
+
+$primary-color: #00005c;
+$text-color: mix(#000, $primary-color, 64%);
+
+label.checkbox-visible {
+    display: flex;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.375em;
+    width: 140px;
+
+    input.my_form_input_visibile {
+        position: absolute;
+        left: -9999px;
+
+        &:checked+span {
+            background-color: mix(#fff, $primary-color, 84%);
+
+            &:before {
+                box-shadow: inset 0 0 0 0.4375em $primary-color;
+            }
+        }
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+        padding: 0.375em 0.75em 0.375em 0.375em;
+        border-radius: 99em;
+        transition: 0.25s ease;
+
+        &:hover {
+            background-color: mix(#fff, $primary-color, 84%);
+        }
+
+        &:before {
+            display: flex;
+            flex-shrink: 0;
+            content: "";
+            background-color: #fff;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+            margin-right: 0.375em;
+            transition: 0.25s ease;
+            box-shadow: inset 0 0 0 0.125em $primary-color;
+        }
+    }
+}

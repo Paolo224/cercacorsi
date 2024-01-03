@@ -29,8 +29,8 @@ return new class extends Migration
             $table->string('provincia', 2);
             $table->string('paese');
             $table->string('ragione_sociale');
-            $table->string('p_iva', 13);
-            $table->string('codice_fiscale', 16);
+            $table->string('p_iva', 13)->nullable();
+            $table->string('codice_fiscale', 16)->nullable();
             $table->string('tipo');
             $table->string('pec');
             $table->string('sdi', 7);

@@ -15,7 +15,7 @@
             <div class="row p-0">
                 <div class="col-12 p-0">
                     <h1>
-                        Tutti i corsi di Formazione
+                        Corsi di Formazione
                     </h1>
                 </div>
             </div>
