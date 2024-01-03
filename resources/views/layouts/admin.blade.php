@@ -18,6 +18,7 @@
 
     <!-- Usando Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
 </head>
 
 <body>
@@ -165,15 +166,17 @@
             </div>
         </div>
         
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
+        {{-- SCRIPT PER LA RICERCA NELLE SELECT --}}
         <script>
             $(document).ready(function() {
                 $('.js-example-basic-single').select2();
             });
         </script>
 
+        {{-- SCRIPT PER VISUALIZZAZIONE DELLE IMMAGINI AL CARICAMENTO --}}
         <script>
             $(document).ready(function() {
                 $('#agency_immagine_copertina').change(function() {
@@ -219,6 +222,8 @@
                 });
             });
         </script>
+
+        {{-- SCRIPT PER RICERCA DI UN CORSO O UN'AZIENDA PER IL RELATIVO NOME --}}
         <script>
             $(document).ready(function() {
                 $('#SearchNomeCorso').on('input', function() {
@@ -253,6 +258,8 @@
                 });
             });
         </script>
+
+        {{-- SCRIPT PER VISUALIZZAZIONE/OSCURAMENTO DEL CAMPO DESCRIZIONE ATTESTATO --}}
         <script>
             $(document).ready(function() {
                 $('input[type=radio][name=attestato]').change(function() {
@@ -264,6 +271,8 @@
                 });
             });
         </script>
+
+        {{-- SCRIPT PER TUTTA LA GESTIONE DELLA BARRA LATERALE ADMIN --}}
         <script>
             function toggleSidebar() {
                 const sidebar = document.getElementById('sidebar');
