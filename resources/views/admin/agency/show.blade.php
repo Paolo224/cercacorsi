@@ -8,15 +8,17 @@
             <div class="logo_azienda">
                 <img class="w-100" src="{{asset('storage/' . $agency->logo)}}" alt="{{$agency->nome}}">
             </div>
-            <!-- MOTTO -->
-            @if ($agency->motto != null || $agency->motto != '')    
-            <p class="motto_aziendale">{{$agency->motto}}</p>
-            @endif
         </div>
     </div>
     <div class="row">
         <div class="col-6 d-flex flex-column justify-content-around">
             <div class="col-12 my-3">
+                {{-- MOTTO --}}
+                @if ($agency->motto != null || $agency->motto != '')
+                <div class="col-12 p-0">
+                    <h4 class="text-center mb-4">{{$agency->motto}}</h4>
+                </div>
+                @endif
                 <div class="row contenitore_informazioni_aziendali fw-medium">
                     <!-- MAIL -->
                     <div class="col-6 d-flex align-items-center mb-3">

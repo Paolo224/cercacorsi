@@ -146,7 +146,7 @@
         </div>
         <div class="content" id="main-content">
             <div class="scrollable-content">
-                    @if ($errors->any())
+                    {{-- @if ($errors->any())
                     <div class="container p-5">
                         <div class="alert alert-danger">
                             <ul>
@@ -158,10 +158,10 @@
                             </ul>
                         </div>
                     </div>
-                @endif
-                @if(Session::has('message'))
-                    <p class="alert alert-info">{{ Session::get('message') }}</p>
-                @endif
+                @endif --}}
+                {{-- @if(Session::has('message'))
+                    <p id="my_alert" class="alert alert-success">{{ Session::get('message') }}</p>
+                @endif --}}
                 @yield('content')
             </div>
         </div>
