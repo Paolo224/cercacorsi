@@ -98,7 +98,13 @@
     <div class="mb-3">
         <div class="w-50">
             <label for="agency_paese" class="my_form_label_input">Paese <span style="color: red">*</span></label>
-            <input class="my_form_input_paese" type="text" id="agency_paese" name="paese" value="{{old('paese', $agency->paese)}}">
+            {{-- <input class="my_form_input_paese" type="text" id="agency_paese" name="paese" value="{{old('paese', $agency->paese)}}"> --}}
+            <select class="my_form_input_paese" name="paese" id="agency_paese">
+                <option value="" selected>Selezione Paese</option>
+                @foreach ($paesiMondiali as $paeseK => $paese)    
+                <option value="{{$paeseK}}" @if(Route::currentRouteName() === 'admin.agency.create') @else {{ old('paese', $agency->paese) == $paeseK ? 'selected' : '' }} @endif>{{$paese}}</option>
+                @endforeach
+            </select>
         </div>
     </div>
     <section class="dati_aziendali mb-3">
