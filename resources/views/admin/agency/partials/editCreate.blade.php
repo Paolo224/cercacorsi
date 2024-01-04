@@ -39,12 +39,12 @@
         <div class="w-50 d-flex flex-column justify-content-center position-relative">
             <input class="form-control d-none" type="file" id="agency_immagine_copertina" name="immagine_copertina" value="{{old('immagine_copertina', $agency->immagine_copertina)}}">
             <p class="m-0">Immagine Copertina</p>
-            <label for="agency_immagine_copertina" class="custom-file-upload">Immagine di copertina</label>
+            <label for="agency_immagine_copertina" class="custom-file-upload">Scegli File...</label>
             <img class="position-absolute" id="agency_immagine_copertina_Image" src="#" alt="Preview" style="height: 40px; border-radius: 7px; display: none; max-width: 180px; left: 63%; bottom: 46%; transform: translateY(70%);">
         </div>
         <div class="w-50">
             <label for="agency_video_presentazione" class="my_form_label_input">Video di Presentazione</label>
-            <input class="my_form_input_motto" type="text" id="agency_video_presentazione" name="video_presentazione" value="{{old('video_presentazione', $agency->video_presentazione)}}">
+            <input class="my_form_input_video" type="text" id="agency_video_presentazione" name="video_presentazione" value="{{old('video_presentazione', $agency->video_presentazione)}}">
         </div>
     </div>
 
@@ -86,7 +86,7 @@
             </div>
             <div class="w-50">
                 <label for="agency_provincia" class="my_form_label_input">Provincia <span style="color: red">*</span></label>
-                <select class="{{-- js-example-basic-single --}}" name="provincia" id="agency_provincia">
+                <select class="js-example-basic-single js-example-responsive" style="width: 80%; height: 40px;" name="provincia" id="agency_provincia">
                     <option value="" selected>Selezione Provincia</option>
                     @foreach ($provinceItaliane as $abbreviazione => $provincia)    
                     <option value="{{$abbreviazione}}" @if(Route::currentRouteName() === 'admin.agency.create') @else {{ old('provincia', $agency->provincia) == $abbreviazione ? 'selected' : '' }} @endif>{{$provincia}}</option>
