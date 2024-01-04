@@ -146,19 +146,6 @@
         </div>
         <div class="content" id="main-content">
             <div class="scrollable-content">
-                    {{-- @if ($errors->any())
-                    <div class="container p-5">
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>
-                                        {{$error}}
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                @endif --}}
                 {{-- @if(Session::has('message'))
                     <p id="my_alert" class="alert alert-success">{{ Session::get('message') }}</p>
                 @endif --}}
@@ -264,10 +251,13 @@
         <script>
             $(document).ready(function() {
                 $('input[type=radio][name=attestato]').change(function() {
+                    var elemento = $('#course_descrizione_attestato_riga');
+                    var textarea = $('#course_descrizione_attestato');
                     if (this.value === '1') {
-                        $('#course_descrizione_attestato_riga').show();
+                        elemento.animate({ height: '280px' }, 500);
                     } else {
-                        $('#course_descrizione_attestato_riga').hide();
+                        elemento.animate({ height: '0' }, 500);
+                        textarea.val('');
                     }
                 });
             });

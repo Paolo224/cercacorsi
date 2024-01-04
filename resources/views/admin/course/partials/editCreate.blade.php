@@ -113,7 +113,7 @@
         </div>
     </div>
 
-    <div class="mb-3" id="course_descrizione_attestato_riga" @if(Route::currentRouteName() === 'admin.tutti-i-corsi.create') style="display: none;" @elseif(Route::currentRouteName() === 'admin.tutti-i-corsi.edit' && $course->attestato == 0) style="display: none;" @else  @endif>
+    <div class="mb-3" id="course_descrizione_attestato_riga" @if(Route::currentRouteName() === 'admin.tutti-i-corsi.create') style="overflow: hidden; height: 0;" @elseif(Route::currentRouteName() === 'admin.tutti-i-corsi.edit' && $course->attestato == 0) style="overflow: hidden; height: 0;" @else  @endif>
         <label for="course_descrizione_attestato" class="my_form_label_input">Descrizione Attestato</label>
         <textarea class="my_form_input_descrizione" id="course_descrizione_attestato" rows="10" name="descrizione_attestato">{{old('descrizione_attestato', $course->descrizione_attestato)}}</textarea>
     </div>
