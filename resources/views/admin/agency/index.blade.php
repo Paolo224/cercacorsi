@@ -111,7 +111,7 @@
                                     <form class="d-inline-block" action="{{ route('admin.toggle', $agency->slug) }}" method="POST">
                                         @method('PATCH')
                                         @csrf
-                                        <button class="btn btn-sm btn-outline-dark me-3" type="submit" title="{{$agency->getABooleanFromNumber($agency->visibile) ? 'visible' : 'invisible' }}">
+                                        <button class="btn btn-sm btn-outline-dark me-3" type="submit" title="{{$agency->getABooleanFromNumber($agency->visibile) ? 'Visibile' : 'Non visibile' }}">
                                             <i class="fa-solid fa-lg fa-eye{{$agency->visibile ? '' : '-slash'}}"></i>
                                         </button>
                                     </form>

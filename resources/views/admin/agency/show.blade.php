@@ -99,9 +99,12 @@
                 <li>
                     Partita IVA <span>{{$agency->p_iva}}</span>
                 </li>
+                @if (strstr($agency->tipo, '(SRL, SPA)') || strstr($agency->tipo, 'Amministrazione'))
+                @else    
                 <li>
                     Codice Fiscale <span>{{$agency->codice_fiscale}}</span>
                 </li>    
+                @endif
                 <li>
                     PEC <span>{{$agency->pec}}</span>
                 </li>

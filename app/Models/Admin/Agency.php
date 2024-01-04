@@ -60,7 +60,7 @@ class Agency extends Model
 
     public function getABooleanFromNumber($num)
     {
-        return ($num) ? 'true' : 'false';
+        return ($num) ? '1' : '0';
     }
 
     public function paesiMondiali()
@@ -205,5 +205,18 @@ class Agency extends Model
         ];
 
         return $provinceItaliane;
+    }
+
+    public function tipologiaAziendale()
+    {
+
+        $tipologiaAziendale = [
+            'Azienda(SRL, SPA) o altra Sociatà for profit',
+            'Individuale(Attività, P.IVA o Ditta Individuale)',
+            'Non Profit(Associazione, Onlus e simili)',
+            'Pubblica Amministrazione',
+        ];
+
+        return $tipologiaAziendale;
     }
 }

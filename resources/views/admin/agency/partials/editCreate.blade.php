@@ -86,7 +86,7 @@
             </div>
             <div class="w-50">
                 <label for="agency_provincia" class="my_form_label_input">Provincia <span style="color: red">*</span></label>
-                <select class="js-example-basic-single" name="provincia" id="agency_provincia">
+                <select class="{{-- js-example-basic-single --}}" name="provincia" id="agency_provincia">
                     <option value="" selected>Selezione Provincia</option>
                     @foreach ($provinceItaliane as $abbreviazione => $provincia)    
                     <option value="{{$abbreviazione}}" @if(Route::currentRouteName() === 'admin.agency.create') @else {{ old('provincia', $agency->provincia) == $abbreviazione ? 'selected' : '' }} @endif>{{$provincia}}</option>
@@ -119,20 +119,41 @@
             </div>
             <div class="w-50">
                 <label for="agency_tipo" class="my_form_label_input">Tipologia <span style="color: red">*</span></label>
-                <input class="my_form_input_tipo" type="text" id="agency_tipo" name="tipo" value="{{old('tipo', $agency->tipo)}}">
+                {{-- <input class="my_form_input_tipo" type="text" id="agency_tipo" name="tipo" value="{{old('tipo', $agency->tipo)}}"> --}}
+                <select class="my_form_input_tipo" name="tipo" id="agency_tipo" onchange="handleChange()">
+                    <option value="" selected>Seleziona Tipo</option>
+                    @foreach ($tipologiaAziendale as $tipo)    
+                    <option value="{{$tipo}}" @if(Route::currentRouteName() === 'admin.agency.create') @else {{ old('tipo', $agency->tipo) == $tipo ? 'selected' : '' }} @endif>{{$tipo}}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
 
         <div class="mb-3 d-flex">
-            {{-- TODO NULLABLE NELLA MIGRATION A P.IVA e CODICE FISCALE gia scritto fare REFRESH--}}
             <div class="w-50">
                 <label for="agency_p_iva" class="my_form_label_input">Partita IVA</label>
                 <input class="my_form_input_pIva" type="text" id="agency_p_iva" name="p_iva" maxlength="13" value="{{old('p_iva', $agency->p_iva)}}">
             </div>
             <div class="w-50">
                 <label for="agency_codice_fiscale" class="my_form_label_input">Codice Fiscale</label>
-                <input class="my_form_input_cFiscale" type="text" id="agency_codice_fiscale" name="codice_fiscale" maxlength="16" value="{{old('codice_fiscale', $agency->codice_fiscale)}}">
+                <input class="my_form_input_cFiscale" type="text" id="agency_codice_fiscale" name="codice_fiscale" maxlength="16" value="{{old('codice_fiscale', $agency->codice_fiscale)}}" disabled>
             </div>
+            <script>
+                function handleChange() {
+                    var select = document.getElementById("agency_tipo");
+                    var codiceFiscaleInput = document.getElementById("agency_codice_fiscale");
+            
+                    if (select.value === "Pubblica Amministrazione" || select.value === "Azienda(SRL, SPA) o altra Sociatà for profit") {
+                        codiceFiscaleInput.value = ""; 
+                        codiceFiscaleInput.disabled = true; 
+                    } else {
+                        codiceFiscaleInput.disabled = false; 
+                    }
+                    
+                    console.log('ciao')
+                }
+                handleChange()
+            </script>
         </div>
     
         <div class="mb-3">
@@ -166,27 +187,27 @@
 
     <div class="mb-3">
         <label for="agency_whatsapp" class="my_form_label_input">Whatsapp</label>
-        <input class="form-control" type="text" id="agency_whatsapp" name="whatsapp" value="{{old('whatsapp', $agency->whatsapp)}}">
+        <input class="my_form_input_whatsapp" type="text" id="agency_whatsapp" name="whatsapp" value="{{old('whatsapp', $agency->whatsapp)}}">
     </div>
     <div class="mb-3">
         <label for="agency_instagram" class="my_form_label_input">Instagram</label>
-        <input class="form-control" type="text" id="agency_instagram" name="instagram" value="{{old('instagram', $agency->instagram)}}">
+        <input class="my_form_input_instagram" type="text" id="agency_instagram" name="instagram" value="{{old('instagram', $agency->instagram)}}">
     </div>
     <div class="mb-3">
         <label for="agency_facebook" class="my_form_label_input">Facebook</label>
-        <input class="form-control" type="text" id="agency_facebook" name="facebook" value="{{old('facebook', $agency->facebook)}}">
+        <input class="my_form_input_facebook" type="text" id="agency_facebook" name="facebook" value="{{old('facebook', $agency->facebook)}}">
     </div>
     <div class="mb-3">
         <label for="agency_youtube" class="my_form_label_input">Youtube</label>
-        <input class="form-control" type="text" id="agency_youtube" name="youtube" value="{{old('youtube', $agency->youtube)}}">
+        <input class="my_form_input_youtube" type="text" id="agency_youtube" name="youtube" value="{{old('youtube', $agency->youtube)}}">
     </div>
     <div class="mb-3">
         <label for="agency_tiktok" class="my_form_label_input">TikTok</label>
-        <input class="form-control" type="text" id="agency_tiktok" name="tiktok" value="{{old('tiktok', $agency->tiktok)}}">
+        <input class="my_form_input_tiktok" type="text" id="agency_tiktok" name="tiktok" value="{{old('tiktok', $agency->tiktok)}}">
     </div>
     <div class="mb-3">
         <label for="agency_linkedin" class="my_form_label_input">Linkedin</label>
-        <input class="form-control" type="text" id="agency_linkedin" name="linkedin" value="{{old('linkedin', $agency->linkedin)}}">
+        <input class="my_form_input_linkedin" type="text" id="agency_linkedin" name="linkedin" value="{{old('linkedin', $agency->linkedin)}}">
     </div>
 
     <div class="mb-3">

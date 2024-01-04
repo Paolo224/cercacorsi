@@ -95,7 +95,9 @@ class AgencyController extends Controller
 
         $paesiMondiali = $agency->paesiMondiali();
 
-        return view('admin.agency.create', compact('agency', 'provinceItaliane', 'paesiMondiali'));
+        $tipologiaAziendale = $agency->tipologiaAziendale();
+
+        return view('admin.agency.create', compact('agency', 'provinceItaliane', 'paesiMondiali', 'tipologiaAziendale'));
     }
 
     /**
@@ -137,7 +139,9 @@ class AgencyController extends Controller
 
         $provinceItaliane = $agency->provinceItaliane();
 
-        return view('admin.agency.edit', compact('agency', 'provinceItaliane', 'paesiMondiali'));
+        $tipologiaAziendale = $agency->tipologiaAziendale();
+
+        return view('admin.agency.edit', compact('agency', 'provinceItaliane', 'paesiMondiali', 'tipologiaAziendale'));
     }
 
     /**
@@ -194,7 +198,7 @@ class AgencyController extends Controller
         }
 
         $agency->update($data);
-        return redirect()->route('admin.le-mie-aziende.show', compact('agency'));
+        return redirect()->route('admin.le-mie-aziende.index');
     }
 
     /**
