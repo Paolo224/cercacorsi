@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('categoria', 255);
             $table->string('titolo', 255);
             $table->string('slug', 255);
-            $table->string('sottotitolo')->nullable();
+            $table->string('sottotitolo', 255)->nullable();
             $table->text('descrizione');
             $table->string('durata', 3);
             $table->text('immagine')->default('immagine_placeholder_copertina.png');

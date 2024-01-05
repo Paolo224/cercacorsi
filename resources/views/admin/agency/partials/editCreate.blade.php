@@ -216,7 +216,7 @@
 
         <div class="mb-3 d-flex">
             <div class="w-50">
-                <label for="agency_p_iva" class="my_form_label_input">Partita IVA</label>
+                <label for="agency_p_iva" class="my_form_label_input">Partita IVA <span style="color: red">*</span></label>
                 <input @error('p_iva') style="border: 1px solid red" @enderror class="my_form_input_pIva" type="text" id="agency_p_iva" name="p_iva" maxlength="13" value="{{old('p_iva', $agency->p_iva)}}">
                 @error('p_iva')    
                     <div class="text-danger">

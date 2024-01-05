@@ -17,23 +17,23 @@ class AgencyController extends Controller
         'nome' => ['required', 'unique:agencies'],
         'logo' => 'image|max:2048|mimes:jpg,png,gif',
         'immagine_copertina' => 'image|max:2048|mimes:jpg,png,gif',
-        'video_presentazione' => 'url:http,https|nullable',
+        'video_presentazione' => 'url:http,https|nullable|regex:/\byoutube\b/',
         'descrizione' => 'required',
-        'motto' => 'nullable',
+        'motto' => 'nullable|max:255',
         'altre_informazioni' => 'nullable',
         'telefono1' => 'required|max:10',
         'telefono2' => 'nullable|max:10',
-        'email' => 'required',
+        'email' => 'required|email:rfc,dns',
         'indirizzo' => 'required',
         'citta' => 'required',
         'provincia' => 'required|max:2',
         'paese' => 'required',
         'cap' => 'required|max:5',
         'ragione_sociale' => 'required',
-        'p_iva' => 'nullable|max:13',
+        'p_iva' => 'required|max:13',
         'codice_fiscale' => 'nullable|max:16',
         'sdi' => 'required|max:7',
-        'pec' => 'required',
+        'pec' => 'required|regex:/\b@pec.it\b/',
         'visibile' => 'required',
         'whatsapp' => ['regex:/\bwhatsapp\b/', 'nullable'],
         'facebook' => ['regex:/\bfacebook\b/', 'nullable'],
@@ -44,7 +44,47 @@ class AgencyController extends Controller
         'tipo' => 'required',
     ];
 
-    protected $customMessages = [];
+    protected $customMessages = [
+        'nome.required' => 'Inserisci il nome dell\'Azienda.',
+        'nome.unique' => 'Azienda gia esistente!',
+        'logo.image' => 'Il logo Aziendale non è valido!',
+        'logo.max' => 'Il logo Aziendale non può pesare più di 2mb',
+        'logo.mimes' => 'Il logo Aziendale deve essere di tipo: jpg, png o gif',
+        'immagine_copertina.image' => 'L\'immagine di copertina non è valida!',
+        'immagine_copertina.max' => 'L\'immagine di copertina non può pesare più di 2mb',
+        'immagine_copertina.mimes' => 'L\'immagine di copertina deve essere di tipo: jpg, png o gif',
+        'video_presentazione.url' => 'Link non valido!',
+        'video_presentazione.regex' => 'Link non valido! Inserire un link di youtube!',
+        'descrizione.required' => 'La descrizione è obbligatoria!',
+        'motto.max' => 'Il motto Aziendale non può superare i 255 caratteri!',
+        'telefono1.required' => 'Telefono obbligatorio!',
+        'telefono1.max' => 'Il campo telefono non può superare i 10 caratteri!',
+        'telefono2.max' => 'Il campo telefono non può superare i 10 caratteri!',
+        'email.required' => 'Il campo email è obbligatorio!',
+        'email.email' => 'Mail non valida!',
+        'indirizzo.required' => 'L\'indirizzo è obbligatorio!',
+        'citta.required' => 'Il campo città è obbligatorio!',
+        'cap.required' => 'Il codice postale è obbligatorio!',
+        'cap.max' => 'Il codice postale non può superare i 5 caratteri!',
+        'provincia.required' => 'Il campo provincia è obbligatorio!',
+        'provincia.max' => 'Il campo provincia non può superare i 2 caratteri!',
+        'paese.required' => 'Il campo paese è obbligatorio!',
+        'ragione_sociale.required' => 'Il campo Ragione Sociale è obbligatorio!',
+        'p_iva.required' => 'La Partita IVA è obbligatoria!',
+        'p_iva.max' => 'La Partita IVA non può avere più 13 caratteri!',
+        'codice_fiscale.max' => 'Il codice fiscale non può avere più 16 caratteri!',
+        'sdi.max' => 'Il codice SDI non può avere più 7 caratteri!',
+        'sdi.required' => 'Il codice SDI è obbligatorio!',
+        'pec.required' => 'La Pec è obbligatoria!',
+        'pec.regex' => 'Pec non valida!',
+        'tipo.required' => 'Il campo tipologia è obbligatorio!',
+        'whatsapp.regex' => 'Link non valido!',
+        'tiktok.regex' => 'Link non valido!',
+        'instagram.regex' => 'Link non valido!',
+        'facebook.regex' => 'Link non valido!',
+        'linkedin.regex' => 'Link non valido!',
+        'youtube.regex' => 'Link non valido!'
+    ];
 
     public function Filtri(Request $request, Agency $agency)
     {
@@ -105,7 +145,7 @@ class AgencyController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate($this->validationRules);
+        $data = $request->validate($this->validationRules, $this->customMessages);
         if ($request->hasFile('logo')) {
             $data['logo'] = Storage::put('uploads/img', $data['logo']);
         }
@@ -182,7 +222,7 @@ class AgencyController extends Controller
 
         $newRules = $this->validationRules;
         $newRules['nome'] = ['required', Rule::unique('agencies')->ignore($agency->id)];
-        $data = $request->validate($newRules);
+        $data = $request->validate($newRules, $this->customMessages);
 
         if ($request->hasFile('logo')) {
             if ($agency->logo !== 'immagine_placeholder.jpg') {

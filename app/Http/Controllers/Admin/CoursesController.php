@@ -18,27 +18,50 @@ class CoursesController extends Controller
         'categoria' => 'required',
         'titolo' => 'required',
         'agency_id' => 'required',
-        'sottotitolo' => 'nullable',
+        'sottotitolo' => 'nullable|max:255',
         'descrizione' => 'required',
         'immagine' => 'image|max:2048|mimes:jpg,png,gif',
-        'video_corso' => 'url:http,https|nullable',
+        'video_corso' => 'url:http,https|nullable|regex:/\byoutube\b/',
         'durata' => 'required|max:3',
-        'competenze_partenza' => 'required',
+        'competenze_partenza' => 'required|max:255',
         'prezzo' => 'nullable|numeric',
         'programma' => 'required',
-        'obiettivi' => 'required',
-        'attestato' => 'required',
+        'obiettivi' => 'required|max:255',
+        'attestato' => 'required|max:255',
         'descrizione_attestato' => 'nullable',
         'lingua' => 'required',
         'fad' => 'nullable',
         'on_site' => 'nullable',
         'in_aula' => 'nullable',
         'visibile' => 'required',
-        'a_chi_si_rivolge' => 'required',
-        'requisiti_richiesti' => 'required'
+        'a_chi_si_rivolge' => 'required|max:255',
+        'requisiti_richiesti' => 'required|max:255'
     ];
 
-    protected $customMessages = [];
+    protected $customMessages = [
+        'categoria.required' => 'Specificare la categoria del corso!',
+        'titolo.required' => 'Inserire il titolo del corso!',
+        'agency_id.required' => 'Inserire l\'Azienda di riferimento',
+        'sottotitolo.max' => 'Il sottotitolo non può superare i 255 caratteri!',
+        'descrizione.required' => 'La descrizione è obbligatoria!',
+        'immagine.image' => 'L\'immagine non è valida!',
+        'immagine.max' => 'L\'immagine non può pesare più di 2mb',
+        'immagine.mimes' => 'L\'immagine deve essere di tipo: jpg, png o gif',
+        'video_corso.url' => 'Link non valido!',
+        'video_corso.regex' => 'Link non valido! Inserire un link di youtube!',
+        'durata.max' => 'Il campo non accetta più di 3 caratteri numerici',
+        'competenze_partenza.required' => 'Inserire le competenze di partenza',
+        'competenze_partenza.max' => 'Questo campo non può superare i 255 caratteri!',
+        'prezzo.numeric' => 'Questo campo accetta solo valori numerici',
+        'programma.required' => 'Inserire il programma del corso',
+        'obiettivi.required' => 'Inserire gli obiettivi del corso',
+        'obiettivi.max' => 'Questo campo non può superare i 255 caratteri!',
+        'lingua.required' => 'Selezionare la lingua del corso',
+        'a_chi_si_rivolge.required' => 'Specificare a chi è rivolto il corso',
+        'a_chi_si_rivolge.max' => 'Questo campo non può superare i 255 caratteri!',
+        'requisiti_richiesti.required' => 'Indicare i requisiti richiesti',
+        'requisiti_richiesti.max' => 'Questo campo non può superare i 255 caratteri!'
+    ];
 
 
     public function Filtri(Request $request, Course $course)
@@ -114,7 +137,7 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate($this->validationRules); //, $this->customMessages);
+        $data = $request->validate($this->validationRules, $this->customMessages);
         if ($request->hasFile('immagine')) {
             $data['immagine'] = Storage::put('uploads/img/courses', $data['immagine']);
         }
@@ -201,7 +224,7 @@ class CoursesController extends Controller
 
         $newRules = $this->validationRules;
         $newRules['slug'] = ['string', Rule::unique('courses')->ignore($course->id)];
-        $data = $request->validate($newRules);
+        $data = $request->validate($newRules, $this->customMessages);
 
         if ($request->hasFile('immagine')) {
             $data['immagine'] = Storage::put('uploads/img/courses', $data['immagine']);
