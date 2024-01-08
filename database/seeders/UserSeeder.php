@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             $newUser->cognome = $faker->lastName();
             $newUser->email = $faker->email();
             $newUser->password = Hash::make('password');
+            $newUser->saldo = rand(100, 10000);
             $newUser->save();
         }
     }

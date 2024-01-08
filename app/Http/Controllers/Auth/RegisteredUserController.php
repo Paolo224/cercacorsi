@@ -42,6 +42,7 @@ class RegisteredUserController extends Controller
             'cognome' => $request->cognome,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'saldo' => 0
         ]);
 
         event(new Registered($user));
