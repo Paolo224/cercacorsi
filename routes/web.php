@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CoursesController as AdminCoursesController;
 use App\Http\Controllers\Admin\AgencyController as AdminAgencyController;
 use App\Http\Controllers\Admin\DashboardController as DashboardController;
+use App\Http\Controllers\Admin\PagamentoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,16 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('/tutti-i-corsi', AdminCoursesController::class)->parameters([
         'tutti-i-corsi' => 'course' // Cambia il nome del parametro da 'course' a 'tutti-i-corsi'
     ]);
+    Route::get('/wallet', function () {
+        return view('admin.wallet');
+    })->name('wallet');
+
+    // PAYPAL
+    Route::post('/pagamento', [PagamentoController::class, 'pagamento'])->name('pagamento');
+    Route::get('/pagamento-avvenuto', [PagamentoController::class, 'avvenuto'])->name('pagamento-avvenuto');
+    Route::get('/pagamento-rifiutato', [PagamentoController::class, 'rifiutato'])->name('pagamento-rifiutato');
+    // PAYPAL
+
     // altre rotte protette da login e che siano in admin
 });
 
