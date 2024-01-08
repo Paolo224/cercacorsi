@@ -91,8 +91,9 @@
 
     <div class="mb-3 d-flex justify-content-between">
         <div style="width: 26%;">
-            <label for="course_prezzo" class="my_form_label_input">Prezzo (Esempio: 1.750)</label>
+            <label for="course_prezzo" class="my_form_label_input">Prezzo</label>
             <input @error('prezzo') style="border: 1px solid red" @enderror maxlength="11" class="my_form_input_prezzo" type="text" id="course_prezzo" name="prezzo" value="{{old('prezzo', $course->prezzo)}}">
+            <span class="fs-4">,00&euro;</span>
             @error('prezzo')    
                 <div class="text-danger">
                     <i class="fa-solid fa-circle-exclamation pe-1"></i>{{$message}}
@@ -103,6 +104,7 @@
         <div style="width: 26%;">
             <label for="course_durata" class="my_form_label_input">Durata del Corso <span style="color: red">*</span></label>
             <input @error('durata') style="border: 1px solid red" @enderror class="my_form_input_durata" type="text" id="course_durata" name="durata" value="{{old('durata', $course->durata)}}">
+            <span class="fs-4">Ore</span>
             @error('durata')    
                 <div class="text-danger">
                     <i class="fa-solid fa-circle-exclamation pe-1"></i>{{$message}}

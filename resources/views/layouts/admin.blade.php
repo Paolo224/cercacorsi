@@ -146,9 +146,6 @@
         </div>
         <div class="content" id="main-content">
             <div class="scrollable-content">
-                {{-- @if(Session::has('message'))
-                    <p id="my_alert" class="alert alert-success">{{ Session::get('message') }}</p>
-                @endif --}}
                 @yield('content')
             </div>
         </div>

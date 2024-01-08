@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-fluid container-xxl">
+<div class="container-fluid">
     <div class="row mt-3">
         @if($agencies->isNotEmpty())
         <div class="row p-0">

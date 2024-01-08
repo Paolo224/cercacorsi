@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-fluid container-xxl">
+<div class="container-fluid">
     <div class="row mt-2">
         <div class="col-12 immagine_copertina_pagina_show"
             style="background-image: url('{{asset('storage/' . $agency->immagine_copertina)}}');">
