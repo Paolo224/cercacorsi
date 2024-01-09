@@ -67,7 +67,7 @@ class PagamentoController extends Controller
             $user->saldo = $nuovoSaldo;
             $user->save();
             // dd($saldo);
-            return "PAGAMENTO AVVENUTO";
+            return view('admin.pagamento-avvenuto');
         } else {
             return redirect()->route('admin.pagamento-rifiutato');
         }
@@ -75,6 +75,6 @@ class PagamentoController extends Controller
 
     public function rifiutato(Request $request)
     {
-        return "PAGAMENTO NON AVVENUTO";
+        return view('admin.pagamento-rifiutato');
     }
 }

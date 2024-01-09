@@ -3,7 +3,7 @@
 
 // STILE PER LAYOUT ADMIN
 :root {
-    --color-hover-icon: #ff0800;
+    --color-hover-icon: #ad9300;
     --color-icon: #ffd700;
     --color-menu-icon: #fff;
     --background-color-sidbar: #333;
@@ -873,4 +873,27 @@ div.box-ricarica-wallet {
 .ricarica-selezionata {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transform: scale(1.05);
+}
+
+button.bottone-pagamento {
+    background-color: white;
+    border: 1px solid #003087;
+    color: #003087;
+    border-radius: 15px;
+    padding: 10px;
+    width: 100%;
+    font-size: 25px;
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+button.bottone-pagamento:hover {
+    background-color: #003087;
+    border: 1px solid #003087;
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+    width: 100%;
+    font-size: 25px;
+    font-weight: 500;
 }
