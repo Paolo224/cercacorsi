@@ -3,10 +3,6 @@
         <h2 class="text-lg font-medium text-gray-900">
             Cambia Password
         </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            Assicurati che il tuo account usi una password lunga e casuale per rimanere al sicuro
-        </p>
     </header>
 
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
@@ -44,7 +40,7 @@
             @enderror
         </div>
 
-        <div class="d-flex align-items-center gap-4">
+        <div class="d-flex flex-column align-items-start gap-4">
             <button type="submit" class="btn btn-primary">Salva</button>
 
             @if (session('status') === 'password-updated')
@@ -56,7 +52,7 @@
                     el.style.display = 'block';
                 }
             </script>
-            <p id='status' class=" fs-5 text-muted">{{ __('Saved.') }}</p>
+            <p id='status' class="fs-5 text-success">Nuova Password Salvata</p>
             @endif
         </div>
     </form>

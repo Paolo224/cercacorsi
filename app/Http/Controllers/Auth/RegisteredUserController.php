@@ -30,12 +30,31 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'nome' => ['required', 'string', 'max:255'],
-            'cognome' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        $request->validate(
+            [
+                'nome' => ['required', 'string', 'max:255'],
+                'cognome' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ],
+            [
+                'nome.required' => 'Inserisci il tuo nome.',
+                'nome.string' => 'Il nome deve essere una stringa.',
+                'nome.max' => 'Il nome deve essere massimo di :max caratteri.',
+                'cognome.required' => 'Inserisci il tuo cognome.',
+                'cognome.string' => 'Il cognome deve essere una stringa.',
+                'cognome.max' => 'Il cognome deve essere massimo di :max caratteri.',
+                'email.required' => 'Inserisci la tua mail.',
+                'email.email' => 'Il campo inserito non è una mail valida.',
+                'email.string' => 'L\'email deve essere una stringa.',
+                'email.lowercase' => 'L\'email deve essere scritta tutta in minuscolo.',
+                'email.max' => 'La mail deve essere massimo di :max caratteri.',
+                'email.unique' => 'La mail è già registrata nei nostri sistemi.',
+                'password.confirmed' => 'Conferma la tua password.',
+                'password.min' => 'La password deve essere lunga minimo :min caratteri.',
+                'password.required' => 'Inserisci obbligatoriamente la passoword.',
+            ]
+        );
 
         $user = User::create([
             'nome' => $request->nome,
@@ -49,6 +68,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('admin');
     }
 }
