@@ -56,9 +56,17 @@ class PagamentoController extends Controller
 
         $response = $provider->capturePaymentOrder($request->token);
 
-        //dd($response);
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            $user = Auth::user(); // Recupera l'utente autenticato
+            $saldo = $user->saldo; // Recupera il saldo dell'utente
+            //dd($response['purchase_units'][0]['payments']['captures'][0]['amount']['value']);
+            $nuovoSaldo = $saldo + $response['purchase_units'][0]['payments']['captures'][0]['amount']['value']; // Aggiungi 20 al saldo attuale
+
+            // Aggiorna il saldo dell'utente nel modello e salva nel database
+            $user->saldo = $nuovoSaldo;
+            $user->save();
+            // dd($saldo);
             return "PAGAMENTO AVVENUTO";
         } else {
             return redirect()->route('admin.pagamento-rifiutato');

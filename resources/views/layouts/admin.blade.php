@@ -159,6 +159,33 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
+        {{-- SCRIPT PER BUDGET RICARICA --}}
+        <script>
+            $(document).ready(function() {
+                $('.box-ricarica-wallet').on('click', function() {
+                    var value = $(this).data('value');
+                    $('#prezzoInput').val(value);
+                    $('#customValue').val('');
+                    if ($(this).hasClass('ricarica-selezionata')) {
+                        $(this).removeClass('ricarica-selezionata'); // Rimuove la classe 'selected' se è già presente
+                    } else {
+                        $('.box-ricarica-wallet').removeClass('ricarica-selezionata'); // Rimuove la classe 'selected' da tutti i riquadri
+                        $(this).addClass('ricarica-selezionata'); // Aggiunge la classe 'selected' al riquadro cliccato
+                    }
+                });
+        
+                $('#customValue').on('click', function() {
+                    $('.box-ricarica-wallet').removeClass('ricarica-selezionata'); 
+                });
+
+                $('#customValue').on('input', function() {
+                    var customValue = $(this).val();
+                    $('#prezzoInput').val(customValue);
+                });
+
+            });
+        </script>
+
         {{-- SCRIPT PER LA RICERCA NELLE SELECT --}}
         <script>
             $(document).ready(function() {
