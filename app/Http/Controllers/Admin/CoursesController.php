@@ -63,43 +63,6 @@ class CoursesController extends Controller
         'requisiti_richiesti.max' => 'Questo campo non può superare i 255 caratteri!'
     ];
 
-
-    public function Filtri(Request $request, Course $course)
-    {
-        // dd($request);
-        $user = Auth::user();
-        $AllAgencies = $user->agencies;
-        $categoriaCorso = $course->categoriaCorso();
-        $filteredCourses = Course::query();
-        //dump($request);
-        if ($request->filled('visibile')) {
-            $filteredCourses->where('visibile', $request->visibile);
-        }
-
-        if ($request->filled('PerCategoria')) {
-            $filteredCourses->where('categoria', $request->PerCategoria);
-        }
-
-        if ($request->filled('PerAzienda')) {
-            $filteredCourses->where('agency_id', $request->PerAzienda);
-        }
-
-        // Ordinamento
-        if ($request->filled('Ordinamento')) {
-            $sort = $request->Ordinamento;
-
-            if ($sort === 'asc') {
-                $filteredCourses->orderBy('titolo', 'asc');
-            } elseif ($sort === 'desc') {
-                $filteredCourses->orderBy('titolo', 'desc');
-            }
-        }
-        // dd($request);
-        $courses = $filteredCourses->get();
-
-        return view('admin.course.index', compact('courses', 'categoriaCorso', 'AllAgencies'));
-    }
-
     /**
      * Display a listing of the resource.
      */
