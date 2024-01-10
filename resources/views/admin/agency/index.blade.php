@@ -27,57 +27,15 @@
                 <h3 class="text-center mt-5 mb-2"><i class="fa-regular fa-face-frown"></i> Non hai inserito nessuna Azienda...</h3>
                 <h4 class="text-center mb-2">inserisci la tua azienda cliccando il tasto "Nuovo"</h4>
             @else
-            <div class="row p-0 mt-2">
-                <div class="col-12 d-flex align-items-center mb-2">
-                    <p class="fs-4 fw-bold m-0">
-                        Filtra per:
-                    </p>
+            <div class="row mt-4" >
+                <div class="col-6 d-flex p-0">
+                    <p class="m-0 opacity-0 d-none">Cerca per Nome dell' Azienda</p>
+                    <form action="" method="GET" style="width: 100%; height: 100%" class="d-flex align-items-end">
+                        <input type="text" id="SearchNomeAzienda" name="SearchNomeAzienda" placeholder="Cerca per Nome dell' Azienda">
+                    </form>
                 </div>
-                <form action="{{ route('admin.le-mie-aziende.filtri') }}" method="GET" class="me-2">
-                    <div class="row justify-content-start">
-                        <div class="col-2 d-flex flex-column-reverse h-100">
-                            <select name="visibile" id="visibile">
-                                <option value="" selected></option>
-                                <option value="1">Visibili</option>
-                                <option value="0">Non Visibili</option>
-                            </select>
-                            <p class="m-0 d-flex align-items-center">Visibilità</p>
-                        </div>
-                        <div class="col-2 d-flex flex-column-reverse h-100">
-                                <select id="SearchPremium" name="PerPremium">
-                                    <option value="" selected></option>
-                                    <option value="1">Premium</option>
-                                    <option value="0">Non Premium</option>
-                                </select>
-                            <p class="m-0 d-flex align-items-center">Premium</p>
-                        </div>
-                        <div class="col-1 d-flex flex-column-reverse h-100">
-                            <select id="Ordinamento" name="Ordinamento">
-                                <option value="" selected></option>
-                                <option value="asc">A-Z</option>
-                                <option value="desc">Z-A</option>
-                            </select>
-                            <p class="m-0 d-flex align-items-center">Ordinamento</p>
-                        </div>
-                        <div class="col-5 d-flex flex-column h-100">
-                            <p class="m-0 opacity-0">Cerca per Nome dell' Azienda</p>
-                            <form action="" method="GET" style="width: 100%; height: 100%" class="d-flex align-items-end">
-                                <input type="text" id="SearchNomeAzienda" name="SearchNomeAzienda" placeholder="Cerca per Nome dell' Azienda">
-                            </form>
-                        </div>
-                        <div class="offset-1 col-1 d-flex align-items-end">
-                            @if (Route::currentRouteName() != 'admin.le-mie-aziende.index')
-                                <a href="{{route('admin.le-mie-aziende.index')}}" class="btn btn-sm btn-danger me-2 align-baseline">
-                                    <i class="fa-solid fa-xmark me-1"></i>Azzera
-                                </a>
-                            @else
-                                <button class="btn btn-outline-dark" type="submit">Applica</button>
-                            @endif
-                        </div>
-                    </div>
-                </form>
             </div>
-            <div class="row row-cols-1 row-cols-md-2 gx-3 gy-3">
+            <div class="row row-cols-1 row-cols-md-2 gx-3 gy-3 p-0">
                 @foreach ($agencies as $agency)
                 <div class="col">
                     <div class="card">

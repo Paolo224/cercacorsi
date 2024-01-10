@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row mt-3 justify-content-center">
+    <div class="row p-0 mt-3 justify-content-center">
             @if(!$courses->isNotEmpty())
             <div class="col-12 text-end">
                 <a href="{{route('admin.tutti-i-corsi.create')}}" class="btn btn-sm btn-success" style="width: 80px;">
@@ -12,72 +12,17 @@
                 <h3 class="text-center mt-5 mb-2"><i class="fa-regular fa-face-sad-tear"></i> Nessun Corso di Formazione trovato...</h3>
                 <h4 class="text-center mb-2">Inserisci un corso cliccando il tasto "Nuovo"</h4>
             @else
-            <div class="row p-0">
-                <div class="col-12 p-0">
-                    <h1>
-                        Corsi di Formazione
-                    </h1>
-                </div>
+            <div class="col-12 d-flex p-0">
+                <h1 class="mb-0">
+                    Tutti i Corsi
+                </h1>
             </div>
-            <div class="row p-0 mt-2">
-                <div class="col-12 d-flex align-items-center mb-2">
-                    <p class="fs-4 fw-bold m-0">
-                        Filtra per:
-                    </p>
-                </div>
-                <form action="{{ route('admin.tutti-i-corsi.filtri') }}" method="GET" class="me-2">
-                    <div class="row justify-content-start">
-                        <div class="col-2 d-flex flex-column-reverse h-100">
-                            <select name="visibile" id="visibile">
-                                <option value="" selected></option>
-                                <option value="1">Visibili</option>
-                                <option value="0">Non Visibili</option>
-                            </select>
-                            <p class="m-0 d-flex align-items-center">Visibilità</p>
-                        </div>
-                        <div class="col-2 d-flex flex-column-reverse h-100">
-                                <select id="SearchCategoria" name="PerCategoria">
-                                    <option value="" selected></option>
-                                    @foreach ($categoriaCorso as $categoria)    
-                                        <option value="{{$categoria}}">{{$categoria}}</option>
-                                    @endforeach
-                                </select>
-                            <p class="m-0 d-flex align-items-center">Categoria</p>
-                        </div>
-                        <div class="col-3 d-flex flex-column-reverse h-100">
-                                <select id="SearchAzienda" name="PerAzienda">
-                                    <option value="" selected></option>
-                                    @foreach ($AllAgencies as $agency)    
-                                        <option value="{{$agency->id}}">{{$agency->nome}}</option>
-                                    @endforeach
-                                </select>
-                            <p class="m-0 d-flex align-items-center">Azienda</p>
-                        </div>
-                        <div class="col-1 d-flex flex-column-reverse h-100">
-                            <select id="Ordinamento" name="Ordinamento">
-                                <option value="" selected></option>
-                                <option value="asc">A-Z</option>
-                                <option value="desc">Z-A</option>
-                            </select>
-                            <p class="m-0 d-flex align-items-center">Ordinamento</p>
-                        </div>
-                        <div class="offset-1 col-1 d-flex align-items-end">
-                            @if (Route::currentRouteName() != 'admin.tutti-i-corsi.index')
-                                <a href="{{route('admin.tutti-i-corsi.index')}}" class="btn btn-sm btn-danger me-2 align-baseline">
-                                    <i class="fa-solid fa-xmark me-1"></i>Azzera
-                                </a>
-                            @else
-                                <button class="btn btn-outline-dark" type="submit">Applica</button>
-                            @endif
-                        </div>
-                    </div>
-                </form>
-                <div class="row mt-3">
-                    <div class="col-5 d-flex justify-content-center">
-                        <form action="" method="GET" style="width: 100%; height: 100%">
-                            <input type="text" id="SearchNomeCorso" name="SearchNomeCorso" placeholder="Cerca per Nome del Corso">
-                        </form>
-                    </div>
+            <div class="row mt-4 p-0 mb-3">
+                <div class="col-6 d-flex p-0">
+                    <p class="m-0 opacity-0 d-none">Cerca per Titolo del Corso</p>
+                    <form action="" method="GET" style="width: 100%; height: 100%" class="d-flex align-items-end">
+                        <input type="text" id="SearchNomeCorso" name="SearchNomeCorso" placeholder="Cerca per Nome del Corso">
+                    </form>
                 </div>
             </div>
             <table class="table table-striped table-hover mt-3" id="coursesTable">
