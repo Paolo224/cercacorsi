@@ -24,7 +24,8 @@ class User extends Authenticatable
         'cognome',
         'email',
         'password',
-        'saldo'
+        'saldo',
+        'id_admin'
     ];
 
     /**

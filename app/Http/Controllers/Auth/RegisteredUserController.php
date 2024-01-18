@@ -36,6 +36,7 @@ class RegisteredUserController extends Controller
                 'cognome' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                'id_admin' => ['nullable']
             ],
             [
                 'nome.required' => 'Inserisci il tuo nome.',
@@ -55,19 +56,24 @@ class RegisteredUserController extends Controller
                 'password.required' => 'Inserisci obbligatoriamente la passoword.',
             ]
         );
-
+        //dd($request);
         $user = User::create([
             'nome' => $request->nome,
             'cognome' => $request->cognome,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'saldo' => 0
+            'saldo' => 0,
+            'id_admin' => $request->id_admin == null ? 0 : $request->id_admin
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        if ($request->id_admin == null) {
+            Auth::login($user);
+            return redirect(RouteServiceProvider::HOME);
+        } else {
+            return redirect(RouteServiceProvider::REGISTRAZIONESEGRETARIA)->with('message', "$request->nome $request->cognome è diventata la segretaria di");
+        }
     }
 }
