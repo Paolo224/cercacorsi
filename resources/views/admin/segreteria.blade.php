@@ -36,18 +36,21 @@
         @endif
         <div class="col-6">
             <div class="card">
+                <div class="card-header">
+                    <h3 class="d-flex justify-content-between">
+                        Datore di Lavoro 
+                        <span>
+                            {{Auth::user()->nome . ' ' . Auth::user()->cognome}}
+                        </span>
+                    </h3>
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.register') }}">
                         @csrf
 
-                        <div class="mb-4 row">
-                            <label for="id_admin" class="col-md-4 col-form-label text-md-right">Datore di Lavoro: {{Auth::user()->nome . ' ' . Auth::user()->cognome}}</label>
-
                             <div style="display: none" class="col-md-6">
                                 <input id="id_admin" class="form-control" name="id_admin" value="{{Auth::user()->id}}">
-                                    {{-- <option value="{{Auth::user()->id}}" selected>{{Auth::user()->nome}} {{Auth::user()->cognome}}</option> --}}
                             </div>
-                        </div>
 
                         <div class="mb-4 row">
                             <label for="nome" class="col-md-4 col-form-label text-md-right">Nome</label>
@@ -135,6 +138,7 @@
                     <th scope="col" class="text-center">Nome</th>
                     <th scope="col" class="text-center">Cognome</th>
                     <th scope="col" class="text-center" style="width: 120px">Email</th>
+                    <th scope="col" class="text-center">Elimina</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -149,10 +153,36 @@
                             <td class="text-center align-middle">
                                 <p class="m-0 fw-bold">{{$segretario->email}}</p>
                             </td>
+                            <td class="text-center align-middle">
+                                <form id="popup_delete_segretaria" action="{{ route('admin.elimina.utente') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="user_id" value="{{ $segretario->id }}">
+                                    <button type="submit">Elimina</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            <script>
+                var popupDeleteSegretaria = document.getElementById('popup_delete_segretaria');
+                popupDeleteSegretaria.addEventListener('submit', function(event){
+                    event.preventDefault();
+                    Swal.fire({
+                        title: "Sei sicuro?",
+                        text: "Sei sicuro di voler eliminare questo/a segretario/a?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Si, Elimina!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.submit()
+                        }
+                    });
+                })
+            </script>
         </div>
     </div>
 </div>
