@@ -25,11 +25,6 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
-    Route::patch('/{agency}/toggle', [AdminAgencyController::class, 'enableToggle'])->name('toggle');
-
-    Route::resource('/le-mie-aziende', AdminAgencyController::class)->parameters([
-        'le-mie-aziende' => 'agency' // Cambia il nome del parametro da 'agency' a 'le-mie-aziende'
-    ]);
 
     Route::resource('/tutti-i-corsi', AdminCoursesController::class)->parameters([
         'tutti-i-corsi' => 'course' // Cambia il nome del parametro da 'course' a 'tutti-i-corsi'
@@ -41,6 +36,12 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
     Route::middleware(['auth', 'verified', 'check_admin_access'])->group(function () {
         Route::get('/', [DashboardController::class, 'index']);
+
+        Route::patch('/{agency}/toggle', [AdminAgencyController::class, 'enableToggle'])->name('toggle');
+
+        Route::resource('/le-mie-aziende', AdminAgencyController::class)->parameters([
+            'le-mie-aziende' => 'agency' // Cambia il nome del parametro da 'agency' a 'le-mie-aziende'
+        ]);
 
         Route::get('/wallet', function () {
             return view('admin.wallet');
