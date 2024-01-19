@@ -25,33 +25,43 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [DashboardController::class, 'index']);
     Route::patch('/{agency}/toggle', [AdminAgencyController::class, 'enableToggle'])->name('toggle');
+
     Route::resource('/le-mie-aziende', AdminAgencyController::class)->parameters([
         'le-mie-aziende' => 'agency' // Cambia il nome del parametro da 'agency' a 'le-mie-aziende'
     ]);
+
     Route::resource('/tutti-i-corsi', AdminCoursesController::class)->parameters([
         'tutti-i-corsi' => 'course' // Cambia il nome del parametro da 'course' a 'tutti-i-corsi'
     ]);
-    Route::get('/wallet', function () {
-        return view('admin.wallet');
-    })->name('wallet');
-    Route::get('/segreteria', function () {
-        return view('admin.segreteria');
-    })->name('segreteria');
 
-    // PAYPAL
-    Route::post('/pagamento', [PagamentoController::class, 'pagamento'])->name('pagamento');
-    Route::get('/pagamento-avvenuto', [PagamentoController::class, 'avvenuto'])->name('pagamento-avvenuto');
-    Route::get('/pagamento-rifiutato', [PagamentoController::class, 'rifiutato'])->name('pagamento-rifiutato');
-    // PAYPAL
+    Route::get('/404', function () {
+        return view('admin.404');
+    })->name('404');
 
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
-    Route::post('register', [RegisteredUserController::class, 'store']);
-    Route::post('/elimina-utente', [SegretariaController::class, 'eliminaUtente'])->name('elimina.utente');
+    Route::middleware(['auth', 'verified', 'check_admin_access'])->group(function () {
+        Route::get('/', [DashboardController::class, 'index']);
 
-    // altre rotte protette da login e che siano in admin
+        Route::get('/wallet', function () {
+            return view('admin.wallet');
+        })->name('wallet');
+
+        // PAYPAL
+        Route::post('/pagamento', [PagamentoController::class, 'pagamento'])->name('pagamento');
+        Route::get('/pagamento-avvenuto', [PagamentoController::class, 'avvenuto'])->name('pagamento-avvenuto');
+        Route::get('/pagamento-rifiutato', [PagamentoController::class, 'rifiutato'])->name('pagamento-rifiutato');
+        // PAYPAL
+
+        Route::get('/segreteria', function () {
+            return view('admin.segreteria');
+        })->name('segreteria');
+
+        // REGISTRAZIONE SEGRETARIO
+        Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+        Route::post('register', [RegisteredUserController::class, 'store']);
+        Route::post('/elimina-utente', [SegretariaController::class, 'eliminaUtente'])->name('elimina.utente');
+        // REGISTRAZIONE SEGRETARIO
+    });
 });
 
 Route::middleware('auth')->group(function () {
