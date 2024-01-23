@@ -69,7 +69,7 @@ class PagamentoController extends Controller
             $saldoAggiunto = $response['purchase_units'][0]['payments']['captures'][0]['amount']['value'];
             return redirect()->route('admin.wallet')->with('message', "$saldoAggiunto € caricati con successo!");
         } else {
-            return redirect()->route('admin.pagamento-rifiutato')->with('message', "Non è stato possibile ricaricare il Walllet");
+            return redirect()->route('admin.pagamento-rifiutato')->with('message-error', "Non è stato possibile ricaricare il Walllet");
         }
     }
 

@@ -10,34 +10,20 @@
         </span>
     </h1>
     @if (session('message'))
-        <p id="messageBox" style="
-        background-color: #003087;
-        color: white;
-        font-weight: 500;
-        padding: 20px;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        border-radius: 15px;
-        font-size: 1.5rem;
-        transition: all 1s ease;
-        margin: 0;
-        z-index: 999;
-        position: relative;
-        ">
-            {{session('message')}}
-            <span id="closeButton" style="
-                position: absolute;
-                right: 5px;
-                cursor: pointer;
-                font-weight: bold;
-                font-size: 1.2rem;
-            "><i class="fa-regular fa-circle-xmark"></i></span>
-        </p>
-
-        <script>
-            document.getElementById('closeButton').addEventListener('click', function() {
-                document.getElementById('messageBox').style.display = 'none'; // Nascondi il messaggio
-            });
-        </script>
+        <div class="row">
+            <div class="alert alert-success d-flex justify-content-between" role="alert">
+                <strong>{{session('message')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+    @if (session('message-error'))
+        <div class="row">
+            <div class="alert alert-warning d-flex justify-content-between" role="alert">
+                <strong>{{session('message')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
     @endif
     <div class="row">
         <div class="col-12 mb-2">

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CoursesController as AdminCoursesController;
 use App\Http\Controllers\Admin\AgencyController as AdminAgencyController;
+use App\Http\Controllers\Admin\AssegnazioneController;
 use App\Http\Controllers\Admin\DashboardController as DashboardController;
 use App\Http\Controllers\Admin\PagamentoController;
 use App\Http\Controllers\Admin\SegretariaController;
@@ -46,6 +47,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         Route::get('/wallet', function () {
             return view('admin.wallet');
         })->name('wallet');
+
+        Route::post('assegnazione', [AssegnazioneController::class, 'assegnazione'])->name('assegnazione');
 
         // PAYPAL
         Route::post('/pagamento', [PagamentoController::class, 'pagamento'])->name('pagamento');

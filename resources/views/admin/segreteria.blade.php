@@ -3,36 +3,12 @@
 <div class="container-fluid mt-3">
     <div class="row">
         @if (session('message'))
-        <div class="col-12">
-            <p id="messageBox" style="
-            background-color: #003087;
-            color: white;
-            font-weight: 500;
-            padding: 20px;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-            border-radius: 15px;
-            font-size: 1.5rem;
-            transition: all 1s ease;
-            margin: 0;
-            z-index: 999;
-            position: relative;
-            ">
-                {{session('message')}} {{Auth::user()->nome}} {{Auth::user()->cognome}}
-                <span id="closeButton" style="
-                    position: absolute;
-                    right: 5px;
-                    cursor: pointer;
-                    font-weight: bold;
-                    font-size: 1.2rem;
-                "><i class="fa-regular fa-circle-xmark"></i></span>
-            </p>
-
-            <script>
-                document.getElementById('closeButton').addEventListener('click', function() {
-                    document.getElementById('messageBox').style.display = 'none'; // Nascondi il messaggio
-                });
-            </script>
-        </div>
+            <div class="row">
+                <div class="alert alert-success d-flex justify-content-between" role="alert">
+                    <strong>{{session('message')}} {{Auth::user()->nome}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
         @endif
         <div class="col-6">
             <div class="card">
@@ -132,56 +108,53 @@
                 // Esegui la query utilizzando Eloquent
                 $segretari = \App\Models\User::where('id_admin', Auth::user()->id)->get();
             @endphp
-            <table class="table table-striped table-hover mt-3">
-                <thead class="table-dark">
-                <tr>
-                    <th scope="col" class="text-center">Nome</th>
-                    <th scope="col" class="text-center">Cognome</th>
-                    <th scope="col" class="text-center" style="width: 120px">Email</th>
-                    <th scope="col" class="text-center">Elimina</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach ($segretari as $segretario)
-                        <tr>
-                            <td class="text-center align-middle">
-                                <p class="m-0 fw-bold">{{$segretario->nome}}</p>
-                            </td>
-                            <td class="text-center align-middle">
-                                <p class="m-0 fw-bold">{{$segretario->cognome}}</p>
-                            </td>
-                            <td class="text-center align-middle">
-                                <p class="m-0 fw-bold">{{$segretario->email}}</p>
-                            </td>
-                            <td class="text-center align-middle">
-                                <form id="popup_delete_segretaria" action="{{ route('admin.elimina.utente') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="user_id" value="{{ $segretario->id }}">
-                                    <button type="submit">Elimina</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            @foreach ($segretari as $segretario)
+            <section class="d-flex justify-content-between">
+                <div>
+                    <div>
+                        <span class="fw-bold">Nome: </span><span class="m-0 ms-2">{{$segretario->nome}}</span>
+                    </div>
+                    <div>
+                        <span class="fw-bold">Cognome: </span><span class="m-0 ms-2">{{$segretario->cognome}}</span>
+                    </div>
+                    <div>
+                        <span class="fw-bold">Email: </span><span class="m-0 ms-2">{{$segretario->email}}</span>
+                    </div>
+                </div>
+                <div>
+                    <form class="popup_delete_segretaria" action="{{ route('admin.elimina.utente') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{ $segretario->id }}">
+                        <button type="submit" class="btn btn-danger me-4">Elimina</button>
+                    </form>
+                </div>
+            </section>
+            <div class="mt-3">
+                @include('admin.partials.assegnazione', ['segretario' => $segretario])
+            </div>
+            @endforeach
             <script>
-                var popupDeleteSegretaria = document.getElementById('popup_delete_segretaria');
-                popupDeleteSegretaria.addEventListener('submit', function(event){
-                    event.preventDefault();
-                    Swal.fire({
-                        title: "Sei sicuro?",
-                        text: "Sei sicuro di voler eliminare questo/a segretario/a?",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Si, Elimina!"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            this.submit()
-                        }
+                document.addEventListener('DOMContentLoaded', function() {
+                    var popupDeleteSegretariaList = document.querySelectorAll('form.popup_delete_segretaria');
+                    popupDeleteSegretariaList.forEach(function(popupDeleteSegretaria) {
+                        popupDeleteSegretaria.addEventListener('submit', function(event){
+                            event.preventDefault();
+                            Swal.fire({
+                                title: "Sei sicuro?",
+                                text: "Sei sicuro di voler eliminare questo/a segretario/a?",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#3085d6",
+                                cancelButtonColor: "#d33",
+                                confirmButtonText: "Si, Elimina!"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.submit()
+                                }
+                            });
+                        })
                     });
-                })
+                });
             </script>
         </div>
     </div>

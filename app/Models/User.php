@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Http\Controllers\Admin\AssegnazioneController;
 use App\Models\Admin\Agency;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -51,5 +52,10 @@ class User extends Authenticatable
     public function Agencies()
     {
         return $this->hasMany(Agency::class);
+    }
+
+    public function assegnazioni()
+    {
+        return $this->hasMany(AssegnazioneController::class, 'id_gestore', 'id');
     }
 }
