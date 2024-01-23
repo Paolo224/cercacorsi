@@ -897,3 +897,55 @@ button.bottone-pagamento:hover {
     font-size: 25px;
     font-weight: 500;
 }
+
+// TICKET
+.ticket {
+    cursor: pointer;
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.6s ease;
+}
+
+.ticket:hover {
+    width: 70px;
+    height: 70px;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background-color: black;
+    z-index: 2;
+    border-bottom-right-radius: 11px;
+}
+
+.richiesta_informazioni {
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+    width: 0;
+    height: 0;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transition: all 0.6s ease;
+}
+
+.ticket.active+.richiesta_informazioni {
+    width: 50%;
+    height: 50%;
+    overflow: auto;
+    padding: 20px;
+}

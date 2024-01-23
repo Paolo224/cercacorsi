@@ -171,12 +171,62 @@
         <div class="content" id="main-content">
             <div class="scrollable-content">
                 @yield('content')
+                @if (session('ticket-inviato'))
+                    <script>
+                        Swal.fire({
+                            position: "bottom-end",
+                            icon: "success",
+                            title: "La tua richiesta è stata inviata correttamente!",
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    </script>
+                @endif
             </div>
         </div>
+        <section>
+            <div class="ticket" id="ticket">
+                <i class="fa-solid fa-ticket fa-2x" style="z-index: 3; color: white;"></i>
+                <div class="overlay"></div>
+            </div>
+            <div class="richiesta_informazioni" id="richiesta">
+                <form action="{{ route('admin.invia-richiesta') }}" method="post">
+                    @csrf
+                    <input name="email" value="{{ Auth::user()->email }}" type="email" style="width: 100%; margin-bottom: 10px;">
+                    <input name="nome" value="{{ Auth::user()->nome }}" type="text" style="width: 50%; margin-bottom: 10px;">
+                    <input name="cognome" value="{{ Auth::user()->cognome }}" type="text" style="width: 50%; margin-bottom: 10px;">
+                    <textarea name="messaggio" rows="7" style="width: 100%; margin-bottom: 10px;"></textarea>
+                    <button type="submit">INVIA RICHIESTA</button>
+                </form>
+            </div>
+        </section>
         
         {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+        {{-- TICKET --}}
+        <script>
+            $(document).ready(function() {
+                var $ticket = $('#ticket');
+                var $richiesta = $('.richiesta_informazioni');
+        
+                $ticket.click(function(e) {
+                    e.stopPropagation(); // Evita la propagazione del clic al documento
+                    $ticket.toggleClass('active');
+                });
+        
+                $(document).click(function() {
+                    if ($ticket.hasClass('active')) {
+                        $ticket.removeClass('active');
+                    }
+                });
+        
+                $richiesta.click(function(e) {
+                    e.stopPropagation(); // Evita che il clic sul div richiesta_informazioni venga interpretato come clic sul documento
+                });
+            });
+        </script>
 
         {{-- SCRIPT PER BUDGET RICARICA --}}
         <script>

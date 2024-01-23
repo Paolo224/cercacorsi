@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CoursesController as AdminCoursesController;
 use App\Http\Controllers\Admin\AgencyController as AdminAgencyController;
 use App\Http\Controllers\Admin\AssegnazioneController;
 use App\Http\Controllers\Admin\DashboardController as DashboardController;
+use App\Http\Controllers\Admin\InvioTicketController;
 use App\Http\Controllers\Admin\PagamentoController;
 use App\Http\Controllers\Admin\SegretariaController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -65,6 +66,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         Route::post('register', [RegisteredUserController::class, 'store']);
         Route::post('/elimina-utente', [SegretariaController::class, 'eliminaUtente'])->name('elimina.utente');
         // REGISTRAZIONE SEGRETARIO
+
+        // INVIO TICKET
+        Route::post('/invia-richiesta', [InvioTicketController::class, 'inviaRichiesta'])->name('invia-richiesta');
     });
 });
 
