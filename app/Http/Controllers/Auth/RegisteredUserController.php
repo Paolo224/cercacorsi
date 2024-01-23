@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\InviaCredenzialiMail;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -10,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -68,6 +70,9 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        if ($request->id_admin != null) {
+            Mail::to($request->email)->send(new InviaCredenzialiMail($user, $request->password));
+        }
 
         if ($request->id_admin == null) {
             Auth::login($user);
