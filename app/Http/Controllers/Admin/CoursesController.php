@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Agency;
+use App\Models\Admin\AssegnazioneAziendeAiGestori;
 use App\Models\Admin\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,13 +69,38 @@ class CoursesController extends Controller
      */
     public function index(Course $course)
     {
-        $user = auth()->user();
-        $agencies = $user->agencies->pluck('id');
+        // $user = auth()->user();
+        // $agencies = $user->agencies->pluck('id');
 
-        $AllAgencies = $user->agencies;
+        // $AllAgencies = $user->agencies;
+        // $categoriaCorso = $course->categoriaCorso();
+        // // Ottieni i corsi associati alle Aziende dell'utente
+        // $courses = Course::whereIn('agency_id', $agencies)->get();
+
+        $user = auth()->user();
+
+        if ($user->id_admin === 0) {
+            // Utente admin
+            $AllAgencies = $user->agencies;
+            $agencies = $user->agencies->pluck('id');
+            $courses = Course::whereIn('agency_id', $agencies)->get();
+        } else {
+            // Utente non admin
+            // Recupera l'id dell'utente corrente
+            $userId = $user->id;
+
+            // Ottieni gli id delle aziende assegnate al gestore dalla tabella di assegnazione
+            $agencies = AssegnazioneAziendeAiGestori::where('id_gestore', $userId)->pluck('id_azienda');
+
+            // Ottieni tutti i corsi associati alle aziende assegnate al gestore
+            $courses = Course::whereIn('agency_id', $agencies)->get();
+
+            // Ottieni tutte le aziende assegnate al gestore
+            $AllAgencies = Agency::whereIn('id', $agencies)->get();
+        }
+
+
         $categoriaCorso = $course->categoriaCorso();
-        // Ottieni i corsi associati alle Aziende dell'utente
-        $courses = Course::whereIn('agency_id', $agencies)->get();
 
         return view('admin.course.index', compact('courses', 'categoriaCorso', 'AllAgencies'));
     }
@@ -89,10 +115,20 @@ class CoursesController extends Controller
         $lingueErogazioneCorso = $course->lingueErogazioneCorso();
 
         $user = Auth::user();
+        if ($user->id_admin === 0) {
+            $AllAgencies = $user->agencies;
+        } else {
+            // Ottieni gli id delle aziende assegnate al gestore dalla tabella di assegnazione
+            $agencies = AssegnazioneAziendeAiGestori::where('id_gestore', $user->id)->pluck('id_azienda');
 
-        $agencies = $user->agencies;
+            // Ottieni tutti i corsi associati alle aziende assegnate al gestore
+            $courses = Course::whereIn('agency_id', $agencies)->get();
 
-        return view('admin.course.create', compact('course', 'lingueErogazioneCorso', 'categoriaCorso', 'agencies'));
+            // Ottieni tutte le aziende assegnate al gestore
+            $AllAgencies = Agency::whereIn('id', $agencies)->get();
+        }
+
+        return view('admin.course.create', compact('course', 'lingueErogazioneCorso', 'categoriaCorso', 'AllAgencies'));
     }
 
     /**
@@ -128,7 +164,7 @@ class CoursesController extends Controller
         $newCourse->fill($data);
         $newCourse->save();
 
-        return redirect()->route('admin.tutti-i-corsi.index')->with('message', "$newCourse->nome AGGIUNTA CON SUCCESSO!!!");
+        return redirect()->route('admin.tutti-i-corsi.index')->with('message-create', "Corso di $newCourse->nome Aggiunto con successo!");
     }
 
     /**
@@ -149,10 +185,20 @@ class CoursesController extends Controller
         $lingueErogazioneCorso = $course->lingueErogazioneCorso();
 
         $user = Auth::user();
+        if ($user->id_admin === 0) {
+            $AllAgencies = $user->agencies;
+        } else {
+            // Ottieni gli id delle aziende assegnate al gestore dalla tabella di assegnazione
+            $agencies = AssegnazioneAziendeAiGestori::where('id_gestore', $user->id)->pluck('id_azienda');
 
-        $agencies = $user->agencies;
+            // Ottieni tutti i corsi associati alle aziende assegnate al gestore
+            $courses = Course::whereIn('agency_id', $agencies)->get();
 
-        return view('admin.course.edit', compact('course', 'categoriaCorso', 'lingueErogazioneCorso', 'agencies'));
+            // Ottieni tutte le aziende assegnate al gestore
+            $AllAgencies = Agency::whereIn('id', $agencies)->get();
+        }
+
+        return view('admin.course.edit', compact('course', 'categoriaCorso', 'lingueErogazioneCorso', 'AllAgencies'));
     }
 
     /**
@@ -206,7 +252,7 @@ class CoursesController extends Controller
         }
 
         $course->update($data);
-        return redirect()->route('admin.tutti-i-corsi.index');
+        return redirect()->route('admin.tutti-i-corsi.index')->with('message-edit', "Corso di $course->titolo Aggiornato con successo!");
     }
 
     /**

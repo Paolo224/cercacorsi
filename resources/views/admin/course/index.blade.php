@@ -2,6 +2,22 @@
 
 @section('content')
 <div class="container-fluid">
+    @if (session('message-edit'))
+        <div class="row mt-3">
+            <div class="alert alert-success d-flex justify-content-between" role="alert">
+                <strong>{{session('message-edit')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+    @if (session('message-create'))
+        <div class="row mt-3">
+            <div class="alert alert-success d-flex justify-content-between" role="alert">
+                <strong>{{session('message-create')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
     <div class="row p-0 mt-3 justify-content-center">
             @if(!$courses->isNotEmpty())
             <div class="col-12 text-end">

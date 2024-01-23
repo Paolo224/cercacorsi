@@ -73,7 +73,7 @@ class RegisteredUserController extends Controller
             Auth::login($user);
             return redirect(RouteServiceProvider::HOME);
         } else {
-            return redirect(RouteServiceProvider::REGISTRAZIONESEGRETARIA)->with('message', "$request->nome $request->cognome è diventata la segretaria di");
+            return redirect(RouteServiceProvider::REGISTRAZIONESEGRETARIA)->with('message', "$request->nome $request->cognome è ora un gestore di");
         }
     }
 }

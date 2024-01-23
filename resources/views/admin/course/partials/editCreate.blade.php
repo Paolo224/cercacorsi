@@ -10,7 +10,7 @@
             <label for="course_agency_id" class="my_form_label_input">A Quale Azienda fa Riferimento il Corso? <span style="color: red">*</span></label>
             <select @error('agency_id') style="border: 1px solid red" @enderror class="my_form_input_azienda" {{-- class="js-example-basic-single"--}} name="agency_id" id="course_agency_id"> 
                 <option value="" selected disabled></option>
-                @foreach ($agencies as $agency)    
+                @foreach ($AllAgencies as $agency)    
                 <option value="{{$agency->id}}" @if(Route::currentRouteName() === 'admin.tutti-i-corsi.create') @else {{ $course->agency_id == $agency->id ? 'selected' : '' }} @endif>{{$agency->nome}}</option>
                 @endforeach
             </select>
