@@ -55,24 +55,28 @@
                             <img src="{{asset('storage/' . $agency->logo)}}" class="card-img-top" alt="{{$agency->nome}}" style="width: 50px;"><h5 class="ms-3 align-middle m-0 card-title d-inline-block">{{$agency->nome}}</h5>
                             <p class="card-text mt-3 mb-0"><i class="fa-regular fa-envelope me-2" style="color: #000000;"></i>{{$agency->email}}</p>
                             <p class="card-text mt-2 mb-0"><i class="fas fa-phone me-2"></i>{{$agency->telefono1}}</p>
-                            <div class="mt-3 d-flex justify-content-between">
-                                @if ($agency->premium == 1)
-                                <button class="btn btn-sm btn-success" disabled>
-                                    <i class="fa-regular fa-thumbs-up"></i> Premium Attivo
-                                </button>
-                                @else
-                                <a href="{{route('admin.le-mie-aziende.index', $agency->slug)}}" class="btn btn-sm btn-warning">
-                                    Passa a Premium
-                                </a>
+                            <div class="mt-3 d-flex  @if(Auth::user()->id_admin === 0) justify-content-between @else justify-content-end @endif">
+                                @if (Auth::user()->id_admin === 0)
+                                    @if ($agency->premium == 1)
+                                        <button class="btn btn-sm btn-success" disabled>
+                                            <i class="fa-regular fa-thumbs-up"></i> Premium Attivo
+                                        </button>
+                                    @else
+                                        <a href="{{route('admin.le-mie-aziende.index', $agency->slug)}}" class="btn btn-sm btn-warning">
+                                            Passa a Premium
+                                        </a>
+                                    @endif
                                 @endif
                                 <div>
-                                    <form class="d-inline-block" action="{{ route('admin.toggle', $agency->slug) }}" method="POST">
-                                        @method('PATCH')
-                                        @csrf
-                                        <button class="btn btn-sm btn-outline-dark me-3" type="submit" title="{{$agency->getABooleanFromNumber($agency->visibile) ? 'Visibile' : 'Non visibile' }}">
-                                            <i class="fa-solid fa-lg fa-eye{{$agency->visibile ? '' : '-slash'}}"></i>
-                                        </button>
-                                    </form>
+                                    @if (Auth::user()->id_admin === 0)
+                                        <form class="d-inline-block" action="{{ route('admin.toggle', $agency->slug) }}" method="POST">
+                                            @method('PATCH')
+                                            @csrf
+                                            <button class="btn btn-sm btn-outline-dark me-3" type="submit" title="{{$agency->getABooleanFromNumber($agency->visibile) ? 'Visibile' : 'Non visibile' }}">
+                                                <i class="fa-solid fa-lg fa-eye{{$agency->visibile ? '' : '-slash'}}"></i>
+                                            </button>
+                                        </form>
+                                    @endif
                                     <a href="{{route('admin.le-mie-aziende.show', $agency->slug)}}" class="btn btn-sm btn-outline-dark me-2">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>

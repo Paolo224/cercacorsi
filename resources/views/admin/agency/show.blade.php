@@ -149,8 +149,5 @@
                 </div>
             @endif
         </div>
-        <div class="col-3">
-            <a class="btn btn-outline-dark" href="{{url('admin/tutti-i-corsi/Filtri?visibile=&PerCategoria=&PerAzienda=1&Ordinamento=')}}">Tutti i Corsi Di {{$agency->nome}}</a>
-        </div>
     </div>
 @endsection

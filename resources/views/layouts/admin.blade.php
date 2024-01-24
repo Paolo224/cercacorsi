@@ -91,9 +91,12 @@
                     </svg>
                 </a>
                 @endif
-                @if (Auth::user()->id_admin === 0)
-                    <a class="d-flex align-items-center justify-content-between" href="{{ route('admin.le-mie-aziende.index') }}">
+                <a class="d-flex align-items-center justify-content-between" href="{{ route('admin.le-mie-aziende.index') }}">
+                    @if (Auth::user()->id_admin === 0)
                         Le mie Aziende
+                    @else
+                        Aziende
+                    @endif
                         <svg class="my_svg_icon" id="Layer_1" enable-background="new 0 0 510 510" height="20" viewBox="0 0 510 510"
                             width="20" xmlns="http://www.w3.org/2000/svg">
                             <g>
@@ -111,7 +114,6 @@
                             </g>
                         </svg>
                     </a>
-                @endif
                 <a class="d-flex align-items-center justify-content-between" href="{{ route('admin.tutti-i-corsi.index') }}">
                     @if (Auth::user()->id_admin === 0)
                         I miei Corsi

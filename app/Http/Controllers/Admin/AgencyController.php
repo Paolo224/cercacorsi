@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Agency;
+use App\Models\Admin\AssegnazioneAziendeAiGestori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -92,8 +93,15 @@ class AgencyController extends Controller
     public function index()
     {
         $user = Auth::user();
+        if ($user->id_admin === 0) {
+            $agencies = $user->agencies;
+        } else {
+            // Ottieni gli id delle aziende assegnate al gestore dalla tabella di assegnazione
+            $AllAgencies = AssegnazioneAziendeAiGestori::where('id_gestore', $user->id)->pluck('id_azienda');
 
-        $agencies = $user->agencies;
+            // Ottieni tutte le aziende assegnate al gestore
+            $agencies = Agency::whereIn('id', $AllAgencies)->get();
+        }
         return view('admin.agency.index', compact('agencies'));
     }
 
@@ -161,37 +169,6 @@ class AgencyController extends Controller
      */
     public function update(Request $request, Agency $agency)
     {
-        // $data = $request->validate([
-        //     'nome' => ['required', Rule::unique('agencies')->ignore($agency->id)],
-        //     'logo' => 'image|max:2048|mimes:jpg,png,gif',
-        //     'immagine_copertina' => 'image|max:2048|mimes:jpg,png,gif',
-        //     'video_presentazione' => 'url:http,https|nullable',
-        //     'descrizione' => 'required',
-        //     'motto' => 'nullable',
-        //     'altre_informazioni' => 'nullable',
-        //     'telefono1' => 'required|max:10',
-        //     'telefono2' => 'nullable|max:10',
-        //     'email' => 'required|',
-        //     'indirizzo' => 'required',
-        //     'citta' => 'required',
-        //     'provincia' => 'required|max:2',
-        //     'paese' => 'required',
-        //     'cap' => 'required|max:5',
-        //     'ragione_sociale' => 'required',
-        //     'p_iva' => 'required|max:13',
-        //     'codice_fiscale' => 'required|max:16',
-        //     'sdi' => 'required|max:7',
-        //     'pec' => 'required',
-        //     'visibile' => 'required',
-        //     'whatsapp' => ['regex:/\bwhatsapp\b/', 'nullable'],
-        //     'facebook' => ['regex:/\bfacebook\b/', 'nullable'],
-        //     'linkedin' => ['regex:/\blinkedin\b/', 'nullable'],
-        //     'tiktok' => ['regex:/\btiktok\b/', 'nullable'],
-        //     'youtube' => ['regex:/\byoutube\b/', 'nullable'],
-        //     'instagram' => ['regex:/\binstagram\b/', 'nullable'],
-        //     'tipo' => 'required',
-        // ]);
-
         $newRules = $this->validationRules;
         $newRules['nome'] = ['required', Rule::unique('agencies')->ignore($agency->id)];
         $data = $request->validate($newRules, $this->customMessages);

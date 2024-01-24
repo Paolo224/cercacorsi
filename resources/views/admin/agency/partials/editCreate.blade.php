@@ -7,15 +7,17 @@
     @method($method)
 
     <div class="mb-3 d-flex">
-        <div class="w-50">
+        @if (Auth::user()->id_admin !== 0)
+        <div class="w-50 @if (Auth::user()->id_admin !== 0) d-none @endif">
             <label for="agency_nome" class="my_form_label_input">Nome dell'Azienda <span style="color: red">*</span></label>
-            <input class="my_form_input_nome" type="text" id="agency_nome" name="nome" value="{{old('nome', $agency->nome)}}" @error('nome') style="border: 1px solid red" @enderror>
+            <input class="my_form_input_nome"  @if (Auth::user()->id_admin === 0) type="text" @else type="hidden" @endif id="agency_nome" name="nome" value="{{old('nome', $agency->nome)}}" @error('nome') style="border: 1px solid red" @enderror>
             @error('nome')    
                 <div class="text-danger">
                     <i class="fa-solid fa-circle-exclamation pe-1"></i>{{$message}}
                 </div>
             @enderror
         </div>
+        @endif
         <div class="w-50 d-flex flex-column justify-content-center position-relative">
             <input class="my_form_input_logo d-none" type="file" id="agency_logo" name="logo" value="{{old('logo', $agency->logo)}}">
             <p class="m-0">Logo Aziendale</p>
@@ -182,15 +184,15 @@
             @enderror
         </div>
     </div>
-    <section class="dati_aziendali mb-3">
+    <section class="dati_aziendali mb-3 @if (Auth::user()->id_admin !== 0) d-none @endif">
         <h3>
             Dati Legali e Fatturazione Elettronica
         </h3>
-    
+        
         <div class="mb-3 d-flex">
             <div class="w-50">
                 <label for="agency_ragione_sociale" class="my_form_label_input">Ragione Sociale <span style="color: red">*</span></label>
-                <input @error('ragione_sociale') style="border: 1px solid red" @enderror class="my_form_input_rSociale" type="text" id="agency_ragione_sociale" name="ragione_sociale" value="{{old('ragione_sociale', $agency->ragione_sociale)}}">
+                <input @error('ragione_sociale') style="border: 1px solid red" @enderror class="my_form_input_rSociale" @if (Auth::user()->id_admin === 0) type="text" @else type="hidden" @endif id="agency_ragione_sociale" name="ragione_sociale" value="{{old('ragione_sociale', $agency->ragione_sociale)}}">
                 @error('ragione_sociale')    
                     <div class="text-danger">
                         <i class="fa-solid fa-circle-exclamation pe-1"></i>{{$message}}
@@ -210,23 +212,23 @@
                     <div class="text-danger">
                         <i class="fa-solid fa-circle-exclamation pe-1"></i>{{$message}}
                     </div>
-                @enderror
+                    @enderror
+                </div>
             </div>
-        </div>
-
-        <div class="mb-3 d-flex">
-            <div class="w-50">
-                <label for="agency_p_iva" class="my_form_label_input">Partita IVA <span style="color: red">*</span></label>
-                <input @error('p_iva') style="border: 1px solid red" @enderror class="my_form_input_pIva" type="text" id="agency_p_iva" name="p_iva" maxlength="13" value="{{old('p_iva', $agency->p_iva)}}">
-                @error('p_iva')    
+            
+            <div class="mb-3 d-flex">
+                <div class="w-50">
+                    <label for="agency_p_iva" class="my_form_label_input">Partita IVA <span style="color: red">*</span></label>
+                    <input @error('p_iva') style="border: 1px solid red" @enderror class="my_form_input_pIva" @if (Auth::user()->id_admin === 0) type="text" @else type="hidden" @endif id="agency_p_iva" name="p_iva" maxlength="13" value="{{old('p_iva', $agency->p_iva)}}">
+                    @error('p_iva')    
                     <div class="text-danger">
                         <i class="fa-solid fa-circle-exclamation pe-1"></i>{{$message}}
                     </div>
-                @enderror
-            </div>
-            <div class="w-50">
+                    @enderror
+                </div>
+                <div class="w-50">
                 <label for="agency_codice_fiscale" class="my_form_label_input">Codice Fiscale</label>
-                <input @error('codice_fiscale') style="border: 1px solid red" @enderror class="my_form_input_cFiscale" type="text" id="agency_codice_fiscale" name="codice_fiscale" maxlength="16" value="{{old('codice_fiscale', $agency->codice_fiscale)}}" disabled>
+                <input @error('codice_fiscale') style="border: 1px solid red" @enderror class="my_form_input_cFiscale" @if (Auth::user()->id_admin === 0) type="text" @else type="hidden" @endif id="agency_codice_fiscale" name="codice_fiscale" maxlength="16" value="{{old('codice_fiscale', $agency->codice_fiscale)}}" disabled>
                 @error('codice_fiscale')    
                     <div class="text-danger">
                         <i class="fa-solid fa-circle-exclamation pe-1"></i>{{$message}}
@@ -251,26 +253,25 @@
     
         <div class="mb-3">
             <label for="agency_pec" class="my_form_label_input">Pec <span style="color: red">*</span></label>
-            <input @error('pec') style="border: 1px solid red" @enderror class="my_form_input_pec" type="text" id="agency_pec" name="pec" value="{{old('pec', $agency->pec)}}">
+            <input @error('pec') style="border: 1px solid red" @enderror class="my_form_input_pec" @if (Auth::user()->id_admin === 0) type="text" @else type="hidden" @endif id="agency_pec" name="pec" value="{{old('pec', $agency->pec)}}">
             @error('pec')    
                 <div class="text-danger">
                     <i class="fa-solid fa-circle-exclamation pe-1"></i>{{$message}}
                 </div>
             @enderror
         </div>
-    
+        
         <div class="mb-3">
             <label for="agency_sdi" class="my_form_label_input">Codice SDI <span style="color: red">*</span></label>
-            <input @error('sdi') style="border: 1px solid red" @enderror class="my_form_input_sdi" type="text" id="agency_sdi" name="sdi" value="{{old('sdi', $agency->sdi)}}">
+            <input @error('sdi') style="border: 1px solid red" @enderror class="my_form_input_sdi" @if (Auth::user()->id_admin === 0) type="text" @else type="hidden" @endif id="agency_sdi" name="sdi" value="{{old('sdi', $agency->sdi)}}">
             @error('sdi')    
-                <div class="text-danger">
+            <div class="text-danger">
                     <i class="fa-solid fa-circle-exclamation pe-1"></i>{{$message}}
                 </div>
             @enderror
         </div>
     </section>
-
-    <div class="mb-3">
+    <div class="mb-3 @if (Auth::user()->id_admin !== 0) d-none @endif">
         <div class="w-50 d-flex">
             <label class="checkbox-visible">
                 <input class="my_form_input_visibile" type="radio" id="visible" name="visibile" value="1" required @checked(old('visibile', $agency->visibile))>
@@ -287,7 +288,6 @@
             </label>
         </div>
     </div>
-
     <div class="mb-3">
         <label for="agency_whatsapp" class="my_form_label_input">Whatsapp</label>
         <input @error('whatsapp') style="border: 1px solid red" @enderror class="my_form_input_whatsapp" type="text" id="agency_whatsapp" name="whatsapp" value="{{old('whatsapp', $agency->whatsapp)}}">
