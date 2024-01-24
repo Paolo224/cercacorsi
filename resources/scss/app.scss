@@ -937,7 +937,7 @@ button.bottone-pagamento:hover {
     width: 0;
     height: 0;
     border-radius: 10px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
     overflow: hidden;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     transition: all 0.6s ease;
@@ -946,6 +946,7 @@ button.bottone-pagamento:hover {
 .ticket.active+.richiesta_informazioni {
     width: 50%;
     height: 50%;
-    overflow: auto;
+    overflow: hidden;
     padding: 20px;
+    background-color: rgb(255, 255, 255);
 }
