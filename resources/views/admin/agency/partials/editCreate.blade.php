@@ -7,7 +7,6 @@
     @method($method)
 
     <div class="mb-3 d-flex">
-        @if (Auth::user()->id_admin !== 0)
         <div class="w-50 @if (Auth::user()->id_admin !== 0) d-none @endif">
             <label for="agency_nome" class="my_form_label_input">Nome dell'Azienda <span style="color: red">*</span></label>
             <input class="my_form_input_nome"  @if (Auth::user()->id_admin === 0) type="text" @else type="hidden" @endif id="agency_nome" name="nome" value="{{old('nome', $agency->nome)}}" @error('nome') style="border: 1px solid red" @enderror>
@@ -17,7 +16,6 @@
                 </div>
             @enderror
         </div>
-        @endif
         <div class="w-50 d-flex flex-column justify-content-center position-relative">
             <input class="my_form_input_logo d-none" type="file" id="agency_logo" name="logo" value="{{old('logo', $agency->logo)}}">
             <p class="m-0">Logo Aziendale</p>

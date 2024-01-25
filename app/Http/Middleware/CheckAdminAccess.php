@@ -14,7 +14,7 @@ class CheckAdminAccess
         // Verifica se l'utente ha la colonna id_admin diversa da null
         if (Auth::check() && Auth::user()->id_admin !== 0) {
             // Se l'utente non può accedere, puoi reindirizzarlo o fare altro
-            return redirect()->route('admin.404');
+            return abort(403);
         }
 
         return $next($request);

@@ -66,10 +66,6 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('/le-mie-aziende', AdminAgencyController::class)->parameters([
         'le-mie-aziende' => 'agency' // Cambia il nome del parametro da 'agency' a 'le-mie-aziende'
     ]);
-
-    Route::get('/404', function () {
-        return view('admin.404');
-    })->name('404');
 });
 
 Route::middleware('auth')->group(function () {

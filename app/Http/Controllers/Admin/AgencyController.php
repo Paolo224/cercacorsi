@@ -144,8 +144,35 @@ class AgencyController extends Controller
     /**
      * Display the specified resource.
      */
+    // public function show(Agency $agency)
+    // {
+    //     return view('admin.agency.show', compact('agency'));
+    // }
+
     public function show(Agency $agency)
     {
+        // Ottieni l'utente autenticato
+        $user = auth()->user();
+
+        if ($user->id_admin !== 0) {
+            // Ottieni gli id delle aziende assegnate al gestore dalla tabella di assegnazione
+            $AllAgencies = AssegnazioneAziendeAiGestori::where('id_gestore', $user->id)->pluck('id_azienda');
+
+            // Ottieni tutte le aziende assegnate al gestore
+            $agencies = Agency::whereIn('id', $AllAgencies)->get();
+
+            // Verifica se l'utente è il proprietario dell'azienda o ha id_admin diverso da 0
+            if ($user->id_admin !== $agency->user_id) {
+                abort(403, 'Non hai il permesso di visualizzare questa azienda.');
+            }
+        } else {
+            // Verifica se l'utente è il proprietario dell'azienda o ha id_admin diverso da 0
+            if ($user->id !== $agency->user_id) {
+                abort(403, 'Non hai il permesso di visualizzare questa azienda.');
+            }
+        }
+
+
         return view('admin.agency.show', compact('agency'));
     }
 
@@ -160,6 +187,27 @@ class AgencyController extends Controller
         $provinceItaliane = $agency->provinceItaliane();
 
         $tipologiaAziendale = $agency->tipologiaAziendale();
+
+        // Ottieni l'utente autenticato
+        $user = auth()->user();
+
+        if ($user->id_admin !== 0) {
+            // Ottieni gli id delle aziende assegnate al gestore dalla tabella di assegnazione
+            $AllAgencies = AssegnazioneAziendeAiGestori::where('id_gestore', $user->id)->pluck('id_azienda');
+
+            // Ottieni tutte le aziende assegnate al gestore
+            $agencies = Agency::whereIn('id', $AllAgencies)->get();
+
+            // Verifica se l'utente è il proprietario dell'azienda o ha id_admin diverso da 0
+            if ($user->id_admin !== $agency->user_id) {
+                abort(403, 'Non hai il permesso di visualizzare questa azienda.');
+            }
+        } else {
+            // Verifica se l'utente è il proprietario dell'azienda o ha id_admin diverso da 0
+            if ($user->id !== $agency->user_id) {
+                abort(403, 'Non hai il permesso di visualizzare questa azienda.');
+            }
+        }
 
         return view('admin.agency.edit', compact('agency', 'provinceItaliane', 'paesiMondiali', 'tipologiaAziendale'));
     }

@@ -172,6 +172,31 @@ class CoursesController extends Controller
      */
     public function show(Course $course)
     {
+        // Ottieni l'utente autenticato
+        $user = auth()->user();
+
+        if ($user->id_admin !== 0) {
+            // Ottieni gli id delle aziende assegnate al gestore dalla tabella di assegnazione
+            $agencies = AssegnazioneAziendeAiGestori::where('id_gestore', $user->id)->pluck('id_azienda');
+
+            // Ottieni tutti i corsi associati alle aziende assegnate al gestore
+            $courses = Course::whereIn('agency_id', $agencies)->get();
+
+            // Ottieni tutte le aziende assegnate al gestore
+            $AllAgencies = Agency::whereIn('id', $agencies)->get();
+
+            // Verifica se l'utente è il proprietario dell'azienda o ha id_admin diverso da 0
+            if ($user->id_admin !== $course->agency->user_id) {
+                abort(403, 'Non hai il permesso di visualizzare questo corso.');
+            }
+        } else {
+            // Verifica se l'utente è il proprietario dell'azienda o ha id_admin diverso da 0
+            // Verifica se l'utente è il proprietario del corso o ha id_admin uguale al suo id
+            if ($user->id !== $course->agency->user_id) {
+                abort(403, 'Non hai il permesso di visualizzare questo corso.');
+            }
+        }
+
         return view('admin.course.show', compact('course'));
     }
 
@@ -187,6 +212,10 @@ class CoursesController extends Controller
         $user = Auth::user();
         if ($user->id_admin === 0) {
             $AllAgencies = $user->agencies;
+
+            if ($user->id !== $course->agency->user_id) {
+                abort(403, 'Non hai il permesso di visualizzare questo corso.');
+            }
         } else {
             // Ottieni gli id delle aziende assegnate al gestore dalla tabella di assegnazione
             $agencies = AssegnazioneAziendeAiGestori::where('id_gestore', $user->id)->pluck('id_azienda');
@@ -196,6 +225,10 @@ class CoursesController extends Controller
 
             // Ottieni tutte le aziende assegnate al gestore
             $AllAgencies = Agency::whereIn('id', $agencies)->get();
+
+            if ($user->id_admin !== $course->agency->user_id) {
+                abort(403, 'Non hai il permesso di visualizzare questo corso.');
+            }
         }
 
         return view('admin.course.edit', compact('course', 'categoriaCorso', 'lingueErogazioneCorso', 'AllAgencies'));
@@ -206,30 +239,6 @@ class CoursesController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        // dd($request);
-        // $data = $request->validate([
-        //     'categoria' => 'required',
-        //     'titolo' => 'required',
-        //     'agency_id' => 'required',
-        //     'sottotitolo' => 'nullable',
-        //     'descrizione' => 'required',
-        //     'immagine' => 'image|max:2048|mimes:jpg,png,gif',
-        //     'video_corso' => 'url:http,https|nullable',
-        //     'durata' => 'required|max:3',
-        //     'competenze_partenza' => 'required',
-        //     'prezzo' => 'nullable|numeric',
-        //     'programma' => 'required',
-        //     'obiettivi' => 'required',
-        //     'attestato' => 'required',
-        //     'descrizione_attestato' => 'nullable',
-        //     'lingua' => 'required',
-        //     'fad' => 'nullable',
-        //     'on_site' => 'nullable',
-        //     'in_aula' => 'nullable',
-        //     'visibile' => 'required',
-        //     'a_chi_si_rivolge' => 'required',
-        //     'requisiti_richiesti' => 'required'
-        // ]);
 
         $newRules = $this->validationRules;
         $newRules['slug'] = ['string', Rule::unique('courses')->ignore($course->id)];
