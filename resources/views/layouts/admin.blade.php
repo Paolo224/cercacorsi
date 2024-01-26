@@ -192,14 +192,14 @@
                 <div class="overlay"></div>
             </div>
             <div class="richiesta_informazioni" id="richiesta">
-                <form action="{{ route('admin.invia-richiesta') }}" method="post">
+                {{-- <form action="{{ route('admin.invia-richiesta') }}" method="post">
                     @csrf
                     <input name="email" value="{{ Auth::user()->email }}" type="email" style="width: 100%; margin-bottom: 10px;">
                     <input name="nome" value="{{ Auth::user()->nome }}" type="text" style="width: 50%; margin-bottom: 10px;">
                     <input name="cognome" value="{{ Auth::user()->cognome }}" type="text" style="width: 50%; margin-bottom: 10px;">
                     <textarea name="messaggio" rows="7" style="width: 100%; margin-bottom: 10px;"></textarea>
                     <button type="submit">INVIA RICHIESTA</button>
-                </form>
+                </form> --}}
             </div>
         </section>
         

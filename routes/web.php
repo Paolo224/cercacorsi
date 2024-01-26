@@ -55,8 +55,6 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         Route::post('/elimina-utente', [SegretariaController::class, 'eliminaUtente'])->name('elimina.utente');
         // REGISTRAZIONE SEGRETARIO
 
-        // INVIO TICKET
-        Route::post('/invia-richiesta', [InvioTicketController::class, 'inviaRichiesta'])->name('invia-richiesta');
     });
 
     Route::resource('/tutti-i-corsi', AdminCoursesController::class)->parameters([

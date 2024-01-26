@@ -61,7 +61,7 @@ class PagamentoController extends Controller
             $user = Auth::user(); // Recupera l'utente autenticato
             $saldo = $user->saldo; // Recupera il saldo dell'utente
             //dd($response['purchase_units'][0]['payments']['captures'][0]['amount']['value']);
-            $nuovoSaldo = $saldo + $response['purchase_units'][0]['payments']['captures'][0]['amount']['value']; // Aggiungi 20 al saldo attuale
+            $nuovoSaldo = $saldo + $response['purchase_units'][0]['payments']['captures'][0]['amount']['value']; // Aggiungi n al saldo attuale
 
             // Aggiorna il saldo dell'utente nel modello e salva nel database
             $user->saldo = $nuovoSaldo;
@@ -69,12 +69,7 @@ class PagamentoController extends Controller
             $saldoAggiunto = $response['purchase_units'][0]['payments']['captures'][0]['amount']['value'];
             return redirect()->route('admin.wallet')->with('message', "$saldoAggiunto € caricati con successo!");
         } else {
-            return redirect()->route('admin.pagamento-rifiutato')->with('message-error', "Non è stato possibile ricaricare il Walllet");
+            return redirect()->route('admin.wallet')->with('message-error', "Non è stato possibile ricaricare il Walllet");
         }
-    }
-
-    public function rifiutato(Request $request)
-    {
-        return view('admin.wallet');
     }
 }
