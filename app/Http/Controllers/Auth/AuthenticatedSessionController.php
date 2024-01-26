@@ -37,6 +37,11 @@ class AuthenticatedSessionController extends Controller
             ->first();
 
         if ($result->id_admin === 0) {
+
+            DB::table('users')
+                ->where('id', $result->id)
+                ->update(['last_login' => now()]);
+
             return redirect()->intended(RouteServiceProvider::HOME);
         } else {
             return redirect()->intended(RouteServiceProvider::GESTORE);

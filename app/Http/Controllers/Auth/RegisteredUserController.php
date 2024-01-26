@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules;
@@ -76,6 +77,9 @@ class RegisteredUserController extends Controller
 
         if ($request->id_admin == null) {
             Auth::login($user);
+            DB::table('users')
+                ->where('id', $user->id)
+                ->update(['last_login' => now()]);
             return redirect(RouteServiceProvider::HOME);
         } else {
             return redirect(RouteServiceProvider::REGISTRAZIONESEGRETARIA)->with('message', "$request->nome $request->cognome è ora un gestore di");
