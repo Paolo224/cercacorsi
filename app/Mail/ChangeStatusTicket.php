@@ -10,23 +10,21 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class InvioTicket extends Mailable
+class ChangeStatusTicket extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $newTicket;
-
+    public $ticket;
     /**
      * Create a new message instance.
      */
-    public function __construct(Ticket $newTicket)
+    public function __construct(Ticket $ticket)
     {
-        $this->newTicket = $newTicket;
+        $this->ticket = $ticket;
     }
 
     public function build()
     {
-        return $this->subject("NUOVO TICKET")
-            ->view('emails.new_ticket');
+        return $this->subject('Stato del ticket aggiornato')->view('emails.ticket_status_change');
     }
 }

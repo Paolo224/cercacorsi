@@ -4,9 +4,9 @@ use App\Http\Controllers\Admin\CoursesController as AdminCoursesController;
 use App\Http\Controllers\Admin\AgencyController as AdminAgencyController;
 use App\Http\Controllers\Admin\AssegnazioneController;
 use App\Http\Controllers\Admin\DashboardController as DashboardController;
-use App\Http\Controllers\Admin\InvioTicketController;
 use App\Http\Controllers\Admin\PagamentoController;
 use App\Http\Controllers\Admin\SegretariaController;
+use App\Http\Controllers\Admin\TicketController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +55,11 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         Route::post('/elimina-utente', [SegretariaController::class, 'eliminaUtente'])->name('elimina.utente');
         // REGISTRAZIONE SEGRETARIO
 
+        Route::patch('/{ticket}/aperto', [TicketController::class, 'aperto'])->name('aperto');
+        Route::patch('/{ticket}/chiuso', [TicketController::class, 'chiuso'])->name('chiuso');
+        Route::patch('/{ticket}/respinto', [TicketController::class, 'respinto'])->name('respinto');
+
+        Route::resource('/ticket', TicketController::class);
     });
 
     Route::resource('/tutti-i-corsi', AdminCoursesController::class)->parameters([

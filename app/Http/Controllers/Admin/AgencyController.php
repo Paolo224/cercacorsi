@@ -138,7 +138,7 @@ class AgencyController extends Controller
         $newAgency->fill($data);
         $newAgency->save();
 
-        return redirect()->route('admin.le-mie-aziende.show', $newAgency->slug)->with('message', "$newAgency->nome AGGIUNTA CON SUCCESSO!!!");
+        return redirect()->route('admin.le-mie-aziende.index')->with('message', "$newAgency->nome AGGIUNTA CON SUCCESSO!!!");
     }
 
     /**

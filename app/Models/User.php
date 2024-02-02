@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Http\Controllers\Admin\AssegnazioneController;
 use App\Models\Admin\Agency;
+use App\Models\Admin\Ticket;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -26,7 +27,8 @@ class User extends Authenticatable
         'email',
         'password',
         'saldo',
-        'id_admin'
+        'id_admin',
+        'super_admin_role'
     ];
 
     /**
@@ -57,5 +59,10 @@ class User extends Authenticatable
     public function assegnazioni()
     {
         return $this->hasMany(AssegnazioneController::class, 'id_gestore', 'id');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
     }
 }

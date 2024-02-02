@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('super_admin_role')->nullable();
             $table->unsignedBigInteger('id_admin')->default(null);
             $table->integer('saldo');
             $table->string('nome');

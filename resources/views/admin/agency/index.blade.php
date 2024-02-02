@@ -2,6 +2,14 @@
 
 @section('content')
 <div class="container-fluid">
+    @if (session('message'))
+        <div class="row mt-3">
+            <div class="alert alert-success d-flex justify-content-between" role="alert">
+                <strong>{{session('message')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
     <div class="row mt-3">
         @if($agencies->isNotEmpty())
         <div class="row p-0">
