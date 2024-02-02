@@ -108,6 +108,7 @@ class TicketController extends Controller
         $ticket->status = 'aperto';
         $ticket->save();
 
+        Mail::to(User::find($ticket->user_id)->email)->send(new ChangeStatusTicket($ticket));
 
         return redirect()->back();
     }

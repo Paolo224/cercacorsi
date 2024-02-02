@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('titolo');
             $table->text('descrizione');
-            $table->string('status')->default(TicketStatus::APERTO->value);
+            $table->string('status')->default(TicketStatus::IN_ELABORAZIONE->value);
             $table->string('allegato')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('status_changed_by_id')->nullable()->constrained('users');
