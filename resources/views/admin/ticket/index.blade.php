@@ -30,6 +30,7 @@
                 </span>
             </p>
         @endif
+        <p class="mx-2">{{$ticket->id}}</p>
         <p class="mx-2"><span class="fw-bold">Titolo: </span> {{$ticket->titolo}}</p>
         <div class="mx-2">
             <p class="mb-0 fw-bold">
